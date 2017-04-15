@@ -49,7 +49,7 @@ module.exports = {
     proxyTable: {
       // proxy to foodsharing socket.io
       '/foodsharing/socket': {
-        target: 'http://localhost:18080',
+        target: 'http://192.168.178.38:18080',
         changeOrigin: false,
         ws: true,
         pathRewrite: {
@@ -58,7 +58,7 @@ module.exports = {
       },
       // TODO: limit this to just login... /xhrapp.php?app=login&m=loginsubmit
       '/fs': {
-        target: 'http://localhost:18080',
+        target: 'http://192.168.178.38:18080',
         changeOrigin: false,
         pathRewrite: {
           '^/fs': ''
