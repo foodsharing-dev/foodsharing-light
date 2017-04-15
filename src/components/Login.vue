@@ -19,7 +19,24 @@
     <div class="layout-view">
       <div class="layout-padding">
         <p icon="lock">FS Login</p>
-        <button @click="login()" class="primary big">Login</button>
+
+
+        <div class="list">
+          <div class="item two-lines">
+            <i class="item-primary">email</i>
+            <div class="item-content">
+              <input v-model="email" class="full-width" placeholder="E-Mail Address">
+            </div>
+          </div>
+          <hr>
+          <div class="item two-lines">
+            <i class="item-primary">lock</i>
+            <div class="item-content">
+              <input v-model="password" placeholder="password" class="full-width">
+            </div>
+          </div>
+        </div>
+        <button @click="login()" class="primary big full-width">Login</button>
       </div>
     </div>
     <!-- MAIN END -->
@@ -48,11 +65,14 @@
 
   export default {
     data () {
-      return {}
+      return {
+        email: '',
+        password: ''
+      }
     },
     methods: {
       login () {
-        return auth.login('user1@example.com', 'user1')
+        return auth.login(this.email, this.password)
       }
     }
   }
