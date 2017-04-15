@@ -49,7 +49,7 @@
         <div class="list" style="max-width: 400px">
 
           <!-- CHAT ITEM -->
-          <div class="item two-lines">
+          <div class="item two-lines item-link">
             <img class="item-primary" :src="'statics/boy-avatar.png'">
             <div class="item-content has-secondary">
               <div>Peter</div>
@@ -62,7 +62,7 @@
           <!-- CHAT ITEM END -->
 
           <!-- CHAT ITEM -->
-          <div class="item two-lines">
+          <div class="item two-lines item-link">
             <img class="item-primary" :src="'statics/linux-avatar.png'">
             <div class="item-content has-secondary">
               <div>Gabi</div>
