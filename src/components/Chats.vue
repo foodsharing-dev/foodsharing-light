@@ -32,27 +32,18 @@
         <div class="list" style="max-width: 400px">
 
           <!-- CHAT ITEM -->
-          <div class="item two-lines item-link">
-            <img class="item-primary" :src="'statics/boy-avatar.png'">
+          <div class="item two-lines item-link" v-for="conversation in conversations">
+            <img class="item-primary" :src="conversation.avatar">
             <div class="item-content has-secondary">
-              <div>Peter</div>
-              <div>Food, i really need food do you have food? i am...</div>
+              <div>
+                <span v-for="participant in conversation.participants">
+                  {{ participant.userName }}
+                </span>
+              </div>
+              <div>{{ conversation.lastMessage.body }}</div>
             </div>
             <div class="item-secondary stamp">
-              21:25
-            </div>
-          </div>
-          <!-- CHAT ITEM END -->
-
-          <!-- CHAT ITEM -->
-          <div class="item two-lines item-link">
-            <img class="item-primary" :src="'statics/linux-avatar.png'">
-            <div class="item-content has-secondary">
-              <div>Gabi</div>
-              <div>Bla bla bla bal balm...</div>
-            </div>
-            <div class="item-secondary stamp">
-              21:25
+              <timeago :since="conversation.lastMessage.time"></timeago>
             </div>
           </div>
           <!-- CHAT ITEM END -->
@@ -114,11 +105,26 @@
 
         conversations: [
           {
-            conversationId: 5,
+            avatar: 'statics/linux-avatar.png',
+            lastMessage: {
+              body: 'Food, i really need food do you have food? i am so hungry, I have been coding all day',
+              time: Date.now()
+            },
             participants: [
               {
-                userId: 10,
                 userName: 'James'
+              }
+            ]
+          },
+          {
+            avatar: 'statics/boy-avatar.png',
+            lastMessage: {
+              body: 'Bla bla bla bal balm...',
+              time: Date.now()
+            },
+            participants: [
+              {
+                userName: 'Gabi'
               }
             ]
           }
