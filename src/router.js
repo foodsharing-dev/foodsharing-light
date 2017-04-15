@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import MainLayout from 'components/MainLayout'
 
+import auth from 'services/auth'
+
 Vue.use(VueRouter)
 
 // global components
@@ -9,6 +11,33 @@ Vue.component('main-layout', MainLayout)
 
 function load (component) {
   return () => System.import(`components/${component}.vue`)
+}
+
+/*
+ Is this needed to do some live reload stuff?
+ function load (component) {
+ return () => System.import(`components/${component}.vue`)
+ }
+ */
+
+const protectRoute = (to, from, next) => {
+  if (auth.state.authenticated) {
+    next()
+  }
+  else {
+    next()
+    auth.state.to = to
+    next({ name: 'login' })
+  }
+}
+
+const redirectIfLoggedIn = (to, from, next) => {
+  if (auth.state.authenticated) {
+    next({ name: 'index' })
+  }
+  else {
+    next()
+  }
 }
 
 export default new VueRouter({
@@ -25,9 +54,10 @@ export default new VueRouter({
    */
 
   routes: [
-    { path: '/', component: load('Index') }, // Default
-    { path: '/stores', component: load('Stores') }, // Stores
-    { path: '/chats', component: load('Chats') }, // Chats
+    { name: 'index', path: '/', component: load('Index'), beforeEnter: protectRoute }, // Default
+    { name: 'login', path: '/login', component: load('Login'), beforeEnter: redirectIfLoggedIn }, // Login
+    { path: '/stores', component: load('Stores'), beforeEnter: protectRoute }, // Stores
+    { path: '/chats', component: load('Chats'), beforeEnter: protectRoute }, // Chats
     { path: '*', component: load('Error404') } // Not found
   ]
 })

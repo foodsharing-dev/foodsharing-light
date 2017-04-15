@@ -8,7 +8,7 @@
         <!-- Message received from peer -->
         <div class="chat-other">
           <div class="chat-user">
-            <img src="assets/linux-avatar.png">
+            <img src="statics/linux-avatar.png">
           </div>
           <div class="chat-date">
             7 minutes ago
@@ -22,7 +22,7 @@
         <!-- Message sent by you -->
         <div class="chat-you">
           <div class="chat-user">
-            <img src="assets/boy-avatar.png">
+            <img src="statics/boy-avatar.png">
           </div>
           <div class="chat-date">
             4 minutes ago

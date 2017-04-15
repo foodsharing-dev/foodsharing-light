@@ -17,6 +17,10 @@
           <q-drawer-link icon="settings" to="/settings" exact>
             Settings
           </q-drawer-link>
+          <hr>
+          <q-drawer-link icon="lock" to="/settings" exact>
+            Logout
+          </q-drawer-link>
         </div>
 
       </div>
