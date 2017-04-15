@@ -18,7 +18,7 @@
             Settings
           </q-drawer-link>
           <hr>
-          <q-drawer-link icon="lock" to="/login" exact>
+          <q-drawer-link icon="lock" to="/logout" exact>
             Logout
           </q-drawer-link>
         </div>

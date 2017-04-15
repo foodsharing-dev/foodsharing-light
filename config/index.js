@@ -46,7 +46,25 @@ module.exports = {
     // Proxy your API if using any.
     // Also see /build/script.dev.js and search for "proxy api requests"
     // https://github.com/chimurai/http-proxy-middleware
-    proxyTable: {}
+    proxyTable: {
+      // proxy to foodsharing socket.io
+      '/foodsharing/socket': {
+        target: 'http://localhost:18080',
+        changeOrigin: false,
+        ws: true,
+        pathRewrite: {
+          '^/': '/chat/socket.io/'
+        }
+      },
+      // TODO: limit this to just login... /xhrapp.php?app=login&m=loginsubmit
+      '/fs': {
+        target: 'http://localhost:18080',
+        changeOrigin: false,
+        pathRewrite: {
+          '^/fs': ''
+        }
+      }
+    }
   }
 }
 

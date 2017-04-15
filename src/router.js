@@ -56,6 +56,7 @@ export default new VueRouter({
   routes: [
     { name: 'index', path: '/', component: load('Index'), beforeEnter: protectRoute }, // Default
     { name: 'login', path: '/login', component: load('Login'), beforeEnter: redirectIfLoggedIn }, // Login
+    { name: 'logout', path: '/logout', component: load('Login') }, // Login
     { path: '/stores', component: load('Stores'), beforeEnter: protectRoute }, // Stores
     { path: '/chats', component: load('Chats'), beforeEnter: protectRoute }, // Chats
     { path: '*', component: load('Error404') } // Not found

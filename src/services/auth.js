@@ -1,3 +1,4 @@
+import axios from 'axios'
 import router from '../router'
 
 export default {
@@ -8,7 +9,7 @@ export default {
   },
 
   login (username, password) {
-    return Promise.resolve().then(() => {
+    return foodsharingLogin(username, password).then(() => {
       this.state.authenticated = true
       let { name, params } = this.state.to || {}
       this.state.to = null
@@ -29,4 +30,18 @@ export default {
     })
   }
 
+}
+
+/*
+*  This is so we are a valid user when we connect to the websocket for chat
+*/
+export function foodsharingLogin (username, password) {
+  return axios.request({
+    // url: '/foodsharing/login',
+    url: '/fs/xhrapp.php?app=login&m=loginsubmit',
+    params: {
+      u: username,
+      p: password
+    }
+  })
 }

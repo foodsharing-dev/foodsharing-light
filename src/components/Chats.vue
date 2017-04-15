@@ -2,40 +2,23 @@
   <div>
     <main-layout>
 
-
       <!-- MAIN -->
       <div>
-        <!-- Message received from peer -->
-        <div class="chat-other">
+        <div class="chat-other" v-for="message in messages">
           <div class="chat-user">
             <img src="statics/linux-avatar.png">
           </div>
           <div class="chat-date">
-            7 minutes ago
+            <timeago :since="message.time"></timeago>
           </div>
           <div class="chat-message">
             <p>
-              Blaböla!
-            </p>
-          </div>
-        </div>
-        <!-- Message sent by you -->
-        <div class="chat-you">
-          <div class="chat-user">
-            <img src="statics/boy-avatar.png">
-          </div>
-          <div class="chat-date">
-            4 minutes ago
-          </div>
-          <div class="chat-message">
-            <p>
-              bla bla bla.
+              {{ message.body }}
             </p>
           </div>
         </div>
       </div>
       <!-- MAIN END-->
-
 
       <!-- SUBMENU -->
       <div slot="submenu">
@@ -73,7 +56,6 @@
             </div>
           </div>
           <!-- CHAT ITEM END -->
-
 
         </div>
 
@@ -116,9 +98,39 @@
 </template>
 
 <script>
+  import chatService from 'services/chat'
   export default {
     data () {
-      return {}
+      return {
+
+        // Active conversation things
+
+        messages: [{
+          time: Date.now(),
+          body: 'heya'
+        }],
+
+        // All conversations
+
+        conversations: [
+          {
+            conversationId: 5,
+            participants: [
+              {
+                userId: 10,
+                userName: 'James'
+              }
+            ]
+          }
+        ]
+
+      }
+    },
+    mounted () {
+      chatService.connect()
+      chatService.subscribe(message => {
+        this.messages.push(message)
+      })
     }
   }
 </script>

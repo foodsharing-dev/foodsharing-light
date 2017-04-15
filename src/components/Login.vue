@@ -52,7 +52,7 @@
     },
     methods: {
       login () {
-        return auth.login()
+        return auth.login('user1@example.com', 'user1')
       }
     }
   }
