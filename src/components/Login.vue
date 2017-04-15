@@ -1,8 +1,7 @@
 <template>
   <main-layout>
-    <router-link :to="{ name: 'index' }">Go to Index page</router-link>
-    <h1>login page</h1>
-    <button @click="login()">LOG ME IN</button>
+    <p>Login</p>
+    <button @click="login()" class="primary big">Login</button>
   </main-layout>
 </template>
 
