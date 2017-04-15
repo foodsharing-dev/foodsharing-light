@@ -1,0 +1,14 @@
+.DS_Store
+node_modules/
+.idea/
+dist/
+blabla/
+npm-debug.log
+npm-debug.log.*
+selenium-debug.log
+test/unit/coverage
+test/e2e/reports
+cordova/platforms
+cordova/plugins
+thumbs.db
+!.gitkeep
