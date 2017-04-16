@@ -17,15 +17,17 @@
       </div>
     </div>
 
-    <div slot="app-footer">
-      <table class="full-width">
-        <tr>
-          <td><textarea class="full-width" placeholder="Message" v-model="newMessage"></textarea></td>
-          <td class="sendbox"><button class="primary circular" @click="send()">
+    <div slot="app-footer" class="chat-footer">
+      <form class="row small-gutter" v-on:submit.stop.prevent="send()">
+        <div class="auto">
+          <input type="text" class="chat-input full-width" v-model="newMessage">
+        </div>
+        <div>
+          <button class="primary circular" type="submit">
             <i>send</i>
-          </button></td>
-        </tr>
-      </table>
+          </button>
+        </div>
+      </form>
     </div>
 
   </main-layout>
@@ -66,10 +68,13 @@
       })
     },
     destroyed () {
-      log.info('clearing conversation')
       if (this.id) {
         chat.clearConversation(this.id)
       }
+    },
+    mounted () {
+      // autofocus
+      this.$el.querySelector('input').focus()
     },
     updated () {
       // auto scroll to bottom...
@@ -80,17 +85,14 @@
   }
 </script>
 
-<style lang="styl">
-  .layout-footer{
-    width: 100%;
-    background-color: #fff;
-    padding: 0 !important;
-  }
-  .layout-footer textarea, .layout-footer table, .layout-footer tr, .layout-footer td {
-    background-color: #fff;
-  }
+<style lang="styl" scope>
 
-  .sendbox {
-    width:56px;
-  }
+.chat-input
+  border: none !important
+  font-size: 1.5rem !important
+  margin-top: 0.3rem
+
+.chat-footer
+  padding: 0.5rem 0.5rem 0 0.5rem
+
 </style>
