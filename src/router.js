@@ -56,12 +56,12 @@ export default new VueRouter({
    */
 
   routes: [
-    { name: 'index', path: '/', component: load('Index'), beforeEnter: protectRoute }, // Default
+    { name: 'index', path: '/', component: load('Pickups'), beforeEnter: protectRoute }, // Default
     { name: 'login', path: '/login', component: load('Login'), beforeEnter: redirectIfLoggedIn }, // Login
     { name: 'signup', path: '/signup', component: load('Signup') }, // Signup
     { name: 'logout', path: '/logout', component: load('Login') }, // Logout
     { path: '/pickups', component: load('Pickups'), beforeEnter: protectRoute }, // Stores
-    { path: '/pickup/*', component: load('Pickup'), beforeEnter: protectRoute }, // Stores
+    { path: '/pickup/:id', component: load('Pickup'), beforeEnter: protectRoute }, // Stores
     { path: '/stores', component: load('Stores'), beforeEnter: protectRoute }, // Stores
     { path: '/store/:id', component: load('Store'), beforeEnter: protectRoute }, // Chats
     { path: '/chats', component: load('Chats'), beforeEnter: protectRoute }, // Chats

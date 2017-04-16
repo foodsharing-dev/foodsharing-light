@@ -8,6 +8,7 @@ require(`./themes/app.${__THEME}.styl`)
 
 import Vue from 'vue'
 import Quasar from 'quasar'
+import moment from 'moment'
 
 import router from './router'
 import auth from 'services/auth'
@@ -27,6 +28,8 @@ router.afterEach((to, from) => {
     auth.logout()
   }
 })
+
+moment.locale('de')
 
 // wireup socket to chats
 // TODO: make it unsubscribe

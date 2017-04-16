@@ -1,5 +1,4 @@
 <template>
-
   <main-layout>
 
     <!-- MAIN -->
@@ -29,12 +28,10 @@
       </div>
     </div>
 
-
     <!-- MAIN END -->
 
-
   </main-layout>
-  </div></template>
+</template>
 
 <script>
   import { Dialog } from 'quasar'
