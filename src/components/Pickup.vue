@@ -40,7 +40,8 @@
       <hr>
       <div class="list no-border">
         <div class="list-label">{{ pickup.members.length }} foodaver kommen</div>
-        <div v-on:click="memberASHandler(m)" class="item two-lines item-link" v-for="m in pickup.members">
+
+        <div v-on:click="showActionSheetWithIcons(m)" class="item two-lines item-link" v-for="m in pickup.members">
           <img class="item-primary" :src="'statics/linux-avatar.png'">
           <div class="item-content">
             {{ m.name }}
@@ -60,38 +61,41 @@
   </div></template>
 
 <script>
-  import { Dialog, ActionSheet } from 'quasar'
-
-  function showActionSheetWithIcons (member) {
-    ActionSheet.create({
-      title: member.name,
-      gallery: true,
-      actions: [
-        {
-          label: 'Call',
-          icon: 'phone',
-          handler () {
-            // todo
-          }
-        },
-        {
-          label: 'Chat',
-          icon: 'chat',
-          handler () {
-             // todo
-          }
-        }
-      ]
-    })
-  }
+  import { Dialog, ActionSheet, Utils, Platform } from 'quasar'
 
   export default {
+    methods :{
+      showActionSheetWithIcons (member) {
+
+        if(Platform.is.desktop) {
+          this.$router.push('/chat/1')
+        }
+
+        ActionSheet.create({
+          title: member.name,
+          gallery: true,
+          actions: [
+            {
+              label: 'Chat',
+              icon: 'chat',
+              handler () {
+                // todo
+              }
+            },
+            {
+              label: 'Call',
+              icon: 'phone',
+              handler () {
+                // todo
+                Utils.openURL('tel:+496170961709')
+              }
+            }
+          ]
+        })
+      }
+    },
     data () {
       return {
-
-        memberASHandler (member) {
-          showActionSheetWithIcons(member)
-        },
 
         pickup: {
           datetime: 'today, 20:00 h',
