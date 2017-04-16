@@ -4,16 +4,21 @@
 
     <!-- MAIN -->
 
+    <h6>Abholung {{ store.name }}</h6>
     <div class="card">
-      <div class="card-title bg-primary text-white">
-        {{ pickup.datetime }}
-      </div>
       <div class="card-content list no-border highlight">
+        <div class="item two-lines">
+          <i class="item-primary">alarm</i>
+          <div class="item-content">
+            <div class="item-title">{{ pickup.datetime }}</div>
+            <div>Datum / Uhrzeit</div>
+          </div>
+        </div>
         <router-link tag="div" to="/store/1" class="item two-lines item-link">
           <i class="item-primary">store</i>
           <div class="item-content">
-            <div class="item-title">{{ store.name }}</div>
-            <div>{{ store.location.street }}, {{ store.location.zip }} {{ store.location.city }}</div>
+            <div class="item-title">{{ store.location.street }}, {{ store.location.zip }} {{ store.location.city }}</div>
+            <div>Adresse</div>
           </div>
         </router-link>
         <div class="item two-lines">
@@ -34,7 +39,7 @@
       </div>
       <hr>
       <div class="list no-border">
-        <div class="list-label">{{ pickup.members.length }} foodaver comming</div>
+        <div class="list-label">{{ pickup.members.length }} foodaver kommen</div>
         <div v-on:click="memberASHandler(m)" class="item two-lines item-link" v-for="m in pickup.members">
           <img class="item-primary" :src="'statics/linux-avatar.png'">
           <div class="item-content">
@@ -43,36 +48,13 @@
         </div>
       </div>
 
-      <div class="card-actions card-no-top-padding">
-        <div class="text-lime">
-          13 minutes left
-        </div>
-        <div class="auto"></div>
-        <button class="primary big" @click="cancelPickupDialog()">
-          <i class="on-left">cancel</i> cancel pickup
-        </button>
-      </div>
+      <button class="primary big full-width" @click="cancelPickupDialog()">
+        <i class="on-left">cancel</i> Austragen
+      </button>
     </div>
 
     <!-- MAIN END -->
 
-    <!-- SUBMENU -->
-    <div slot="submenu">
-
-      <div class="toolbar light">
-        <q-toolbar-title :padding="1">
-          My Stores
-        </q-toolbar-title>
-      </div>
-
-      <div class="list no-border platform-delimiter">
-        <q-drawer-link icon="store" :to="'/store/' + s.id" exact v-for="s in stores">
-          {{ s.name }}
-        </q-drawer-link>
-      </div>
-
-    </div>
-    <!-- SUBMENU END -->
 
   </main-layout>
   </div></template>
@@ -154,15 +136,15 @@
 
         cancelPickupDialog () {
           Dialog.create({
-            title: 'really?',
-            message: 'sure you want to cancel the pickup?',
+            title: 'Sicher?',
+            message: 'Willst Du Dich wirklich von der Abholung Abmelden?',
             buttons: [
               {
-                label: 'not sure',
+                label: 'Nein',
                 classes: 'positive on-left'
               },
               {
-                label: 'yes sure',
+                label: 'Ja',
                 classes: 'negative'
               }
             ]

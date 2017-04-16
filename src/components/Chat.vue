@@ -1,7 +1,9 @@
 <template>
   <main-layout>
 
-    <spinner v-if="loading"></spinner>
+    <div style="text-align: center; padding-top: 30px;">
+      <spinner color="#4a3520" size="48" name="hourglass"></spinner>
+    </div>
 
     <div v-if="conversation" class="conversation">
       <div v-for="message in conversation.messages" v-bind:class="{ 'chat-other': isMe(message), 'chat-you': !isMe(message) }">

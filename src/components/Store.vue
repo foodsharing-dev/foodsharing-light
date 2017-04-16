@@ -3,11 +3,11 @@
   <main-layout>
 
     <!-- MAIN -->
+    <h6>
+      {{ store.name }}
+    </h6>
     <div class="card">
 
-      <div class="card-title bg-primary text-white">
-        {{ store.name }}
-      </div>
       <!--
       <div class="card-media">
         <img :src="'statics/map.png'">
@@ -16,7 +16,7 @@
       -->
       <div class="card-content list no-border highlight">
         <div class="item two-lines">
-          <i class="item-primary">store</i>
+          <i class="item-primary">location_on</i>
           <div class="item-content">
             <div class="item-title">Adresse</div>
             <div>{{ store.location.street }}, {{ store.location.zip }} {{ store.location.city }}</div>
@@ -58,23 +58,6 @@
 
     <!-- MAIN END -->
 
-    <!-- SUBMENU -->
-    <div slot="submenu">
-
-      <div class="toolbar light">
-        <q-toolbar-title :padding="1">
-          My Stores
-        </q-toolbar-title>
-      </div>
-
-      <div class="list no-border platform-delimiter">
-        <q-drawer-link icon="store" :to="'/store/1' + s.id" exact v-for="s in stores">
-          {{ s.name }}
-        </q-drawer-link>
-      </div>
-
-    </div>
-    <!-- SUBMENU END -->
 
   </main-layout>
   </div></template>
