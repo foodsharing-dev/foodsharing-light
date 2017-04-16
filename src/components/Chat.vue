@@ -1,36 +1,34 @@
 <template>
   <main-layout>
 
+    <spinner v-if="loading"></spinner>
+
     <div v-if="conversation" class="conversation">
       <div v-for="message in conversation.messages" v-bind:class="{ 'chat-other': isMe(message), 'chat-you': !isMe(message) }">
         <div class="chat-user">
-          <img src="statics/linux-avatar.png">
+          <img :src="message.sentBy.photo || '/statics/mini_q_avatar.png'">
         </div>
         <div class="chat-date">
-          <timeago :since="message.sentAt"></timeago>
+          <from-now :date="message.sentAt"></from-now>
         </div>
         <div class="chat-message">
-          <p>
-            {{ message.body }}
-          </p>
+          <p>{{ message.body }}</p>
         </div>
       </div>
-
     </div>
 
     <div slot="app-footer">
-        <table class="full-width">
-          <tr>
-            <td><textarea class="full-width" placeholder="Message" v-model="newMessage"></textarea></td>
-            <td class="sendbox"><button class="primary circular" @click="send()">
-              <i>send</i>
-            </button></td>
-          </tr>
-        </table>
+      <table class="full-width">
+        <tr>
+          <td><textarea class="full-width" placeholder="Message" v-model="newMessage"></textarea></td>
+          <td class="sendbox"><button class="primary circular" @click="send()">
+            <i>send</i>
+          </button></td>
+        </tr>
+      </table>
     </div>
 
   </main-layout>
-
 </template>
 
 <script>
@@ -61,9 +59,17 @@
     },
     created () {
       this.id = this.$route.params.id
+      this.loading = true
       chat.loadConversation(this.id).then(conversation => {
+        this.loading = false
         Object.assign(this, { conversation })
       })
+    },
+    destroyed () {
+      log.info('clearing conversation')
+      if (this.id) {
+        chat.clearConversation(this.id)
+      }
     },
     updated () {
       // auto scroll to bottom...

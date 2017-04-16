@@ -21,7 +21,7 @@
               <div>{{ conversation.lastMessage.body }}</div>
             </div>
             <div class="item-secondary stamp">
-              <timeago :since="conversation.lastMessageAt"></timeago>
+              <from-now :date="conversation.lastMessageAt"></from-now>
             </div>
           </router-link>
 

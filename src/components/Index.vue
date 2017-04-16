@@ -3,7 +3,7 @@
   <main-layout>
 
     <!-- MAIN -->
-
+    
     <h6>Deine Abholtermine</h6>
     <div class="card">
       <div class="list no-border">
@@ -24,6 +24,7 @@
         </router-link>
       </div>
     </div>
+
 
     <!-- MAIN END -->
 

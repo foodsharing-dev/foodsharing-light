@@ -36,10 +36,6 @@ export default {
       io.on('conv', data => {
         if (!data.o) return
         let message = convertMessage(JSON.parse(data.o))
-        log.info('received message', {
-          raw: JSON.parse(data.o),
-          mapped: message
-        })
         subscribers.forEach(fn => fn(message))
       })
     })

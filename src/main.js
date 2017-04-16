@@ -8,21 +8,16 @@ require(`./themes/app.${__THEME}.styl`)
 
 import Vue from 'vue'
 import Quasar from 'quasar'
-import VueTimeago from 'vue-timeago'
 
 import router from './router'
 import auth from 'services/auth'
 import socket from 'services/socket'
 import chat from 'services/chat'
+import FromNow from 'components/FromNow'
 
 Vue.use(Quasar) // Install Quasar Framework
 
-Vue.use(VueTimeago, {
-  locale: 'en-US',
-  locales: {
-    'en-US': require('vue-timeago/locales/en-US.json')
-  }
-})
+Vue.component('from-now', FromNow)
 
 // TODO: make a less hacky way to logout
 // this way is just because I couldn't work out how to make it logout from

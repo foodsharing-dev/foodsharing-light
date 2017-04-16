@@ -33,7 +33,7 @@ export default {
     return axios.post(prefix('/xhrapp.php?app=msg&m=sendmsg'), data)
       .then(({ data: { data: { msg } } }) => {
         Object.assign(msg, { cid: conversationId })
-        return msg
+        return this.convertMessage(msg)
       })
   },
 
@@ -45,9 +45,52 @@ export default {
       params: {
         fsid: userId
       }
-    }).then(({ data: { cid } }) => {
+    }).then(({ data: { data: { cid } } }) => {
       return cid
     })
+  },
+
+  /*
+   * Foodsharing db has encoded html entities (e.g. "fish &amp; chips")
+   *
+   * Function to reverse php htmlentities() function
+   * Get list of entities by running:
+   *
+   *   php -r 'var_dump(get_html_translation_table());`
+   *
+   */
+  decodeHtmlEntities (str) {
+    return str
+      .replace(/&amp;/g, '&')
+      .replace(/&quot;/g, '""')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+  },
+
+  /*
+   * Convert message from existing foodsharing format to our format
+   * See /api/doc#get--api-v1-conversation-{id}
+   */
+  convertMessage ({
+    time: sentAt,
+    body,
+    fs_name: firstName,
+    fs_id: userId,
+    id: messageId,
+    cid: conversationId
+  }) {
+    return {
+      // Foodsharing does not return timezone information, but seems to be in UTC
+      // Not sure if this works in production or is because of my docker backend...
+      sentAt: sentAt + '+0000',
+      body: this.decodeHtmlEntities(body),
+      sentBy: {
+        id: parseInt(userId, 10),
+        firstName
+      },
+      messageId: parseInt(messageId, 10),
+      conversationId: parseInt(conversationId, 10)
+    }
   }
 
 }
