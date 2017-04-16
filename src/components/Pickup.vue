@@ -80,7 +80,7 @@
 <script>
   import { Dialog, ActionSheet } from 'quasar'
 
-  function showActionSheetWithIcons (member) {
+  function showActionSheetWithIcons (member) { 
 
     ActionSheet.create({
       title: member.name,
