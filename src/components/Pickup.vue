@@ -87,7 +87,7 @@
               icon: 'phone',
               handler () {
                 // todo
-                Utils.openURL('tel:+496170961709')
+                window.location.href = 'tel:+496170961709'
               }
             }
           ]
