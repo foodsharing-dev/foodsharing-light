@@ -21,6 +21,15 @@ export default {
 
   state,
 
+  /*
+   *  Check if we are already logged in
+   */
+  check () {
+    return foodsharing.checklogin().then(fsLoggedIn => {
+      log.info('fs is logged in', fsLoggedIn)
+    })
+  },
+
   login (email, password) {
     api.login(email, password).then(({ user }) => {
       Object.assign(state, { user })

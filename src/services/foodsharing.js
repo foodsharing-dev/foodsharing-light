@@ -16,13 +16,23 @@ export default {
   *  This is so we are a valid user when we connect to the websocket for chat
   */
   login (email, password) {
-    // TODO: check for invalid credential failure (hint: it's still 200)
     return axios.request({
-      url: prefix('/xhrapp.php?app=login&m=loginsubmit'),
+      url: prefix('/xhrapp.php?app=api&m=auth'),
       params: {
-        u: email,
-        p: password
+        user: email,
+        pass: password
       }
+    }).then(({ data }) => {
+      return data.status === 1
+    })
+  },
+
+  checklogin (email, password) {
+    return axios.request({
+      url: prefix('/xhrapp.php?app=api&m=checklogin&callback=jsonp')
+    }).then(({ data }) => {
+      // The response is a jsonp kind of thing... we don't need eval it
+      return data === 'jsonp({"status":1});'
     })
   },
 

@@ -34,11 +34,13 @@ socket.subscribe(message => {
   chat.receiveMessage(message)
 })
 
-Quasar.start(() => {
-  /* eslint-disable no-new */
-  new Vue({
-    el: '#q-app',
-    router,
-    render: h => h(require('./App'))
+auth.check().then(() => {
+  Quasar.start(() => {
+    /* eslint-disable no-new */
+    new Vue({
+      el: '#q-app',
+      router,
+      render: h => h(require('./App'))
+    })
   })
 })

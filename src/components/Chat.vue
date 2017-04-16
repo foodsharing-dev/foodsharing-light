@@ -87,7 +87,7 @@
   }
 </script>
 
-<style lang="styl" scope>
+<style lang="styl" scoped>
 
 .chat-input
   border: none !important

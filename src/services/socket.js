@@ -1,7 +1,7 @@
 import socketio from 'socket.io-client'
 
 import log from 'services/log'
-import { convertMessage } from 'services/chat'
+import foodsharing from 'services/foodsharing'
 
 export let io = null
 export const subscribers = []
@@ -35,7 +35,7 @@ export default {
       })
       io.on('conv', data => {
         if (!data.o) return
-        let message = convertMessage(JSON.parse(data.o))
+        let message = foodsharing.convertMessage(JSON.parse(data.o))
         subscribers.forEach(fn => fn(message))
       })
     })
