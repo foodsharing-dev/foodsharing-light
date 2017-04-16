@@ -4,7 +4,15 @@
 
     <!-- MAIN -->
 
-    <div class="card">
+    <div v-if="pickups.length === 0">
+      <div class="card">
+        <div class="card-title bg-primary text-white">
+          You have no upcoming pickups!
+        </div>
+      </div>
+    </div>
+
+    <div class="card" v-if="pickups.length > 0">
       <div class="card-title bg-primary text-white">
         your pickups
       </div>
@@ -18,11 +26,11 @@
               <div>{{ p.datetime }}</div>
               <div>
                 <span>{{ p.store.name }}</span><br>
-                {{ p.store.location.street }}, {{ p.store.zip }} {{ p.store.city }}
+                {{ p.store.streetNumber }} {{ p.store.street }}, {{ p.store.zip }} {{ p.store.city }}
               </div>
             </div>
             <div class="item-secondary stamp">
-              3 minutes left
+              <from-now :date="p.at"></from-now>
             </div>
           </router-link>
           <hr class="inset">
@@ -54,73 +62,18 @@
   </div></template>
 
 <script>
-  import { Dialog } from 'quasar'
+  import api from 'services/api'
 
   export default {
     data () {
       return {
-
-        pickups: [
-          {
-            id: 1,
-            datetime: 'today, 20:00 h',
-            store: {
-              id: 1,
-              name: 'Coffee Shop',
-              location: {
-                street: 'Bananastreet 1',
-                zip: '12345',
-                city: 'Tomatocity'
-              }
-            }
-          },
-          {
-            id: 2,
-            datetime: 'tomorrow, 12:00 h',
-            store: {
-              id: 1,
-              name: 'Banana Shop',
-              location: {
-                street: 'Mangostreet 1',
-                zip: '12345',
-                city: 'Tomatocity'
-              }
-            }
-          }
-        ],
-
-        stores: [
-          {
-            id: 1,
-            name: 'Store 1'
-          },
-          {
-            id: 2,
-            name: 'Store 2'
-          },
-          {
-            id: 3,
-            name: 'Store 3'
-          }
-        ],
-
-        cancelPickupDialog () {
-          Dialog.create({
-            title: 'really?',
-            message: 'sure you want to cancel the pickup?',
-            buttons: [
-              {
-                label: 'not sure',
-                classes: 'positive on-left'
-              },
-              {
-                label: 'yes sure',
-                classes: 'negative'
-              }
-            ]
-          })
-        }
+        pickups: []
       }
+    },
+    created () {
+      api.getNextPickupList().then(pickups => {
+        this.pickups = pickups
+      })
     }
   }
 </script>

@@ -26,7 +26,21 @@ export default {
   getConversation (id) {
     return axios.get(`/api/v1/conversations/${id}`).then(({ data: { conversation } }) => {
       conversationDecodeHtmlEntities(conversation)
+      let usersById = {}
+      conversation.members.forEach(member => {
+        usersById[member.id] = member
+      })
+      conversation.messages.forEach(message => {
+        let member = usersById[message.sentBy.id]
+        message.sentBy = member
+      })
       return conversation
+    })
+  },
+
+  getNextPickupList () {
+    return axios.get('/api/v1/pickups/next').then(({ data: { pickups } }) => {
+      return pickups
     })
   }
 

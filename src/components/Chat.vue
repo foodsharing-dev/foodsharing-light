@@ -6,15 +6,13 @@
     <div v-if="conversation" class="conversation">
       <div v-for="message in conversation.messages" v-bind:class="{ 'chat-other': isMe(message), 'chat-you': !isMe(message) }">
         <div class="chat-user">
-          <img src="statics/linux-avatar.png">
+          <img :src="message.sentBy.photo || '/statics/mini_q_avatar.png'">
         </div>
         <div class="chat-date">
-          <timeago :since="message.sentAt"></timeago>
+          <from-now :date="message.sentAt"></from-now>
         </div>
         <div class="chat-message">
-          <p>
-            {{ message.body }}
-          </p>
+          <p>{{ message.body }}</p>
         </div>
       </div>
     </div>
