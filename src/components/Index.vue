@@ -2,7 +2,7 @@
 
     <main-layout>
 
-      <p>Hello World, on foodsharing light! :-)</p>
+      <p>Hello {{ user.firstName }} {{ user.lastName }}, welcome to foodsharing light! :-)</p>
 
       <!-- SUBMENU -->
       <div slot="submenu">
@@ -30,9 +30,10 @@
   </div></template>
 
 <script>
+  import auth from 'services/auth'
   export default {
-    data () {
-      return {}
+    computed: {
+      user: () => auth.state.user
     }
   }
 </script>

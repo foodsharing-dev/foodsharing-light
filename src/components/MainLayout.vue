@@ -51,7 +51,13 @@
     </q-drawer>
     <!-- SUBMENU END -->
 
+    <!--
     <router-view class="layout-view"></router-view>
+  -->
+
+    <div slot="footer">
+      <slot name="app-footer"></slot>
+    </div>
 
     <!--
     <div slot="footer" class="toolbar">
