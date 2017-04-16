@@ -4,9 +4,16 @@ import log from 'services/log'
 import socket from 'services/socket'
 
 export const state = {
-  authenticated: false, // are we currently authenticated?
-  to: null, // which route to go to after we succeed,
-  user: null // currently logged in uesr
+
+  // are we currently authenticated?
+  authenticated: false,
+
+  // which route to go to after we succeed,
+  to: null,
+
+  // currently logged in uesr
+  user: null
+
 }
 
 export default {
