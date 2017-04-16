@@ -3,8 +3,9 @@
     <main-layout>
 
       <!-- MAIN -->
-      <div>
 
+      <h6>Deine Unterhaltungen</h6>
+      <div class="card">
         <div class="list no-border">
 
           <!-- CHAT ITEM -->
@@ -28,6 +29,7 @@
 
         </div>
       </div>
+
       <!-- MAIN END-->
 
       <!-- SUBMENU -->

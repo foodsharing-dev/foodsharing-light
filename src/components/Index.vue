@@ -1,39 +1,89 @@
 <template>
 
-    <main-layout>
+  <main-layout>
 
-      <p>Hello {{ user.firstName }} {{ user.lastName }}, welcome to foodsharing light! :-)</p>
+    <!-- MAIN -->
 
-      <!-- SUBMENU -->
-      <div slot="submenu">
-
-        <div class="toolbar light">
-          <q-toolbar-title :padding="1">
-            My Account
-          </q-toolbar-title>
-        </div>
-
-        <div class="list no-border platform-delimiter">
-          <q-drawer-link icon="settings" to="/settings" exact>
-            Settings
-          </q-drawer-link>
-          <hr>
-          <q-drawer-link icon="lock" to="/logout" exact>
-            Logout
-          </q-drawer-link>
-        </div>
-
+    <h6>Deine Abholtermine</h6>
+    <div class="card">
+      <div class="list no-border">
+        <router-link :to="'/pickup/' + p.id" tag="div" class="item two-lines item-link" v-for="p in pickups">
+          <div class="item-primary">
+            <i>store</i>
+          </div>
+          <div class="item-content inset has-secondary">
+            <div>{{ p.datetime }}</div>
+            <div>
+              <span>{{ p.store.name }}</span><br>
+              {{ p.store.location.street }}, {{ p.store.zip }} {{ p.store.city }}
+            </div>
+          </div>
+          <div class="item-secondary stamp">
+            3 minutes left
+          </div>
+        </router-link>
       </div>
-      <!-- SUBMENU END -->
+    </div>
 
-    </main-layout>
+    <!-- MAIN END -->
+
+
+  </main-layout>
   </div></template>
 
 <script>
-  import auth from 'services/auth'
+  import { Dialog } from 'quasar'
+
   export default {
-    computed: {
-      user: () => auth.state.user
+    data () {
+      return {
+
+        pickups: [
+          {
+            id: 1,
+            datetime: 'today, 20:00 h',
+            store: {
+              id: 1,
+              name: 'Coffee Shop',
+              location: {
+                street: 'Bananastreet 1',
+                zip: '12345',
+                city: 'Tomatocity'
+              }
+            }
+          },
+          {
+            id: 2,
+            datetime: 'tomorrow, 12:00 h',
+            store: {
+              id: 1,
+              name: 'Banana Shop',
+              location: {
+                street: 'Mangostreet 1',
+                zip: '12345',
+                city: 'Tomatocity'
+              }
+            }
+          }
+        ],
+
+        cancelPickupDialog () {
+          Dialog.create({
+            title: 'really?',
+            message: 'sure you want to cancel the pickup?',
+            buttons: [
+              {
+                label: 'not sure',
+                classes: 'positive on-left'
+              },
+              {
+                label: 'yes sure',
+                classes: 'negative'
+              }
+            ]
+          })
+        }
+      }
     }
   }
 </script>

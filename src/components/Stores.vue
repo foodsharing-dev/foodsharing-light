@@ -2,29 +2,25 @@
   <div>
     <main-layout>
 
-      <!-- SUBMENU -->
-      <div slot="submenu">
-
-          <div class="toolbar light">
-            <q-toolbar-title :padding="1">
-              My Stores
-            </q-toolbar-title>
-          </div>
-
-          <div class="list no-border platform-delimiter">
-            <q-drawer-link icon="store" to="/store/1" exact>
-              My Store 1
-            </q-drawer-link>
-            <q-drawer-link icon="store" to="/store/2" exact>
-              My Store 2
-            </q-drawer-link>
-            <q-drawer-link icon="store" to="/store/3" exact>
-              My Store 3
-            </q-drawer-link>
-          </div>
-
+      <!-- MAIN -->
+      <h6>Deine Betriebe</h6>
+      <div class="card">
+        <div class="list no-border">
+          <router-link :to="'/store/' + store.id" tag="div" class="item two-lines item-link" v-for="store in stores">
+            <div class="item-primary">
+              <i>store</i>
+            </div>
+            <div class="item-content">
+              <div>{{ store.name }}</div>
+              <div>
+                {{ store.location.street }}, {{ store.location.zip }} {{ store.location.city }}
+              </div>
+            </div>
+          </router-link>
+          <hr class="inset">
+        </div>
       </div>
-      <!-- SUBMENU END -->
+      <!-- MAIN END -->
 
     </main-layout>
   </div>
@@ -33,7 +29,28 @@
 <script>
   export default {
     data () {
-      return {}
+      return {
+        stores: [
+          {
+            id: 1,
+            name: 'Tomato Shop',
+            location: {
+              street: 'Tomatostreet 2',
+              zip: '12345',
+              city: 'Fruitcity'
+            }
+          },
+          {
+            id: 2,
+            name: 'Chocolate Shop',
+            location: {
+              street: 'Brownstreet 2',
+              zip: '12345',
+              city: 'Fruitcity'
+            }
+          }
+        ]
+      }
     }
   }
 </script>

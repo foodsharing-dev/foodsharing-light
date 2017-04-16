@@ -77,11 +77,11 @@
 <style lang="styl">
   .layout-footer{
     width: 100%;
-    background-color: #F6D89B;
+    background-color: #fff;
     padding: 0 !important;
   }
   .layout-footer textarea, .layout-footer table, .layout-footer tr, .layout-footer td {
-    background-color: #F6D89B;
+    background-color: #fff;
   }
 
   .sendbox {

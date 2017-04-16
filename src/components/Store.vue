@@ -3,27 +3,29 @@
   <main-layout>
 
     <!-- MAIN -->
-
     <div class="card">
+
       <div class="card-title bg-primary text-white">
         {{ store.name }}
       </div>
+      <!--
       <div class="card-media">
         <img :src="'statics/map.png'">
         <button class="primary circular"><i>place</i></button>
       </div>
+      -->
       <div class="card-content list no-border highlight">
         <div class="item two-lines">
           <i class="item-primary">store</i>
           <div class="item-content">
-            <div class="item-title">{{ store.name }}</div>
+            <div class="item-title">Adresse</div>
             <div>{{ store.location.street }}, {{ store.location.zip }} {{ store.location.city }}</div>
           </div>
         </div>
         <div class="item two-lines">
           <i class="item-primary">info</i>
           <div class="item-content">
-            <div class="item-title">Things to know</div>
+            <div class="item-title">Besonderheiten</div>
             <div>{{ store.info }}</div>
           </div>
         </div>
@@ -45,9 +47,12 @@
       <div class="list-label">Team</div>
       <router-link tag="div" :to="'/chat/' + m.id" class="item item-link" v-for="m in store.members">
         <img class="item-primary" :src="'statics/linux-avatar.png'">
-        <div class="item-content">
+        <div class="item-content has-secondary">
           {{ m.name }}
         </div>
+        <i class="item-secondary">
+          chat_bubble
+        </i>
       </router-link>
     </div>
 
