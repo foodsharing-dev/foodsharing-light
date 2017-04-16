@@ -95,4 +95,8 @@
 .chat-footer
   padding: 0.5rem 0.5rem 0 0.5rem
 
+.chat-message
+  p
+   word-break: break-all
+
 </style>
