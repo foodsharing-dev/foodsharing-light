@@ -1,57 +1,87 @@
-import socketio from 'socket.io-client'
+import axios from 'axios'
 
-// TODO: handle hot loading unsubscribe/resubscribing...
+import log from 'services/log'
+
+export const state = {
+  conversations: {}
+}
 
 export default {
-  io: null,
-  subscribers: [],
 
-  /*
-  *  Subscribe to receive messages
-  *  Returns a function that will unsubscribe you
-  */
-  subscribe (fn) {
-    this.subscribers.push(fn)
-    return () => {
-      let idx = this.subscribers.indexOf(fn)
-      if (idx !== -1) this.subscribers.splice(idx, 1)
-    }
+  state,
+
+  send (conversationId, body) {
+    let data = new FormData()
+    data.append('c', conversationId)
+    data.append('b', body)
+    return axios.post('/fs/xhrapp.php?app=msg&m=sendmsg', data)
+      .then(({ data: { data: { msg } } }) => {
+        Object.assign(msg, { cid: conversationId })
+        this.receiveMessage(convertMessage(msg))
+      })
   },
 
-  /*
-  * Connects to the socket.io socket if not already
-  * Returns a promise that resolves when connected
-  */
-  connect () {
-    if (this.io) return Promise.resolve()
-    return new Promise((resolve, reject) => {
-      this.io = socketio({ path: '/foodsharing/socket' })
-      this.io.on('connect', () => {
-        this.io.emit('register')
-        resolve()
-      })
-      this.io.on('conv', data => {
-        if (!data.o) return
-        let message = JSON.parse(data.o)
-        this.subscribers.forEach(fn => fn(mapMessage(message)))
-      })
+  loadConversation (id) {
+    return axios.get(`/api/v1/conversation/${id}`).then(({ data: { conversation } }) => {
+      state.conversations[id] = conversation
+      return conversation
     })
+  },
+
+  receiveMessage (message) {
+    let { conversationId } = message
+    let conversation = state.conversations[conversationId]
+    if (conversation) {
+      conversation.messages.push(message)
+      conversation.lastMessage = message
+    }
+    else {
+      log.info('no conversation found for', conversationId)
+    }
   }
 
 }
 
+export function fetchConversationList () {
+  return axios.get('/api/v1/converations').then(({ data: { conversations } }) => {
+    Object.assign(state, { conversations })
+  })
+}
+
+export function ensureConversation (id) {
+  let conversation = state.conversations[id]
+  if (conversation) {
+    return Promise.resolve(conversation)
+  }
+  else {
+    // must fetch it
+    return axios.get(`/api/v1/conversation/${id}`).then(({ data: { conversation } }) => {
+      state.conversations[id] = conversation
+      return conversation
+    })
+  }
+}
+
 /*
-* Convert message from foodsharing socket.io API format to our format
-*/
-export function mapMessage ({
-  time,
+ * Convert message from existing foodsharing format to our format
+ * See /api/doc#get--api-v1-conversation-{id}
+ */
+export function convertMessage ({
+  time: sentAt,
   body,
-  fs_name: userName,
+  fs_name: firstName,
   fs_id: userId,
   id: messageId,
   cid: conversationId
 }) {
   return {
-    time, body, userName, userId, messageId, conversationId
+    sentAt,
+    body,
+    sentBy: {
+      id: parseInt(userId, 10),
+      firstName
+    },
+    messageId: parseInt(messageId, 10),
+    conversationId: parseInt(conversationId, 10)
   }
 }

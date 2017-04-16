@@ -64,13 +64,13 @@
 </template>
 
 <script>
-  import auth from '../services/auth'
+  import auth from 'services/auth'
 
   export default {
     data () {
       return {
-        email: '',
-        password: ''
+        email: 'user1@example.com',
+        password: 'user1'
       }
     },
     methods: {

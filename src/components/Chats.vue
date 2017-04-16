@@ -54,7 +54,6 @@
 </template>
 
 <script>
-  import chatService from 'services/chat'
   export default {
     data () {
       return {
@@ -98,12 +97,6 @@
         ]
 
       }
-    },
-    mounted () {
-      chatService.connect()
-      chatService.subscribe(message => {
-        this.messages.push(message)
-      })
     }
   }
 </script>

@@ -12,6 +12,8 @@ import VueTimeago from 'vue-timeago'
 
 import router from './router'
 import auth from 'services/auth'
+import socket from 'services/socket'
+import chat from 'services/chat'
 
 Vue.use(Quasar) // Install Quasar Framework
 
@@ -29,6 +31,12 @@ router.afterEach((to, from) => {
   if (to.name === 'logout') {
     auth.logout()
   }
+})
+
+// wireup socket to chats
+// TODO: make it unsubscribe
+socket.subscribe(message => {
+  chat.receiveMessage(message)
 })
 
 Quasar.start(() => {
