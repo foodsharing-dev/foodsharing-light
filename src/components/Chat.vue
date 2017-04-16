@@ -1,6 +1,8 @@
 <template>
   <main-layout>
 
+    <spinner v-if="loading"></spinner>
+
     <div v-if="conversation" class="conversation">
       <div v-for="message in conversation.messages" v-bind:class="{ 'chat-other': isMe(message), 'chat-you': !isMe(message) }">
         <div class="chat-user">
@@ -61,9 +63,17 @@
     },
     created () {
       this.id = this.$route.params.id
+      this.loading = true
       chat.loadConversation(this.id).then(conversation => {
+        this.loading = false
         Object.assign(this, { conversation })
       })
+    },
+    destroyed () {
+      log.info('clearing conversation')
+      if (this.id) {
+        chat.clearConversation(this.id)
+      }
     },
     updated () {
       // auto scroll to bottom...

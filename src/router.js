@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import MainLayout from 'components/MainLayout'
 
 import auth from 'services/auth'
+import log from 'services/log'
+import chat from 'services/chat'
 
 Vue.use(VueRouter)
 
@@ -63,7 +65,20 @@ export default new VueRouter({
     { path: '/stores', component: load('Stores'), beforeEnter: protectRoute }, // Stores
     { path: '/store/:id', component: load('Store'), beforeEnter: protectRoute }, // Chats
     { path: '/chats', component: load('Chats'), beforeEnter: protectRoute }, // Chats
-    { path: '/chat/:id', component: load('Chat'), beforeEnter: protectRoute }, // Chats
+    { name: 'chat', path: '/chat/:id', component: load('Chat'), beforeEnter: protectRoute }, // Chats
+    {
+      path: '/users/:id/chat',
+      beforeEnter: (to, from, next) => {
+        log.info('getting user chat', to)
+        chat.getOrCreateConversationForUser(to.params.id).then(id => {
+          log.info('redirecting to chat id', id)
+          next({ name: 'chat', params: { id } })
+        }).catch(err => {
+          log.error('could not get/create chat for user', err)
+          next({ name: 'index' })
+        })
+      }
+    }, // Chats
     { path: '*', component: load('Error404') } // Not found
   ]
 })

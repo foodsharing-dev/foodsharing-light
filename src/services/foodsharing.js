@@ -45,7 +45,7 @@ export default {
       params: {
         fsid: userId
       }
-    }).then(({ data: { cid } }) => {
+    }).then(({ data: { data: { cid } } }) => {
       return cid
     })
   }

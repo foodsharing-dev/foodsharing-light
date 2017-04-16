@@ -1,8 +1,6 @@
 import foodsharing from 'services/foodsharing'
 import api from 'services/api'
 
-import log from 'services/log'
-
 export const state = {
 
   // stores just the list, no messages
@@ -23,12 +21,20 @@ export default {
     })
   },
 
+  getOrCreateConversationForUser (id) {
+    return foodsharing.user2conv(id)
+  },
+
   loadConversation (id) {
     return api.getConversation(id).then(conversation => {
       conversationDecodeHtmlEntities(conversation)
       state.conversations[id] = conversation
       return conversation
     })
+  },
+
+  clearConversation (id) {
+    delete state.conversations[id]
   },
 
   loadConversationList () {
@@ -45,10 +51,13 @@ export default {
     if (conversation) {
       conversation.messages.push(message)
       conversation.lastMessage = message
-      // TODO: also update the conversationList
+      conversation.lastMessageAt = message.sentAt
     }
-    else {
-      log.info('no conversation found for', conversationId)
+    conversation = state.conversationList.find(c => c.id === conversationId)
+    if (conversation) {
+      conversation.lastMessage = message
+      conversation.lastMessageAt = message.sentAt
+      state.conversationList.sort((a, b) => a.lastMessageAt - b.lastMessageAt)
     }
   }
 

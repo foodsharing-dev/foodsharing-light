@@ -4,6 +4,8 @@
 
       <p>Hello {{ user.firstName }} {{ user.lastName }}, welcome to foodsharing light! :-)</p>
 
+      <p><router-link to="/users/151031/chat">start chatting with user 151031!</router-link></p>
+
       <!-- SUBMENU -->
       <div slot="submenu">
 
