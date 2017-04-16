@@ -10,7 +10,9 @@
            :key="message.id"
            v-bind:class="{ 'chat-other': isMe(message), 'chat-you': !isMe(message) }">
         <div class="chat-user">
-          <img :src="message.sentBy.photo || '/statics/mini_q_avatar.png'">
+          <div class="image-wrapper">
+            <img :src="avatarFor(message.sentBy)">
+          </div>
         </div>
         <div class="chat-date">
           <from-now :date="message.sentAt"></from-now>
@@ -55,6 +57,14 @@
     methods: {
       isMe (message) {
         return message.sentBy.id === this.user.id
+      },
+      avatarFor (user) {
+        if (user.photo) {
+          return '/fs/images/thumb_crop_' + user.photo
+        }
+        else {
+          return '/statics/mini_q_avatar.png'
+        }
       },
       send () {
         log.info('send message', this.newMessage)
@@ -111,5 +121,24 @@
     p
       background-color: #fff !important;
       color: #4A3520 !important;
+
+/*
+  We add an intermediate .image-wrapper element
+  as foodsharing profile images are not square
+*/
+.chat-user
+  .image-wrapper
+    width: 65px
+    height: 65px
+    overflow: hidden
+    border-radius: 50%
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3)
+    img
+      width: 65px !important
+      height: 80px !important
+      border-radius: 0 !important
+      box-shadow: none !important
+      position: relative
+      bottom: 5px
 
 </style>
