@@ -4,7 +4,7 @@
     <!-- HEADER -->
     <slot name="header">
       <div slot="header" class="toolbar">
-        <button class="hide-on-drawer-visible" @click="$refs.leftDrawer.open()">
+        <button v-if="submenuVisible" class="hide-on-drawer-visible" @click="$refs.leftDrawer.open()">
           <i>menu</i>
         </button>
         <q-toolbar-title :padding="1">
@@ -14,6 +14,7 @@
         <q-tabs slot="navigation">
           <q-tab icon="home" route="/" replace>Home</q-tab>
           <q-tab icon="chat" route="/chats" replace>Chats</q-tab>
+          <q-tab icon="directions_bike" route="/pickups">Pickups</q-tab>
           <q-tab icon="store" route="/stores" exact replace>Stores</q-tab>
         </q-tabs>
         <!-- NAVIGATION END -->
@@ -31,7 +32,7 @@
 
 
     <!-- SUBMENU -->
-    <q-drawer ref="leftDrawer">
+    <q-drawer ref="leftDrawer" v-if="submenuVisible">
       <slot name="submenu">
 
           <div class="toolbar light">
@@ -69,7 +70,7 @@
   export default {
     data () {
       return {
-        search: ''
+        submenuVisible: true
       }
     }
   }

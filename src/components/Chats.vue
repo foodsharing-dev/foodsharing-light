@@ -37,14 +37,6 @@
             My Chats
           </q-toolbar-title>
         </div>
-
-        <div class="list no-border platform-delimiter">
-          <q-drawer-link icon="settings" to="/logout" exact>
-            Dummy Chat
-          </q-drawer-link>
-
-        </div>
-
       </div>
       <!-- SUBMENU END -->
 

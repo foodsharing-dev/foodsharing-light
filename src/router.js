@@ -58,7 +58,9 @@ export default new VueRouter({
     { name: 'login', path: '/login', component: load('Login'), beforeEnter: redirectIfLoggedIn }, // Login
     { name: 'signup', path: '/signup', component: load('Signup') }, // Signup
     { name: 'logout', path: '/logout', component: load('Login') }, // Logout
+    { path: '/pickups', component: load('Pickups'), beforeEnter: protectRoute }, // Stores
     { path: '/stores', component: load('Stores'), beforeEnter: protectRoute }, // Stores
+    { path: '/store/:id', component: load('Store'), beforeEnter: protectRoute }, // Chats
     { path: '/chats', component: load('Chats'), beforeEnter: protectRoute }, // Chats
     { path: '/chat/:id', component: load('Chat'), beforeEnter: protectRoute }, // Chats
     { path: '*', component: load('Error404') } // Not found

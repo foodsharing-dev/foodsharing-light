@@ -53,24 +53,18 @@
       </div>
       <!-- SUBMENU END -->
 
-
-      <q-layout>
-        <div slot="footer" class="">
-          <table class="full-width">
-            <tr>
-              <td><textarea class="full-width" placeholder="Message"></textarea></td>
-              <td class="sendbox"><button class="primary circular">
-                <i>send</i>
-              </button></td>
-            </tr>
-          </table>
-        </div>
-      </q-layout>
-
     </main-layout>
 
-
-
+    <div class="fixedtextbox inset-shadow">
+        <table class="full-width">
+          <tr>
+            <td><textarea class="full-width" placeholder="Message"></textarea></td>
+            <td class="sendbox"><button class="primary circular">
+              <i>send</i>
+            </button></td>
+          </tr>
+        </table>
+    </div>
   </div>
 
 
@@ -133,11 +127,14 @@
 </script>
 
 <style lang="styl">
-  .layout-footer {
-    background: white !important;
-    padding-left:8px;
-
+  .fixedtextbox{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    background-color: #F6D89B;
   }
+
   .sendbox {
     width:56px;
   }
