@@ -36,7 +36,7 @@
           </div>
           <button @click="login()" class="primary big full-width">Login</button>
           </div>
-        <p>Noch nicht dabei? Registrieren musst Du Dich auf der alten <a href="https://foodsharing.de/" target="_blank">foodsharing.de</a> Seite</p>
+        <p>Noch nicht dabei? <a href="https://foodsharing.de/" target="_blank">Registrieren</a> musst Du Dich auf der Desktop Version von <a href="https://foodsharing.de/" target="_blank">foodsharing.de</a></p>
       </div>
     </div>
     <!-- MAIN END -->

@@ -32,7 +32,7 @@
         <div class="item two-lines">
           <i class="item-primary">info</i>
           <div class="item-content">
-            <div class="item-title">Things to know</div>
+            <div class="item-title">Besinderheiten</div>
             <div>{{ store.info }}</div>
           </div>
         </div>
