@@ -1,12 +1,20 @@
-import axios from 'axios'
 import router from '../router'
 import log from 'services/log'
 import socket from 'services/socket'
+import foodsharing from 'services/foodsharing'
+import api from 'services/api'
 
 export const state = {
-  authenticated: false, // are we currently authenticated?
-  to: null, // which route to go to after we succeed,
-  user: null // currently logged in uesr
+
+  // are we currently authenticated?
+  authenticated: false,
+
+  // which route to go to after we succeed,
+  to: null,
+
+  // currently logged in uesr
+  user: null
+
 }
 
 export default {
@@ -14,13 +22,11 @@ export default {
   state,
 
   login (email, password) {
-    axios.post('/api/v1/login', {
-      email, password
-    }).then(({ data: { user } }) => {
+    api.login(email, password).then(({ user }) => {
       Object.assign(state, { user })
     }).then(() => {
       // Login to foodsharing, then connect to it's websocket
-      return foodsharingLogin(email, password)
+      return foodsharing.login(email, password)
         .then(() => socket.connect())
         .catch(err => log.error('failed to connect to socket', err))
     }).then(() => {
@@ -47,24 +53,10 @@ export default {
       user: null,
       authenticated: false
     })
-    return axios.post('/api/v1/logout').then(() => {
+    api.logout().then(() => {
       socket.disconnect()
       router.push({ name: 'index' })
     })
   }
 
-}
-
-/*
-*  This is so we are a valid user when we connect to the websocket for chat
-*/
-export function foodsharingLogin (email, password) {
-  return axios.request({
-    // url: '/foodsharing/login',
-    url: '/fs/xhrapp.php?app=login&m=loginsubmit',
-    params: {
-      u: email,
-      p: password
-    }
-  })
 }

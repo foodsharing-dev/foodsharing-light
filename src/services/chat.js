@@ -1,9 +1,16 @@
-import axios from 'axios'
+import foodsharing from 'services/foodsharing'
+import api from 'services/api'
 
 import log from 'services/log'
 
 export const state = {
+
+  // stores just the list, no messages
+  conversationList: [],
+
+  // stores conversations by id, including the messages
   conversations: {}
+
 }
 
 export default {
@@ -11,21 +18,24 @@ export default {
   state,
 
   send (conversationId, body) {
-    let data = new FormData()
-    data.append('c', conversationId)
-    data.append('b', body)
-    return axios.post('/fs/xhrapp.php?app=msg&m=sendmsg', data)
-      .then(({ data: { data: { msg } } }) => {
-        Object.assign(msg, { cid: conversationId })
-        this.receiveMessage(convertMessage(msg))
-      })
+    return foodsharing.sendMessage(conversationId, body).then(msg => {
+      this.receiveMessage(convertMessage(msg))
+    })
   },
 
   loadConversation (id) {
-    return axios.get(`/api/v1/conversations/${id}`).then(({ data: { conversation } }) => {
+    return api.getConversation(id).then(conversation => {
       conversationDecodeHtmlEntities(conversation)
       state.conversations[id] = conversation
       return conversation
+    })
+  },
+
+  loadConversationList () {
+    return api.getConversationList().then(conversations => {
+      conversations.forEach(conversationDecodeHtmlEntities)
+      state.conversationList = conversations
+      return state.conversationList
     })
   },
 
@@ -35,6 +45,7 @@ export default {
     if (conversation) {
       conversation.messages.push(message)
       conversation.lastMessage = message
+      // TODO: also update the conversationList
     }
     else {
       log.info('no conversation found for', conversationId)
@@ -43,17 +54,12 @@ export default {
 
 }
 
-export function fetchConversationList () {
-  return axios.get('/api/v1/converations').then(({ data: { conversations } }) => {
-    conversations.forEach(conversationDecodeHtmlEntities)
-    Object.assign(state, { conversations })
-  })
-}
-
 export function conversationDecodeHtmlEntities (conversation) {
-  conversation.messages.forEach(message => {
-    message.body = decodeHtmlEntities(message.body)
-  })
+  if (conversation.messages) {
+    conversation.messages.forEach(message => {
+      message.body = decodeHtmlEntities(message.body)
+    })
+  }
   if (conversation.lastMessage) {
     conversation.lastMessage.body = decodeHtmlEntities(conversation.lastMessage.body)
   }
