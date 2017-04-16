@@ -17,22 +17,20 @@
           </p>
         </div>
       </div>
-
     </div>
 
     <div slot="app-footer">
-        <table class="full-width">
-          <tr>
-            <td><textarea class="full-width" placeholder="Message" v-model="newMessage"></textarea></td>
-            <td class="sendbox"><button class="primary circular" @click="send()">
-              <i>send</i>
-            </button></td>
-          </tr>
-        </table>
+      <table class="full-width">
+        <tr>
+          <td><textarea class="full-width" placeholder="Message" v-model="newMessage"></textarea></td>
+          <td class="sendbox"><button class="primary circular" @click="send()">
+            <i>send</i>
+          </button></td>
+        </tr>
+      </table>
     </div>
 
   </main-layout>
-
 </template>
 
 <script>
