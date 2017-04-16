@@ -3,7 +3,13 @@ import axios from 'axios'
 import log from 'services/log'
 
 export const state = {
+
+  // stores just the list, no messages
+  conversationList: [],
+
+  // stores conversations by id, including the messages
   conversations: {}
+
 }
 
 export default {
@@ -29,12 +35,22 @@ export default {
     })
   },
 
+  loadConversationList () {
+    return axios.get('/api/v1/conversations').then(({ data: { conversations } }) => {
+      console.log('got conversations', conversations)
+      conversations.forEach(conversationDecodeHtmlEntities)
+      state.conversationList = conversations
+      return state.conversationList
+    })
+  },
+
   receiveMessage (message) {
     let { conversationId } = message
     let conversation = state.conversations[conversationId]
     if (conversation) {
       conversation.messages.push(message)
       conversation.lastMessage = message
+      // TODO: also update the conversationList
     }
     else {
       log.info('no conversation found for', conversationId)
@@ -43,17 +59,12 @@ export default {
 
 }
 
-export function fetchConversationList () {
-  return axios.get('/api/v1/converations').then(({ data: { conversations } }) => {
-    conversations.forEach(conversationDecodeHtmlEntities)
-    Object.assign(state, { conversations })
-  })
-}
-
 export function conversationDecodeHtmlEntities (conversation) {
-  conversation.messages.forEach(message => {
-    message.body = decodeHtmlEntities(message.body)
-  })
+  if (conversation.messages) {
+    conversation.messages.forEach(message => {
+      message.body = decodeHtmlEntities(message.body)
+    })
+  }
   if (conversation.lastMessage) {
     conversation.lastMessage.body = decodeHtmlEntities(conversation.lastMessage.body)
   }

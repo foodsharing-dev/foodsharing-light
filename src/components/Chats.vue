@@ -8,18 +8,19 @@
         <div class="list no-border">
 
           <!-- CHAT ITEM -->
-          <router-link tag="div" class="item item-link two-lines" to="/chat/1" v-for="conversation in conversations">
-            <img class="item-primary" :src="conversation.avatar">
+          <router-link tag="div"
+                       class="item item-link two-lines"
+                       to="/chat/1"
+                       v-for="conversation in conversations">
+            <img class="item-primary" :src="conversation.avatar || '/statics/mini_q_avatar.png'">
             <div class="item-content has-secondary">
               <div>
-                <span v-for="participant in conversation.participants">
-                  {{ participant.userName }}
-                </span>
+                  {{ conversation.name || conversation.lastMessage.sentBy.firstName }}
               </div>
               <div>{{ conversation.lastMessage.body }}</div>
             </div>
             <div class="item-secondary stamp">
-              <timeago :since="conversation.lastMessage.time"></timeago>
+              <timeago :since="conversation.lastMessageAt"></timeago>
             </div>
           </router-link>
 
@@ -46,49 +47,17 @@
 </template>
 
 <script>
+  import chat from 'services/chat'
   export default {
     data () {
       return {
-
-        // Active conversation things
-
-        messages: [{
-          time: Date.now(),
-          body: 'heya'
-        }],
-
-        // All conversations
-
-        conversations: [
-          {
-            id: 1,
-            avatar: 'statics/linux-avatar.png',
-            lastMessage: {
-              body: 'Food, i really need food do you have food? i am so hungry, I have been coding all day',
-              time: Date.now()
-            },
-            participants: [
-              {
-                userName: 'James'
-              }
-            ]
-          },
-          {
-            id: 2,
-            avatar: 'statics/boy-avatar.png',
-            lastMessage: {
-              body: 'Bla bla bla bal balm...',
-              time: Date.now()
-            },
-            participants: [
-              {
-                userName: 'Gabi'
-              }
-            ]
-          }
-        ]
-
+        conversations: []
       }
+    },
+    created () {
+      chat.loadConversationList().then(conversations => {
+        this.conversations = conversations
+      })
     }
   }
 </script>
