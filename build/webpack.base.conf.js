@@ -88,9 +88,8 @@ module.exports = {
     /*
       Take note!
       Uncomment if you wish to load only one Moment locale:
-
-      new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
     */
+    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
 
     new webpack.DefinePlugin({
       'process.env': config[env.prod ? 'build' : 'dev'].env,

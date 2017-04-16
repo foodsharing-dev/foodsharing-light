@@ -32,7 +32,7 @@ module.exports = {
     env: require('./dev.env'),
     cssSourceMap: true,
     // auto open browser or not
-    openBrowser: true,
+    openBrowser: false,
     publicPath: '/',
     port: 8080,
 
@@ -47,6 +47,7 @@ module.exports = {
     // Also see /build/script.dev.js and search for "proxy api requests"
     // https://github.com/chimurai/http-proxy-middleware
     proxyTable: {
+
       // proxy to foodsharing socket.io
       '/foodsharing/socket': {
         target: 'http://192.168.178.38:18080',
@@ -56,6 +57,7 @@ module.exports = {
           '^/': '/chat/socket.io/'
         }
       },
+
       // TODO: limit this to just login... /xhrapp.php?app=login&m=loginsubmit
       '/fs': {
         target: 'http://192.168.178.38:18080',
@@ -64,6 +66,7 @@ module.exports = {
           '^/fs': ''
         }
       }
+
     }
   }
 }

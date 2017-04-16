@@ -5,14 +5,23 @@ import socketio from 'socket.io-client'
 export default {
   io: null,
   subscribers: [],
+
+  /*
+  *  Subscribe to receive messages
+  *  Returns a function that will unsubscribe you
+  */
   subscribe (fn) {
     this.subscribers.push(fn)
-    // return an unsubscribe function
     return () => {
       let idx = this.subscribers.indexOf(fn)
       if (idx !== -1) this.subscribers.splice(idx, 1)
     }
   },
+
+  /*
+  * Connects to the socket.io socket if not already
+  * Returns a promise that resolves when connected
+  */
   connect () {
     if (this.io) return Promise.resolve()
     return new Promise((resolve, reject) => {
@@ -28,8 +37,12 @@ export default {
       })
     })
   }
+
 }
 
+/*
+* Convert message from foodsharing socket.io API format to our format
+*/
 export function mapMessage ({
   time,
   body,
