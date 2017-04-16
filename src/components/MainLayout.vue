@@ -52,8 +52,6 @@
 
     <router-view class="layout-view"></router-view>
 
-
-
     <!--
     <div slot="footer" class="toolbar">
       <div class="auto flex justify-center within-iframe-hide">

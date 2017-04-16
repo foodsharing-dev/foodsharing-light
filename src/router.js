@@ -56,9 +56,11 @@ export default new VueRouter({
   routes: [
     { name: 'index', path: '/', component: load('Index'), beforeEnter: protectRoute }, // Default
     { name: 'login', path: '/login', component: load('Login'), beforeEnter: redirectIfLoggedIn }, // Login
-    { name: 'logout', path: '/logout', component: load('Login') }, // Login
+    { name: 'signup', path: '/signup', component: load('Signup') }, // Signup
+    { name: 'logout', path: '/logout', component: load('Login') }, // Logout
     { path: '/stores', component: load('Stores'), beforeEnter: protectRoute }, // Stores
     { path: '/chats', component: load('Chats'), beforeEnter: protectRoute }, // Chats
+    { path: '/chat/:id', component: load('Chat'), beforeEnter: protectRoute }, // Chats
     { path: '*', component: load('Error404') } // Not found
   ]
 })

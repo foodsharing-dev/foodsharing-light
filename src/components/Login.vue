@@ -7,8 +7,9 @@
         <button class="hide-on-drawer-visible" @click="$refs.leftDrawer.open()">
           <i>menu</i>
         </button>
+        <i>lock</i>
         <q-toolbar-title :padding="1">
-          Login
+          Foodsharing Login
         </q-toolbar-title>
 
       </div>
@@ -37,6 +38,8 @@
           </div>
         </div>
         <button @click="login()" class="primary big full-width">Login</button>
+        <hr>
+        <p>Don't a Member yet? <router-link :to="{ name: 'signup' }">Sign up for an account</router-link></p>
       </div>
     </div>
     <!-- MAIN END -->
