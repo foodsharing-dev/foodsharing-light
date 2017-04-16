@@ -16,8 +16,8 @@ export default {
   state,
 
   send (conversationId, body) {
-    return foodsharing.sendMessage(conversationId, body).then(msg => {
-      this.receiveMessage(convertMessage(msg))
+    return foodsharing.sendMessage(conversationId, body).then(message => {
+      this.receiveMessage(message)
     })
   },
 
@@ -27,7 +27,6 @@ export default {
 
   loadConversation (id) {
     return api.getConversation(id).then(conversation => {
-      conversationDecodeHtmlEntities(conversation)
       state.conversations[id] = conversation
       return conversation
     })
@@ -39,7 +38,6 @@ export default {
 
   loadConversationList () {
     return api.getConversationList().then(conversations => {
-      conversations.forEach(conversationDecodeHtmlEntities)
       state.conversationList = conversations
       return state.conversationList
     })
@@ -61,56 +59,4 @@ export default {
     }
   }
 
-}
-
-export function conversationDecodeHtmlEntities (conversation) {
-  if (conversation.messages) {
-    conversation.messages.forEach(message => {
-      message.body = decodeHtmlEntities(message.body)
-    })
-  }
-  if (conversation.lastMessage) {
-    conversation.lastMessage.body = decodeHtmlEntities(conversation.lastMessage.body)
-  }
-}
-
-/*
- * Foodsharing db has encoded html entities (e.g. "fish &amp; chips")
- *
- * Function to reverse php htmlentities() function
- * Get list of entities by running:
- *
- *   php -r 'var_dump(get_html_translation_table());`
- *
- */
-export function decodeHtmlEntities (str) {
-  return str
-    .replace(/&amp;/g, '&')
-    .replace(/&quot;/g, '""')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-}
-
-/*
- * Convert message from existing foodsharing format to our format
- * See /api/doc#get--api-v1-conversation-{id}
- */
-export function convertMessage ({
-  time: sentAt,
-  body,
-  fs_name: firstName,
-  fs_id: userId,
-  id: messageId,
-  cid: conversationId
-}) {
-  return {
-    sentAt,
-    body: decodeHtmlEntities(body),
-    sentBy: {
-      id: parseInt(userId, 10),
-      firstName
-    },
-    messageId: parseInt(messageId, 10),
-    conversationId: parseInt(conversationId, 10)
-  }
 }
