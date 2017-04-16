@@ -23,6 +23,7 @@ export default {
 
   loadConversation (id) {
     return axios.get(`/api/v1/conversation/${id}`).then(({ data: { conversation } }) => {
+      conversationDecodeHtmlEntities(conversation)
       state.conversations[id] = conversation
       return conversation
     })
@@ -44,22 +45,35 @@ export default {
 
 export function fetchConversationList () {
   return axios.get('/api/v1/converations').then(({ data: { conversations } }) => {
+    conversations.forEach(conversationDecodeHtmlEntities)
     Object.assign(state, { conversations })
   })
 }
 
-export function ensureConversation (id) {
-  let conversation = state.conversations[id]
-  if (conversation) {
-    return Promise.resolve(conversation)
+export function conversationDecodeHtmlEntities (conversation) {
+  conversation.messages.forEach(message => {
+    message.body = decodeHtmlEntities(message.body)
+  })
+  if (conversation.lastMessage) {
+    conversation.lastMessage.body = decodeHtmlEntities(conversation.lastMessage.body)
   }
-  else {
-    // must fetch it
-    return axios.get(`/api/v1/conversation/${id}`).then(({ data: { conversation } }) => {
-      state.conversations[id] = conversation
-      return conversation
-    })
-  }
+}
+
+/*
+ * Foodsharing db has encoded html entities (e.g. "fish &amp; chips")
+ *
+ * Function to reverse php htmlentities() function
+ * Get list of entities by running:
+ *
+ *   php -r 'var_dump(get_html_translation_table());`
+ *
+ */
+export function decodeHtmlEntities (str) {
+  return str
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '""')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
 }
 
 /*
@@ -76,7 +90,7 @@ export function convertMessage ({
 }) {
   return {
     sentAt,
-    body,
+    body: decodeHtmlEntities(body),
     sentBy: {
       id: parseInt(userId, 10),
       firstName
