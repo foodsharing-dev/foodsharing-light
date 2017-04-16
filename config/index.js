@@ -48,9 +48,15 @@ module.exports = {
     // https://github.com/chimurai/http-proxy-middleware
     proxyTable: {
 
+      // proxy to symfony api backend
+      '/api': {
+        target: require('./dev.backends').api,
+        changeOrigin: false
+      },
+
       // proxy to foodsharing socket.io
       '/foodsharing/socket': {
-        target: 'http://192.168.178.38:18080',
+        target: require('./dev.backends').foodsharing,
         changeOrigin: false,
         ws: true,
         pathRewrite: {
@@ -60,7 +66,7 @@ module.exports = {
 
       // TODO: limit this to just login... /xhrapp.php?app=login&m=loginsubmit
       '/fs': {
-        target: 'http://192.168.178.38:18080',
+        target: require('./dev.backends').foodsharing,
         changeOrigin: false,
         pathRewrite: {
           '^/fs': ''
