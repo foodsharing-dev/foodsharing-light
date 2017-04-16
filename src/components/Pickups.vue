@@ -6,68 +6,27 @@
 
     <div class="card">
       <div class="card-title bg-primary text-white">
-        {{ pickup.datetime }}
+        your pickups
       </div>
-      <div class="card-content list no-border highlight">
-        <router-link tag="div" to="/store/1" class="item two-lines item-link">
-          <i class="item-primary">store</i>
-          <div class="item-content">
-            <div class="item-title">{{ store.name }}</div>
-            <div>{{ store.location.street }}, {{ store.location.zip }} {{ store.location.city }}</div>
-          </div>
-        </router-link>
-        <div class="item two-lines">
-          <i class="item-primary">shopping_basket</i>
-          <div class="item-content">
-            <div class="item-title">{{ store.fetchweight }}</div>
-            <div>Abholmenge im Schnitt</div>
-          </div>
-        </div>
-
-        <div class="item two-lines">
-          <i class="item-primary">info</i>
-          <div class="item-content">
-            <div class="item-title">Things to know</div>
-            <div>{{ store.info }}</div>
-          </div>
-        </div>
-      </div>
-      <hr>
-      <div class="list no-border">
-        <div class="list-label">4 foodaver comming</div>
-        <div class="item two-lines" v-for="n in 3">
-          <img class="item-primary" :src="'statics/linux-avatar.png'">
-          <div class="item-content has-secondary">
-            Gabi
-          </div>
-          <i slot="target" class="item-secondary">
-            more_vert
-            <q-popover ref="popover">
-              <div class="list">
-
-                <router-link tag="div" to="/chat/1" class="item item-link">
-                  <i class="item-primary">chat</i>
-                  <div class="item-content">Chat</div>
-                </router-link>
-                <div class="item item-link">
-                  <i class="item-primary">phone</i>
-                  <div class="item-content">Call</div>
-                </div>
-
+      <div class="card-content card-force-top-padding">
+        <div class="list no-border">
+          <router-link :to="'/pickup/' + p.id" tag="div" class="item two-lines item-link" v-for="p in pickups">
+            <div class="item-primary">
+              <i>store</i>
+            </div>
+            <div class="item-content inset has-secondary">
+              <div>{{ p.datetime }}</div>
+              <div>
+                <span>{{ p.store.name }}</span><br>
+                {{ p.store.location.street }}, {{ p.store.zip }} {{ p.store.city }}
               </div>
-            </q-popover>
-          </i>
+            </div>
+            <div class="item-secondary stamp">
+              3 minutes left
+            </div>
+          </router-link>
+          <hr class="inset">
         </div>
-      </div>
-
-      <div class="card-actions card-no-top-padding">
-        <div class="text-lime">
-          13 minutes left
-        </div>
-        <div class="auto"></div>
-        <button class="primary big" @click="cancelPickupDialog()">
-          <i class="on-left">cancel</i> cancel pickup
-        </button>
       </div>
     </div>
 
@@ -83,7 +42,7 @@
       </div>
 
       <div class="list no-border platform-delimiter">
-        <q-drawer-link icon="store" to="/store/1" exact v-for="store in stores">
+        <q-drawer-link icon="store" :to="'/store/' + store.id" exact v-for="store in stores">
           {{ store.name }}
         </q-drawer-link>
       </div>
@@ -101,31 +60,34 @@
     data () {
       return {
 
-        pickup: {
-          datetime: 'today, 20:00 h'
-        },
-
-        store: {
-          id: 1,
-          name: 'Coffee Shop',
-          location: {
-            street: 'Bananastreet 1',
-            zip: '12345',
-            city: 'Tomatocity'
-          },
-          fetchweight: '20-30kg',
-          info: 'The store Boss has a big nose.',
-          members: [
-            {
+        pickups: [
+          {
+            id: 1,
+            datetime: 'today, 20:00 h',
+            store: {
               id: 1,
-              name: 'Peter'
-            },
-            {
-              id: 2,
-              name: 'Gabi'
+              name: 'Coffee Shop',
+              location: {
+                street: 'Bananastreet 1',
+                zip: '12345',
+                city: 'Tomatocity'
+              }
             }
-          ]
-        },
+          },
+          {
+            id: 2,
+            datetime: 'tomorrow, 12:00 h',
+            store: {
+              id: 1,
+              name: 'Banana Shop',
+              location: {
+                street: 'Mangostreet 1',
+                zip: '12345',
+                city: 'Tomatocity'
+              }
+            }
+          }
+        ],
 
         stores: [
           {

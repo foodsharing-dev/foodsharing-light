@@ -19,10 +19,12 @@
         </q-tabs>
         <!-- NAVIGATION END -->
       </div>
+
     </slot>
     <!-- HEADER END -->
 
     <!-- MAIN -->
+
     <div class="layout-view">
       <div class="layout-padding">
         <slot></slot>

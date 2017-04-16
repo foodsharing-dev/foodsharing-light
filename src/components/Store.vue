@@ -32,10 +32,10 @@
 
     <div class="list">
       <div class="list-label">Verantwortliche foodsaver</div>
-      <router-link tag="div" to="/chat/1" class="item item-link" v-for="n in 3">
+      <router-link tag="div" :to="'/chat/' + m.id" class="item item-link" v-for="m in store.responsible">
         <img class="item-primary" :src="'statics/boy-avatar.png'">
         <div class="item-content has-secondary">
-          Peter
+          {{ m.name }}
         </div>
         <i class="item-secondary">
           chat_bubble
@@ -43,10 +43,10 @@
       </router-link>
       <hr>
       <div class="list-label">Team</div>
-      <router-link tag="div" to="/chat/1" class="item item-link" v-for="n in 3">
+      <router-link tag="div" :to="'/chat/' + m.id" class="item item-link" v-for="m in store.members">
         <img class="item-primary" :src="'statics/linux-avatar.png'">
         <div class="item-content">
-          Gabi
+          {{ m.name }}
         </div>
       </router-link>
     </div>
@@ -63,7 +63,7 @@
       </div>
 
       <div class="list no-border platform-delimiter">
-        <q-drawer-link icon="store" to="/store/1" exact v-for="s in stores">
+        <q-drawer-link icon="store" :to="'/store/1' + s.id" exact v-for="s in stores">
           {{ s.name }}
         </q-drawer-link>
       </div>

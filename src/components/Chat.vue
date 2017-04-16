@@ -17,6 +17,7 @@
       </div>
 
     </div>
+
     <div slot="app-footer">
         <table class="full-width">
           <tr>
