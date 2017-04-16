@@ -1,4 +1,5 @@
-import axios from 'axios'
+import foodsharing from 'services/foodsharing'
+import api from 'services/api'
 
 import log from 'services/log'
 
@@ -17,18 +18,13 @@ export default {
   state,
 
   send (conversationId, body) {
-    let data = new FormData()
-    data.append('c', conversationId)
-    data.append('b', body)
-    return axios.post('/fs/xhrapp.php?app=msg&m=sendmsg', data)
-      .then(({ data: { data: { msg } } }) => {
-        Object.assign(msg, { cid: conversationId })
-        this.receiveMessage(convertMessage(msg))
-      })
+    return foodsharing.sendMessage(conversationId, body).then(msg => {
+      this.receiveMessage(convertMessage(msg))
+    })
   },
 
   loadConversation (id) {
-    return axios.get(`/api/v1/conversations/${id}`).then(({ data: { conversation } }) => {
+    return api.getConversation(id).then(conversation => {
       conversationDecodeHtmlEntities(conversation)
       state.conversations[id] = conversation
       return conversation
@@ -36,8 +32,7 @@ export default {
   },
 
   loadConversationList () {
-    return axios.get('/api/v1/conversations').then(({ data: { conversations } }) => {
-      console.log('got conversations', conversations)
+    return api.getConversationList().then(conversations => {
       conversations.forEach(conversationDecodeHtmlEntities)
       state.conversationList = conversations
       return state.conversationList
