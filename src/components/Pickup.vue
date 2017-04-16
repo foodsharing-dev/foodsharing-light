@@ -61,13 +61,12 @@
   </div></template>
 
 <script>
-  import { Dialog, ActionSheet, Utils, Platform } from 'quasar'
+  import { Dialog, ActionSheet, Platform } from 'quasar'
 
   export default {
-    methods :{
+    methods: {
       showActionSheetWithIcons (member) {
-
-        if(Platform.is.desktop) {
+        if (Platform.is.desktop) {
           this.$router.push('/chat/1')
         }
 
