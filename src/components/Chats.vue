@@ -12,7 +12,8 @@
           <router-link tag="div"
                        class="item item-link two-lines"
                        to="/chat/1"
-                       v-for="conversation in conversations">
+                       v-for="conversation in conversations"
+                       :key="conversation.id">
             <img class="item-primary" :src="conversation.avatar || '/statics/mini_q_avatar.png'">
             <div class="item-content has-secondary">
               <div>
@@ -65,12 +66,4 @@
 </script>
 
 <style lang="styl">
-  .layout-footer {
-    background: white !important;
-    padding-left:8px;
-
-  }
-  .sendbox {
-    width:56px;
-  }
 </style>

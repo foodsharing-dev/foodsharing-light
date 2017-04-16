@@ -34,7 +34,10 @@
 
     <div class="list">
       <div class="list-label">Verantwortliche foodsaver</div>
-      <router-link tag="div" :to="'/chat/' + m.id" class="item item-link" v-for="m in store.responsible">
+      <router-link tag="div"
+                   :to="'/chat/' + m.id" class="item item-link"
+                   v-for="m in store.responsible"
+                   :key="m.id">
         <img class="item-primary" :src="'statics/boy-avatar.png'">
         <div class="item-content has-secondary">
           {{ m.name }}
@@ -45,7 +48,11 @@
       </router-link>
       <hr>
       <div class="list-label">Team</div>
-      <router-link tag="div" :to="'/chat/' + m.id" class="item item-link" v-for="m in store.members">
+      <router-link tag="div"
+                   class="item item-link"
+                   :to="'/chat/' + m.id"
+                   v-for="m in store.members"
+                   :key="m.id">
         <img class="item-primary" :src="'statics/linux-avatar.png'">
         <div class="item-content has-secondary">
           {{ m.name }}

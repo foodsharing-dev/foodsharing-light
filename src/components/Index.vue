@@ -7,7 +7,11 @@
     <h6>Deine Abholtermine</h6>
     <div class="card">
       <div class="list no-border">
-        <router-link :to="'/pickup/' + p.id" tag="div" class="item two-lines item-link" v-for="p in pickups">
+        <router-link :to="'/pickup/' + p.id"
+                     tag="div"
+                     class="item two-lines item-link"
+                     v-for="p in pickups"
+                     :key="p.id">
           <div class="item-primary">
             <i>store</i>
           </div>

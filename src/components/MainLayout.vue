@@ -127,12 +127,7 @@
   .list, .card {
     background-color: #fff;
   }
-  .chat-you .chat-date, .chat-other .chat-date {
-    color: #4A3520 !important;
-  }
-  .chat-you .chat-message p {
-    background-color: #fff !important;
-    color: #4A3520 !important;
-    word-wrap:break-word;
+  .layout-footer {
+    background-color: white !important;
   }
 </style>

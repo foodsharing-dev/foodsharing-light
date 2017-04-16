@@ -6,7 +6,7 @@
       <h6>Deine Betriebe</h6>
       <div class="card">
         <div class="list no-border">
-          <router-link :to="'/store/' + store.id" tag="div" class="item two-lines item-link" v-for="store in stores">
+          <router-link :to="'/store/' + store.id" tag="div" class="item two-lines item-link" v-for="store in stores" :key="store.id">
             <div class="item-primary">
               <i>store</i>
             </div>

@@ -18,7 +18,11 @@
       </div>
       <div class="card-content card-force-top-padding">
         <div class="list no-border">
-          <router-link :to="'/pickup/' + p.id" tag="div" class="item two-lines item-link" v-for="p in pickups">
+          <router-link :to="'/pickup/' + p.id"
+                       tag="div"
+                       class="item two-lines item-link"
+                       v-for="p in pickups"
+                       :key="p.id">
             <div class="item-primary">
               <i>store</i>
             </div>
@@ -50,7 +54,11 @@
       </div>
 
       <div class="list no-border platform-delimiter">
-        <q-drawer-link icon="store" :to="'/store/' + store.id" exact v-for="store in stores">
+        <q-drawer-link icon="store"
+                       exact
+                       v-for="store in stores"
+                       :key="store.id"
+                       :to="'/store/' + store.id">
           {{ store.name }}
         </q-drawer-link>
       </div>

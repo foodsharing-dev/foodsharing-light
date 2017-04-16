@@ -6,7 +6,9 @@
     </div>
 
     <div v-if="conversation" class="conversation">
-      <div v-for="message in conversation.messages" v-bind:class="{ 'chat-other': isMe(message), 'chat-you': !isMe(message) }">
+      <div v-for="message in conversation.messages"
+           :key="message.id"
+           v-bind:class="{ 'chat-other': isMe(message), 'chat-you': !isMe(message) }">
         <div class="chat-user">
           <img :src="message.sentBy.photo || '/statics/mini_q_avatar.png'">
         </div>
@@ -100,5 +102,14 @@
 .chat-message
   p
    word-break: break-all
+
+.chat-date
+  color: #4A3520 !important
+
+.chat-you
+  .chat-message
+    p
+      background-color: #fff !important;
+      color: #4A3520 !important;
 
 </style>
