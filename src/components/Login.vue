@@ -23,14 +23,14 @@
               <div class="item two-lines">
                 <i class="item-primary">email</i>
                 <div class="item-content">
-                  <input v-model="email" class="full-width" placeholder="E-Mail Address">
+                  <input v-model="email" class="full-width" type="email" placeholder="E-Mail Addresse">
                 </div>
               </div>
               <hr>
               <div class="item two-lines">
                 <i class="item-primary">lock</i>
                 <div class="item-content">
-                  <input v-model="password" placeholder="password" type="password" class="full-width">
+                  <input v-model="password" placeholder="Passwort" type="password" class="full-width">
                 </div>
               </div>
             </div>
