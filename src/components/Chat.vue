@@ -115,6 +115,7 @@
    word-break: break-all
    padding-top: 5px
    padding-bottom: 5px
+   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
 
 .chat-date
   color: #4A3520 !important
@@ -133,7 +134,7 @@
     height: 65px
     overflow: hidden
     border-radius: 50%
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3)
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
     img
       width: 65px !important
       height: 80px !important
