@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 import foodsharing from 'services/foodsharing'
 import api from 'services/api'
 
@@ -27,18 +29,20 @@ export default {
 
   loadConversation (id) {
     return api.getConversation(id).then(conversation => {
-      state.conversations[id] = conversation
+      Vue.set(state.conversations, id, conversation)
       return conversation
     })
   },
 
   clearConversation (id) {
-    delete state.conversations[id]
+    Vue.delete(state.conversations, id)
   },
 
   loadConversationList () {
     return api.getConversationList().then(conversations => {
-      state.conversationList = conversations
+      // Use array mutation methods so any bindings update
+      state.conversationList.splice(0)
+      state.conversationList.push.apply(state.conversationList, conversations)
       return state.conversationList
     })
   },
@@ -56,6 +60,10 @@ export default {
       conversation.lastMessage = message
       conversation.lastMessageAt = message.sentAt
       state.conversationList.sort((a, b) => a.lastMessageAt - b.lastMessageAt)
+    }
+    else {
+      // we don't have this conversation in our list, reload the list
+      this.loadConversationList()
     }
   }
 

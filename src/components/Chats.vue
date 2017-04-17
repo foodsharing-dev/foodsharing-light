@@ -11,10 +11,10 @@
           <!-- CHAT ITEM -->
           <router-link tag="div"
                        class="item item-link two-lines"
-                       to="/chat/1"
+                       :to="{ name: 'chat', params: { id: conversation.id } }"
                        v-for="conversation in conversations"
                        :key="conversation.id">
-            <img class="item-primary" :src="conversation.avatar || '/statics/mini_q_avatar.png'">
+            <img class="item-primary" :src="avatarFor(conversation)">
             <div class="item-content has-secondary">
               <div>
                   {{ conversation.name || conversation.lastMessage.sentBy.firstName }}
@@ -25,7 +25,6 @@
               <from-now :date="conversation.lastMessageAt"></from-now>
             </div>
           </router-link>
-
           <!-- CHAT ITEM END -->
 
         </div>
@@ -42,6 +41,17 @@
     data () {
       return {
         conversations: []
+      }
+    },
+    methods: {
+      avatarFor (conversation) {
+        let { lastMessage } = conversation
+        if (lastMessage && lastMessage.sentBy.photo) {
+          return '/fs/images/thumb_crop_' + lastMessage.sentBy.photo
+        }
+        else {
+          return '/statics/mini_q_avatar.png'
+        }
       }
     },
     created () {

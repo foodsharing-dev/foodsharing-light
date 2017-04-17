@@ -52,12 +52,12 @@
   export default {
     data () {
       return {
-        /*
         email: 'userbot@example.com',
         password: 'userbot'
-        */
+        /*
         email: 'user1@example.com',
         password: 'user1'
+        */
       }
     },
     mounted () {

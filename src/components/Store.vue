@@ -36,7 +36,7 @@
       <div class="list">
         <div class="list-label">Verantwortliche foodsaver</div>
         <router-link tag="div"
-                     :to="'/chat/' + m.user.id" class="item item-link"
+                     :to="{ name: 'userChat', params: { userId: m.user.id } }" class="item item-link"
                      v-for="m in store.team"
                      :key="m.user.id">
           <img class="item-primary" :src="'statics/boy-avatar.png'">
@@ -51,7 +51,7 @@
         <div class="list-label">Team</div>
         <router-link tag="div"
                      class="item item-link"
-                     :to="'/chat/' + m.user.id"
+                     :to="{ name: 'userChat', params: { userId: m.user.id } }"
                      v-for="m in store.team"
                      :key="m.user.id">
           <img class="item-primary" :src="'statics/linux-avatar.png'">

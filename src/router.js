@@ -64,8 +64,8 @@ export default new VueRouter({
     { name: 'pickup', path: '/pickups/:id', component: load('Pickup'), beforeEnter: protectRoute }, // Stores
     { path: '/stores', component: load('Stores'), beforeEnter: protectRoute }, // Stores
     { path: '/store/:id', component: load('Store'), beforeEnter: protectRoute }, // Chats
-    { path: '/chats', component: load('Chats'), beforeEnter: protectRoute }, // Chats
-    { name: 'chat', path: '/chat/:id', component: load('Chat'), beforeEnter: protectRoute }, // Chats
+    { name: 'chats', path: '/chats', component: load('Chats'), beforeEnter: protectRoute }, // Chats
+    { name: 'chat', path: '/chats/:id', component: load('Chat'), beforeEnter: protectRoute }, // Chats
     {
       name: 'logout',
       path: '/logout',
