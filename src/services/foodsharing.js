@@ -23,18 +23,19 @@ export default {
         p: password
       }
     }).then(({ data }) => {
-      if (!/"status":1/.test(data)) {
-        Promise.reject(new Error('login to desktop foodsharing failed'))
+      data = convertJsonp('ignored', data)
+      if (data.status !== 1) {
+        return Promise.reject(new Error('login to desktop foodsharing failed'))
       }
     })
   },
 
   checklogin (email, password) {
     return axios.request({
-      url: prefix('/xhrapp.php?app=api&m=checklogin&callback=jsonp')
+      url: prefix('/xhrapp.php?app=api&m=checklogin&callback=ignored')
     }).then(({ data }) => {
-      // The response is a jsonp kind of thing... we don't need eval it
-      return data === 'jsonp({"status":1});'
+      data = convertJsonp('ignored', data)
+      return data.status === 1
     })
   },
 
@@ -105,4 +106,8 @@ export default {
     }
   }
 
+}
+
+export function convertJsonp (name, value) {
+  return JSON.parse(value.replace(new RegExp(`^${name}\\(`), '').replace(/\);$/, ''))
 }

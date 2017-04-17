@@ -4,54 +4,62 @@
 
     <!-- MAIN -->
 
-    <h6>Abholung {{ store.name }}</h6>
-    <div class="card">
-      <div class="card-content list no-border highlight">
-        <div class="item two-lines">
-          <i class="item-primary">alarm</i>
-          <div class="item-content">
-            <div class="item-title">{{ pickup.datetime }}</div>
-            <div>Datum / Uhrzeit</div>
+    <div v-if="pickup">
+
+      <h6>Abholung {{ store.name }}</h6>
+      <div class="card">
+        <div class="card-content list no-border highlight">
+          <div class="item two-lines">
+            <i class="item-primary">alarm</i>
+            <div class="item-content">
+              <div class="item-title">{{ pickup.at }}</div>
+              <div>Datum / Uhrzeit</div>
+            </div>
+          </div>
+          <router-link tag="div" to="/store/1" class="item two-lines item-link">
+            <i class="item-primary">store</i>
+            <div class="item-content">
+              <div class="item-title">{{ store.streetNumber }} {{ store.street }}, {{ store.zip }} {{ store.city }}</div>
+              <div>Adresse</div>
+            </div>
+          </router-link>
+
+          <!--
+          <div class="item two-lines">
+            <i class="item-primary">shopping_basket</i>
+            <div class="item-content">
+              <div class="item-title">{{ store.fetchweight }}</div>
+              <div>Abholmenge im Schnitt</div>
+            </div>
+          </div>
+          -->
+
+          <div class="item two-lines">
+            <i class="item-primary">info</i>
+            <div class="item-content">
+              <div class="item-title">Besonderheiten</div>
+              <div>{{ store.notes }}</div>
+            </div>
           </div>
         </div>
-        <router-link tag="div" to="/store/1" class="item two-lines item-link">
-          <i class="item-primary">store</i>
-          <div class="item-content">
-            <div class="item-title">{{ store.location.street }}, {{ store.location.zip }} {{ store.location.city }}</div>
-            <div>Adresse</div>
-          </div>
-        </router-link>
-        <div class="item two-lines">
-          <i class="item-primary">shopping_basket</i>
-          <div class="item-content">
-            <div class="item-title">{{ store.fetchweight }}</div>
-            <div>Abholmenge im Schnitt</div>
+        <hr>
+        <div class="list no-border">
+          <div class="list-label">{{ pickup.members.length }} foodsaver kommen</div>
+
+          <div v-for="member in pickup.members"
+               v-on:click="showActionSheetWithIcons(member)"
+               class="item two-lines item-link">
+            <img class="item-primary" :src="avatarFor(member)">
+            <div class="item-content">
+              {{ member.firstName }}
+            </div>
           </div>
         </div>
 
-        <div class="item two-lines">
-          <i class="item-primary">info</i>
-          <div class="item-content">
-            <div class="item-title">Besinderheiten</div>
-            <div>{{ store.info }}</div>
-          </div>
-        </div>
+        <button class="primary big full-width" @click="cancelPickupDialog()">
+          <i class="on-left">cancel</i> Austragen
+        </button>
       </div>
-      <hr>
-      <div class="list no-border">
-        <div class="list-label">{{ pickup.members.length }} foodaver kommen</div>
-
-        <div v-on:click="showActionSheetWithIcons(m)" class="item two-lines item-link" v-for="m in pickup.members">
-          <img class="item-primary" :src="'statics/linux-avatar.png'">
-          <div class="item-content">
-            {{ m.name }}
-          </div>
-        </div>
-      </div>
-
-      <button class="primary big full-width" @click="cancelPickupDialog()">
-        <i class="on-left">cancel</i> Austragen
-      </button>
     </div>
 
     <!-- MAIN END -->
@@ -63,97 +71,82 @@
 <script>
   import { Dialog, ActionSheet, Platform } from 'quasar'
 
+  import api from 'services/api'
+  import log from 'services/log'
+
   export default {
+    data () {
+      return {
+        pickup: null,
+        store: null
+      }
+    },
     methods: {
-      showActionSheetWithIcons (member) {
+      avatarFor (user) {
+        if (user.photo) {
+          return '/fs/images/thumb_crop_' + user.photo
+        }
+        else {
+          return '/statics/mini_q_avatar.png'
+        }
+      },
+      cancelPickupDialog () {
+        Dialog.create({
+          title: 'Sicher?',
+          message: 'Willst Du Dich wirklich von der Abholung Abmelden?',
+          buttons: [
+            {
+              label: 'Nein',
+              classes: 'positive on-left'
+            },
+            {
+              label: 'Ja',
+              classes: 'negative'
+            }
+          ]
+        })
+      },
+      showActionSheetWithIcons ({ user }) {
+        log.info('this.$router', this.$router)
         if (Platform.is.desktop) {
           this.$router.push('/chat/1')
         }
 
-        ActionSheet.create({
-          title: member.name,
-          gallery: true,
-          actions: [
-            {
-              label: 'Chat',
-              icon: 'chat',
-              handler () {
-                // todo
-              }
-            },
-            {
-              label: 'Call',
-              icon: 'phone',
-              handler () {
-                // todo
-                window.location.href = 'tel:+496170961709'
-              }
+        let actions = []
+
+        actions.push({
+          label: 'Chat',
+          icon: 'chat',
+          handler: () => {
+            this.$router.push({ name: 'userChat', params: { userId: user.id } })
+          }
+        })
+
+        if (user.phone) {
+          actions.push({
+            label: 'Call',
+            icon: 'phone',
+            handler () {
+              // todo
+              window.location.href = 'tel:+496170961709'
             }
-          ]
+          })
+        }
+
+        ActionSheet.create({
+          title: user.firstName,
+          gallery: true,
+          actions
         })
       }
     },
-    data () {
-      return {
-
-        pickup: {
-          datetime: 'today, 20:00 h',
-          members: [
-            {
-              id: 1,
-              name: 'Peter'
-            },
-            {
-              id: 2,
-              name: 'Gabi'
-            }
-          ]
-        },
-
-        store: {
-          id: 1,
-          name: 'Coffee Shop',
-          location: {
-            street: 'Bananastreet 1',
-            zip: '12345',
-            city: 'Tomatocity'
-          },
-          fetchweight: '20-30kg',
-          info: 'The store Boss has a big nose.'
-        },
-
-        stores: [
-          {
-            id: 1,
-            name: 'Store 1'
-          },
-          {
-            id: 2,
-            name: 'Store 2'
-          },
-          {
-            id: 3,
-            name: 'Store 3'
-          }
-        ],
-
-        cancelPickupDialog () {
-          Dialog.create({
-            title: 'Sicher?',
-            message: 'Willst Du Dich wirklich von der Abholung Abmelden?',
-            buttons: [
-              {
-                label: 'Nein',
-                classes: 'positive on-left'
-              },
-              {
-                label: 'Ja',
-                classes: 'negative'
-              }
-            ]
-          })
-        }
-      }
+    created () {
+      let { id } = this.$route.params
+      log.info('pickup id is', id)
+      api.getPickup(id).then(pickup => {
+        this.pickup = pickup
+        this.store = pickup.store
+      })
     }
   }
 </script>

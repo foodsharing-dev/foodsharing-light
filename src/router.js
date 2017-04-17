@@ -68,12 +68,13 @@ export default new VueRouter({
     { path: '/chats', component: load('Chats'), beforeEnter: protectRoute }, // Chats
     { name: 'chat', path: '/chat/:id', component: load('Chat'), beforeEnter: protectRoute }, // Chats
     {
-      path: '/users/:id/chat',
+      name: 'userChat',
+      path: '/users/:userId/chat',
       beforeEnter: (to, from, next) => {
-        log.info('getting user chat', to)
-        chat.getOrCreateConversationForUser(to.params.id).then(id => {
-          log.info('redirecting to chat id', id)
-          next({ name: 'chat', params: { id } })
+        let { userId } = to.params
+        log.info('opening user chat for', userId)
+        chat.getOrCreateConversationForUser(userId).then(conversationId => {
+          next({ name: 'chat', params: { id: conversationId } })
         }).catch(err => {
           log.error('could not get/create chat for user', err)
           next({ name: 'index' })

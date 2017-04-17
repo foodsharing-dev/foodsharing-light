@@ -40,7 +40,14 @@ export default {
 
   getNextPickupList () {
     return axios.get('/api/v1/pickups/next').then(({ data: { pickups } }) => {
+      pickups.forEach(setPickupId)
       return pickups
+    })
+  },
+
+  getPickup (id) {
+    return axios.get(`/api/v1/pickups/${id}`).then(({ data: { pickup } }) => {
+      return pickup
     })
   },
 
@@ -49,7 +56,10 @@ export default {
       return stores
     })
   }
+}
 
+export function setPickupId (pickup) {
+  pickup.id = [pickup.store.id, pickup.at].join(':')
 }
 
 export function conversationDecodeHtmlEntities (conversation) {

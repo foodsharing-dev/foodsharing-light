@@ -67,8 +67,8 @@
   export default {
     data () {
       return {
-        email: 'user1@example.com',
-        password: 'user1'
+        email: 'userbot@example.com',
+        password: 'userbot'
       }
     },
     methods: {
