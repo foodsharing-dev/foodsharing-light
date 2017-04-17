@@ -3,7 +3,6 @@
   <main-layout>
 
     <!-- MAIN -->
-
     <div v-if="pickup">
 
       <h6>Abholung {{ store.name }}</h6>
@@ -23,16 +22,6 @@
               <div>Adresse</div>
             </div>
           </router-link>
-
-          <!--
-          <div class="item two-lines">
-            <i class="item-primary">shopping_basket</i>
-            <div class="item-content">
-              <div class="item-title">{{ store.fetchweight }}</div>
-              <div>Abholmenge im Schnitt</div>
-            </div>
-          </div>
-          -->
 
           <div class="item two-lines">
             <i class="item-primary">info</i>
@@ -55,16 +44,10 @@
             </div>
           </div>
         </div>
-
-        <button class="primary big full-width" @click="cancelPickupDialog()">
-          <i class="on-left">cancel</i> Austragen
-        </button>
       </div>
     </div>
 
     <!-- MAIN END -->
-
-
   </main-layout>
   </div></template>
 
@@ -90,22 +73,6 @@
           return '/statics/mini_q_avatar.png'
         }
       },
-      cancelPickupDialog () {
-        Dialog.create({
-          title: 'Sicher?',
-          message: 'Willst Du Dich wirklich von der Abholung Abmelden?',
-          buttons: [
-            {
-              label: 'Nein',
-              classes: 'positive on-left'
-            },
-            {
-              label: 'Ja',
-              classes: 'negative'
-            }
-          ]
-        })
-      },
       showActionSheetWithIcons ({ user }) {
         let actions = []
 
@@ -117,13 +84,13 @@
           }
         })
 
-        if (user.phone) {
+        if (user.mobile) {
           actions.push({
             label: 'Call',
             icon: 'phone',
             handler () {
               // todo
-              window.location.href = 'tel:+496170961709'
+              window.location.href = 'tel:' + user.phone
             }
           })
         }
