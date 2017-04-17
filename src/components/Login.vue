@@ -19,44 +19,30 @@
         <h6>Melde Dich an</h6>
 
         <div class="card">
-          <div class="list">
-            <div class="item two-lines">
-              <i class="item-primary">email</i>
-              <div class="item-content">
-                <input v-model="email" class="full-width" placeholder="E-Mail Address">
+          <form v-on:submit.stop.prevent="login()">
+            <div class="list">
+              <div class="item two-lines">
+                <i class="item-primary">email</i>
+                <div class="item-content">
+                  <input v-model="email" class="full-width" placeholder="E-Mail Address">
+                </div>
+              </div>
+              <hr>
+              <div class="item two-lines">
+                <i class="item-primary">lock</i>
+                <div class="item-content">
+                  <input v-model="password" placeholder="password" type="password" class="full-width">
+                </div>
               </div>
             </div>
-            <hr>
-            <div class="item two-lines">
-              <i class="item-primary">lock</i>
-              <div class="item-content">
-                <input v-model="password" placeholder="password" class="full-width">
-              </div>
-            </div>
-          </div>
-          <button @click="login()" class="primary big full-width">Login</button>
-          </div>
+            <button type="submit" class="primary big full-width">Login</button>
+          </form>
+        </div>
         <p>Noch nicht dabei? <a href="https://foodsharing.de/" target="_blank">Registrieren</a> musst Du Dich auf der Desktop Version von <a href="https://foodsharing.de/" target="_blank">foodsharing.de</a></p>
       </div>
     </div>
     <!-- MAIN END -->
 
-
-
-    <router-view class="layout-view"></router-view>
-
-
-
-    <!--
-    <div slot="footer" class="toolbar">
-      <div class="auto flex justify-center within-iframe-hide">
-
-      </div>
-      <q-toolbar-title :padding="0" class="within-iframe-only">
-        Footer
-      </q-toolbar-title>
-    </div>
-    -->
   </q-layout>
 </template>
 
@@ -67,8 +53,12 @@
   export default {
     data () {
       return {
+        /*
         email: 'userbot@example.com',
         password: 'userbot'
+        */
+        email: 'user1@example.com',
+        password: 'user1'
       }
     },
     methods: {

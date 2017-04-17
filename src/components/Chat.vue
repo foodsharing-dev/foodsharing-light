@@ -43,7 +43,6 @@
   import { Toast } from 'quasar'
   import chat from 'services/chat'
   import auth from 'services/auth'
-  import log from 'services/log'
   export default {
     data () {
       return {
@@ -69,7 +68,6 @@
         }
       },
       send () {
-        log.info('send message', this.newMessage)
         chat.send(this.id, this.newMessage).then(() => {
           this.newMessage = ''
         })
@@ -104,7 +102,7 @@
   }
 </script>
 
-<style lang="styl" scoped>
+<style lang="stylus" scoped>
 
 .chat-input
   border: none !important
@@ -127,10 +125,8 @@
       background-color: #fff !important;
       color: #4A3520 !important;
 
-/*
-  We add an intermediate .image-wrapper element
-  as foodsharing profile images are not square
-*/
+// We add an intermediate .image-wrapper element
+// as foodsharing profile images are not square
 .chat-user
   .image-wrapper
     width: 65px

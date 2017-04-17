@@ -104,8 +104,9 @@ export default {
   convertMessage ({
     time: sentAt,
     body,
-    fs_name: firstName,
     fs_id: userId,
+    fs_name: firstName,
+    fs_photo: photo,
     id: messageId,
     cid: conversationId
   }) {
@@ -116,7 +117,8 @@ export default {
       body: this.decodeHtmlEntities(body),
       sentBy: {
         id: parseInt(userId, 10),
-        firstName
+        firstName,
+        photo
       },
       messageId: parseInt(messageId, 10),
       conversationId: parseInt(conversationId, 10)

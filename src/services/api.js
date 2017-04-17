@@ -40,7 +40,9 @@ export default {
       })
       conversation.messages.forEach(message => {
         let member = usersById[message.sentBy.id]
-        message.sentBy = member
+        if (member) {
+          message.sentBy = member
+        }
       })
       return conversation
     })
