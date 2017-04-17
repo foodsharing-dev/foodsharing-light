@@ -69,7 +69,7 @@
   </div></template>
 
 <script>
-  import { Dialog, ActionSheet, Platform } from 'quasar'
+  import { Dialog, ActionSheet } from 'quasar'
 
   import api from 'services/api'
   import log from 'services/log'
@@ -107,11 +107,6 @@
         })
       },
       showActionSheetWithIcons ({ user }) {
-        log.info('this.$router', this.$router)
-        if (Platform.is.desktop) {
-          this.$router.push('/chat/1')
-        }
-
         let actions = []
 
         actions.push({

@@ -1,7 +1,7 @@
 <template>
   <main-layout>
 
-    <div style="text-align: center; padding-top: 30px;">
+    <div v-if="loading" style="text-align: center; padding-top: 30px;">
       <spinner color="#4a3520" :size="48" name="hourglass"></spinner>
     </div>
 
@@ -40,12 +40,14 @@
 </template>
 
 <script>
+  import { Toast } from 'quasar'
   import chat from 'services/chat'
   import auth from 'services/auth'
   import log from 'services/log'
   export default {
     data () {
       return {
+        loading: false,
         id: null,
         conversation: null,
         newMessage: ''
@@ -79,6 +81,8 @@
       chat.loadConversation(this.id).then(conversation => {
         this.loading = false
         Object.assign(this, { conversation })
+      }).catch(err => {
+        Toast.create.negative(err.message)
       })
     },
     destroyed () {

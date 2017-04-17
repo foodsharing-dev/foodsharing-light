@@ -73,8 +73,8 @@
     },
     methods: {
       login () {
-        return auth.login(this.email, this.password)
-          .catch(() => Toast.create.negative('Login fehlgeschlagen'))
+        return auth.login(this.email, this.password).catch(() =>
+          Toast.create.negative('Login fehlgeschlagen'))
       }
     }
   }
