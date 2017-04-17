@@ -5,15 +5,23 @@ import foodsharing from 'services/foodsharing'
 export default {
 
   login (email, password) {
-    return axios.post('/api/v1/login', {
+    return axios.post('/api/v1/session', {
       email, password
     }).then(({ data: { user } }) => {
       return { user }
     })
   },
 
+  checkLogin () {
+    return axios.get('/api/v1/session').then(({ data: { user } }) => {
+      return { user }
+    }).catch(() => {
+      return false
+    })
+  },
+
   logout () {
-    return axios.post('/api/v1/logout')
+    return axios.delete('/api/v1/session')
   },
 
   getConversationList () {
