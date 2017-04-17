@@ -15,7 +15,7 @@
               <div>Datum / Uhrzeit</div>
             </div>
           </div>
-          <router-link tag="div" to="/store/1" class="item two-lines item-link">
+          <router-link tag="div" :to="{ name: 'store', params: { id: store.id } }" class="item two-lines item-link">
             <i class="item-primary">store</i>
             <div class="item-content">
               <div class="item-title">{{ store.streetNumber }} {{ store.street }}, {{ store.zip }} {{ store.city }}</div>

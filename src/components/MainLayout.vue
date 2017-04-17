@@ -12,9 +12,9 @@
         </q-toolbar-title>
         <!-- NAVIGATION -->
         <q-tabs slot="navigation">
-          <q-tab icon="restaurant" route="/pickups"></q-tab>
-          <q-tab icon="chat" route="/chats"></q-tab>
-          <q-tab icon="shopping_cart" route="/stores"></q-tab>
+          <q-tab icon="directions_bike" :route="{ name: 'pickups' }"></q-tab>
+          <q-tab icon="chat" :route="{ name: 'chats' }"></q-tab>
+          <q-tab icon="shopping_cart" :route="{ name: 'stores' }"></q-tab>
         </q-tabs>
         <!-- NAVIGATION END -->
       </div>
