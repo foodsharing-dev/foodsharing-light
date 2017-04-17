@@ -26,37 +26,12 @@
           </div>
         </div>
       </div>
-
-      <div class="list">
-        <div class="list-label">Verantwortliche foodsaver</div>
-        <router-link tag="div"
-                     :to="{ name: 'userChat', params: { userId: m.user.id } }" class="item item-link"
-                     v-for="m in store.team"
-                     :key="m.user.id">
-          <img class="item-primary" :src="'statics/boy-avatar.png'">
-          <div class="item-content has-secondary">
-            {{ m.user.firstName }}
-          </div>
-          <i class="item-secondary">
-            chat_bubble
-          </i>
-        </router-link>
-        <hr>
-        <div class="list-label">Team</div>
-        <router-link tag="div"
-                     class="item item-link"
-                     :to="{ name: 'userChat', params: { userId: m.user.id } }"
-                     v-for="m in store.team"
-                     :key="m.user.id">
-          <img class="item-primary" :src="'statics/linux-avatar.png'">
-          <div class="item-content has-secondary">
-            {{ m.user.firstName }}
-          </div>
-          <i class="item-secondary">
-            chat_bubble
-          </i>
-        </router-link>
+      <div class="card">
+        <user-list :users="coordinators" title="Betriebsverantwortliche" />
+        <user-list :users="team" title="Team" />
       </div>
+
+
     </template>
 
     <!-- MAIN END -->
@@ -67,12 +42,24 @@
 
 <script>
 import api from 'services/api'
+import UserList from 'components/UserList'
 
 export default {
+  components: {
+    UserList
+  },
   data () {
     return {
       loading: false,
       store: null
+    }
+  },
+  computed: {
+    team () {
+      return this.store ? this.store.team.filter(team => !team.coordinator) : []
+    },
+    coordinators () {
+      return this.store ? this.store.team.filter(team => team.coordinator) : []
     }
   },
   methods: {

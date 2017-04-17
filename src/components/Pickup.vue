@@ -32,18 +32,7 @@
           </div>
         </div>
         <hr>
-        <div class="list no-border">
-          <div class="list-label">{{ pickup.members.length }} foodsaver kommen</div>
-
-          <div v-for="member in pickup.members"
-               v-on:click="showActionSheetWithIcons(member)"
-               class="item two-lines item-link">
-            <img class="item-primary" :src="avatarFor(member)">
-            <div class="item-content">
-              {{ member.firstName }}
-            </div>
-          </div>
-        </div>
+        <user-list :users=pickup.members title="Abholer"></user-list>
       </div>
     </div>
 
@@ -52,12 +41,14 @@
   </div></template>
 
 <script>
-  import { ActionSheet } from 'quasar'
-
   import api from 'services/api'
   import log from 'services/log'
+  import UserList from 'components/UserList'
 
   export default {
+    components: {
+      UserList
+    },
     data () {
       return {
         pickup: null,
@@ -65,42 +56,6 @@
       }
     },
     methods: {
-      avatarFor (user) {
-        if (user.photo) {
-          return '/fs/images/thumb_crop_' + user.photo
-        }
-        else {
-          return '/statics/default-avatar.png'
-        }
-      },
-      showActionSheetWithIcons ({ user }) {
-        let actions = []
-
-        actions.push({
-          label: 'Chat',
-          icon: 'chat',
-          handler: () => {
-            this.$router.push({ name: 'userChat', params: { userId: user.id } })
-          }
-        })
-
-        if (user.mobile) {
-          actions.push({
-            label: 'Call',
-            icon: 'phone',
-            handler () {
-              // todo
-              window.location.href = 'tel:' + user.phone
-            }
-          })
-        }
-
-        ActionSheet.create({
-          title: user.firstName,
-          gallery: true,
-          actions
-        })
-      }
     },
     created () {
       let { id } = this.$route.params
