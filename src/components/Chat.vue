@@ -90,7 +90,7 @@
       }
     },
     mounted () {
-      // autofocus
+      // autofocus (TODO: extract to directive)
       this.$el.querySelector('input').focus()
     },
     updated () {
@@ -115,6 +115,8 @@
 .chat-message
   p
    word-break: break-all
+   padding-top: 5px
+   padding-bottom: 5px
 
 .chat-date
   color: #4A3520 !important

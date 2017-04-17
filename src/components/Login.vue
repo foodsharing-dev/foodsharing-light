@@ -60,6 +60,10 @@
         password: 'user1'
       }
     },
+    mounted () {
+      // autofocus (TODO: extract to directive)
+      this.$el.querySelector('input').focus()
+    },
     methods: {
       login () {
         return auth.login(this.email, this.password).catch(() =>

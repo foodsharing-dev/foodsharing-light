@@ -16,8 +16,14 @@ export default {
     return axios.get('/api/v1/session').then(({ data: { user } }) => {
       return user
     }).catch(err => {
-      console.log('checkLogin err', err)
-      return null
+      if (err.response && err.response.status === 404) {
+        // 404 means we have no current session
+        return null
+      }
+      else {
+        // actually an error
+        return Promise.reject(err)
+      }
     })
   },
 
