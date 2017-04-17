@@ -37,14 +37,14 @@
           </q-drawer-link>
         </div>
 
-        <div class="absolute-bottom">
+        <div class="absolute-bottom fs-contact-us">
           <div class="card-content">
 
             <p>Willkommen auf foodsharing light <strong>beta</strong>.</p>
             <p>Hier gibt's keine Garantie, dass alles funktioniert.</p>
             <p>Bitte gib uns Feedback über Fehler und Verbesserungsvorschlage!</p>
 
-            <div class="list contact-us-list">
+            <div class="list">
 
               <div class="item">
                 <img src="/statics/GitHub-Mark-64px.png" class="item-primary" style="top: 10px; height: 25px; width: 25px;">
@@ -162,7 +162,10 @@
   .layout-footer {
     background-color: white !important;
   }
-  .contact-us-list a {
+  .fs-contact-us a {
     display: block;
+  }
+  .fs-contact-us {
+    z-index:-1
   }
 </style>
