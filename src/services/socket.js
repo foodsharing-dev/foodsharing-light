@@ -35,6 +35,7 @@ export default {
       })
       io.on('conv', data => {
         if (!data.o) return
+        log.info('recv', data)
         let message = foodsharing.convertMessage(JSON.parse(data.o))
         subscribers.forEach(fn => fn(message))
       })

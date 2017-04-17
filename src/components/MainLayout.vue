@@ -14,9 +14,9 @@
         <!-- NAVIGATION -->
         <q-tabs slot="navigation">
 
-          <q-tab icon="directions_bike" route="/" exact>Pickups</q-tab>
+          <q-tab icon="directions_bike" route="/pickups">Pickups</q-tab>
           <q-tab icon="chat" route="/chats">Chats</q-tab>
-          <q-tab icon="store" route="/stores" exact>Stores</q-tab>
+          <q-tab icon="store" route="/stores">Stores</q-tab>
         </q-tabs>
         <!-- NAVIGATION END -->
       </div>
@@ -53,10 +53,6 @@
       </slot>
     </q-drawer>
     <!-- SUBMENU END -->
-
-    <!--
-    <router-view class="layout-view"></router-view>
-  -->
 
     <div slot="footer">
       <slot name="app-footer"></slot>

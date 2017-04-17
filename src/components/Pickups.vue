@@ -6,11 +6,11 @@
     <h6>Deine Abholtermine</h6>
     <div class="card">
       <div class="list no-border">
-        <router-link :to="'/pickup/' + p.id"
+        <router-link v-for="p in pickups"
+                     :to="{ name: 'pickup', params: { id: p.id } }"
+                     :key="p.id"
                      tag="div"
-                     class="item two-lines item-link"
-                     v-for="p in pickups"
-                     :key="p.id">
+                     class="item two-lines item-link">
           <div class="item-primary">
             <i>store</i>
           </div>

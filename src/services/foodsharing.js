@@ -10,29 +10,39 @@ export function prefix (path) {
   return '/fs' + path
 }
 
+export function xhrapp (options) {
+  return axios.request({
+    url: prefix('/xhrapp.php'),
+    ...options
+  })
+}
+
 export default {
 
-  /*
-  *  This is so we are a valid user when we connect to the websocket for chat
-  */
   login (email, password) {
-    return axios.request({
-      url: prefix('/xhrapp.php?app=api&m=login&callback=ignored'),
+    return xhrapp({
       params: {
-        e: email,
+        app: 'login',
+        m: 'loginsubmit',
+        u: email,
         p: password
       }
-    }).then(({ data }) => {
-      data = convertJsonp('ignored', data)
-      if (data.status !== 1) {
+    }).then(({ data: { script } }) => {
+      // Foodsharing endpoint returns a script, we do not eval it but just check
+      // it contains signs of success (status is always 1 :/)
+      if (!/pulseSuccess/.test(script)) {
         return Promise.reject(new Error('login to desktop foodsharing failed'))
       }
     })
   },
 
   checklogin (email, password) {
-    return axios.request({
-      url: prefix('/xhrapp.php?app=api&m=checklogin&callback=ignored')
+    return xhrapp({
+      params: {
+        app: 'api',
+        m: 'checklogin',
+        callback: 'ignored'
+      }
     }).then(({ data }) => {
       data = convertJsonp('ignored', data)
       return data.status === 1
@@ -43,19 +53,26 @@ export default {
     let data = new FormData()
     data.append('c', conversationId)
     data.append('b', body)
-    return axios.post(prefix('/xhrapp.php?app=msg&m=sendmsg'), data)
-      .then(({ data: { data: { msg } } }) => {
-        Object.assign(msg, { cid: conversationId })
-        return this.convertMessage(msg)
-      })
+    return xhrapp({
+      method: 'POST',
+      params: {
+        app: 'msg',
+        m: 'sendmsg'
+      },
+      data
+    }).then(({ data: { data: { msg } } }) => {
+      Object.assign(msg, { cid: conversationId })
+      return this.convertMessage(msg)
+    })
   },
 
   /* Get conversation id for a user (will create it if not available)
    */
   user2conv (userId) {
-    return axios.request({
-      url: prefix('/xhrapp.php?app=msg&m=user2conv'),
+    return xhrapp({
       params: {
+        app: 'msg',
+        m: 'user2conv',
         fsid: userId
       }
     }).then(({ data: { data: { cid } } }) => {

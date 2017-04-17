@@ -36,8 +36,13 @@ export default {
     }).then(() => {
       // Login to foodsharing, then connect to it's websocket
       return foodsharing.login(email, password)
-        .then(() => socket.connect())
-        .catch(err => log.error('failed to connect to socket', err))
+        .then(() => {
+          socket.connect()
+            .catch(err => {
+              log.error('failed to connect to foodsharing socket', err)
+              return Promise.reject(err)
+            })
+        })
     }).then(() => {
       state.authenticated = true
       let { name, params } = state.to || {}
