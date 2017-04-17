@@ -34,13 +34,16 @@
 </template>
 
 <script>
+  import { Toast } from 'quasar'
   import moment from 'moment'
+
   import api from 'services/api'
 
   export default {
     data () {
       return {
-        pickups: []
+        pickups: [],
+        loading: false
       }
     },
     methods: {
@@ -49,8 +52,14 @@
       }
     },
     created () {
+      this.loading = true
       api.getNextPickupList().then(pickups => {
         this.pickups = pickups
+      }).catch(() => {
+        // TODO: translate to German
+        Toast.create.negative('Could not load pickups')
+      }).then(() => {
+        this.loading = false
       })
     }
   }

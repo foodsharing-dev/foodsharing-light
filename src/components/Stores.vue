@@ -33,6 +33,8 @@
 </template>
 
 <script>
+  import { Toast } from 'quasar'
+
   import api from 'services/api'
 
   export default {
@@ -48,6 +50,10 @@
       this.loading = true
       api.getStoreList().then(stores => {
         this.stores = stores
+      }).catch(() => {
+        // TODO: translate to German
+        Toast.create.negative('Could not load stores')
+      }).then(() => {
         this.loading = false
       })
     }
