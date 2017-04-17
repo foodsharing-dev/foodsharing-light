@@ -42,6 +42,12 @@ export default {
     return axios.get('/api/v1/pickups/next').then(({ data: { pickups } }) => {
       return pickups
     })
+  },
+
+  getStoreList () {
+    return axios.get('/api/v1/stores').then(({ data: { stores } }) => {
+      return stores
+    })
   }
 
 }
