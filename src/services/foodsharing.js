@@ -17,13 +17,15 @@ export default {
   */
   login (email, password) {
     return axios.request({
-      url: prefix('/xhrapp.php?app=api&m=auth'),
+      url: prefix('/xhrapp.php?app=api&m=login&callback=ignored'),
       params: {
-        user: email,
-        pass: password
+        e: email,
+        p: password
       }
     }).then(({ data }) => {
-      return data.status === 1
+      if (!/"status":1/.test(data)) {
+        Promise.reject(new Error('login to desktop foodsharing failed'))
+      }
     })
   },
 
