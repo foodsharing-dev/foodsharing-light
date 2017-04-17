@@ -66,6 +66,9 @@
     },
     methods: {
       login () {
+        if (!navigator.cookieEnabled) {
+          Toast.create.negative('Bitte aktiviere Cookies in deinem Browser, um dich einloggen zu können!')
+        }
         return auth.login(this.email, this.password).catch(() =>
           Toast.create.negative('Login fehlgeschlagen'))
       }
