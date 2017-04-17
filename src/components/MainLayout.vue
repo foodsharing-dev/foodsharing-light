@@ -4,25 +4,38 @@
     <!-- HEADER -->
     <slot name="header">
       <div slot="header" class="toolbar">
-        <button v-if="submenuVisible" class="hide-on-drawer-visible" @click="$refs.leftDrawer.open()">
+        <button class="hide-on-drawer-visible" @click="$refs.leftDrawer.open()">
           <i>menu</i>
         </button>
         <q-toolbar-title :padding="1" class="toolbar-logo">
-          <router-link v-if="bigScreen" to="/">food<span>sharing {{ currentPage }}</span></router-link>
-          <router-link v-if="!bigScreen" to="/"><span>fs</span></router-link>
+          <router-link :to="{ name: 'index' }">food<span>sharing {{ currentPage }}</span></router-link>
         </q-toolbar-title>
         <!-- NAVIGATION -->
         <q-tabs slot="navigation">
-
-          <q-tab icon="directions_bike" route="/pickups">Pickups</q-tab>
-          <q-tab icon="chat" route="/chats">Chats</q-tab>
-          <q-tab icon="store" route="/stores">Stores</q-tab>
+          <q-tab icon="restaurant" route="/pickups"></q-tab>
+          <q-tab icon="chat" route="/chats"></q-tab>
+          <q-tab icon="shopping_cart" route="/stores"></q-tab>
         </q-tabs>
         <!-- NAVIGATION END -->
       </div>
 
     </slot>
     <!-- HEADER END -->
+
+    <q-drawer ref="leftDrawer">
+      <slot name="left-drawer">
+        <div class="toolbar light">
+          <q-toolbar-title :padding="1">
+            Actions
+          </q-toolbar-title>
+        </div>
+        <div class="list no-border platform-delimiter">
+          <q-drawer-link icon="exit_to_app" :to="{ name: 'logout' }" exact>
+            Logout
+          </q-drawer-link>
+        </div>
+      </slot>
+    </q-drawer>
 
     <!-- MAIN -->
 
@@ -32,27 +45,6 @@
       </div>
     </div>
     <!-- MAIN END -->
-
-
-    <!-- SUBMENU -->
-    <q-drawer ref="leftDrawer" v-if="submenuVisible">
-      <slot name="submenu">
-
-          <div class="toolbar light">
-            <q-toolbar-title :padding="1">
-              Submenu
-            </q-toolbar-title>
-          </div>
-
-          <div class="list no-border platform-delimiter">
-            <q-drawer-link icon="local_florist" to="/sublink" exact>
-              Sublink
-            </q-drawer-link>
-          </div>
-
-      </slot>
-    </q-drawer>
-    <!-- SUBMENU END -->
 
     <div slot="footer">
       <slot name="app-footer"></slot>
@@ -72,24 +64,11 @@
 </template>
 
 <script>
-  import { Utils } from 'quasar'
-
   export default {
     data () {
       return {
-        submenuVisible: false,
-        bigScreen: true,
         currentPage: ''
       }
-    },
-    created () {
-      let { height, width } = Utils.dom.viewport()
-      console.log(height)
-      if (width < 400) {
-        this.bigScreen = false
-      }
-    },
-    destroyed () {
     }
   }
 </script>

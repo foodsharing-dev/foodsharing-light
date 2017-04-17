@@ -20,15 +20,6 @@ Vue.use(Quasar) // Install Quasar Framework
 
 Vue.component('from-now', FromNow)
 
-// TODO: make a less hacky way to logout
-// this way is just because I couldn't work out how to make it logout from
-// a <q-drawer-link> component, so I made a route...
-router.afterEach((to, from) => {
-  if (to.name === 'logout') {
-    auth.logout()
-  }
-})
-
 moment.locale('de')
 
 // wireup socket to chats

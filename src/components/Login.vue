@@ -6,9 +6,8 @@
       <div slot="header" class="toolbar">
         <i>lock</i>
         <q-toolbar-title :padding="1" class="toolbar-logo">
-          <router-link to="/">food<span>sharing Login</span></router-link>
+          <router-link to="/">food<span>sharing</span></router-link>
         </q-toolbar-title>
-
       </div>
     </slot>
     <!-- HEADER END -->

@@ -36,7 +36,7 @@ export default {
     })
   },
 
-  checklogin (email, password) {
+  checkLogin () {
     return xhrapp({
       params: {
         app: 'api',

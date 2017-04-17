@@ -60,13 +60,22 @@ export default new VueRouter({
     { name: 'index', path: '/', redirect: { name: 'pickups' }, beforeEnter: protectRoute }, // Default
     { name: 'login', path: '/login', component: load('Login'), beforeEnter: redirectIfLoggedIn }, // Login
     { name: 'signup', path: '/signup', component: load('Signup') }, // Signup
-    { name: 'logout', path: '/logout', component: load('Login') }, // Logout
     { name: 'pickups', path: '/pickups', component: load('Pickups'), beforeEnter: protectRoute }, // Stores
     { name: 'pickup', path: '/pickups/:id', component: load('Pickup'), beforeEnter: protectRoute }, // Stores
     { path: '/stores', component: load('Stores'), beforeEnter: protectRoute }, // Stores
     { path: '/store/:id', component: load('Store'), beforeEnter: protectRoute }, // Chats
     { path: '/chats', component: load('Chats'), beforeEnter: protectRoute }, // Chats
     { name: 'chat', path: '/chat/:id', component: load('Chat'), beforeEnter: protectRoute }, // Chats
+    {
+      name: 'logout',
+      path: '/logout',
+      beforeEnter: (to, from, next) => {
+        console.log('logging out!')
+        auth.logout().then(() => {
+          next({ name: 'login' })
+        })
+      }
+    },
     {
       name: 'userChat',
       path: '/users/:userId/chat',

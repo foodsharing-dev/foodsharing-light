@@ -25,8 +25,12 @@ export default {
    *  Check if we are already logged in
    */
   check () {
-    return foodsharing.checklogin().then(fsLoggedIn => {
-      log.info('fs is logged in', fsLoggedIn)
+    return api.checkLogin().then(user => {
+      if (!user) return false
+      return foodsharing.checkLogin().then(fsLoggedIn => {
+        if (!fsLoggedIn) return false
+        Object.assign(state, { authenticated: true, user })
+      })
     })
   },
 
@@ -67,9 +71,8 @@ export default {
       user: null,
       authenticated: false
     })
-    api.logout().then(() => {
+    return api.logout().then(() => {
       socket.disconnect()
-      router.push({ name: 'index' })
     })
   }
 

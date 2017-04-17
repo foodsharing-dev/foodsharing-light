@@ -30,22 +30,9 @@
 
         </div>
       </div>
-
       <!-- MAIN END-->
 
-      <!-- SUBMENU -->
-      <div slot="submenu">
-
-        <div class="toolbar light">
-          <q-toolbar-title :padding="1">
-            My Chats
-          </q-toolbar-title>
-        </div>
-      </div>
-      <!-- SUBMENU END -->
-
     </main-layout>
-
   </div>
 </template>
 

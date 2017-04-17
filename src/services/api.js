@@ -14,9 +14,10 @@ export default {
 
   checkLogin () {
     return axios.get('/api/v1/session').then(({ data: { user } }) => {
-      return { user }
-    }).catch(() => {
-      return false
+      return user
+    }).catch(err => {
+      console.log('checkLogin err', err)
+      return null
     })
   },
 
