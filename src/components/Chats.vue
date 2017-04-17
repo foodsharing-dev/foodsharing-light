@@ -3,7 +3,6 @@
     <main-layout>
 
       <!-- MAIN -->
-
       <h6>Deine Unterhaltungen</h6>
       <div class="card">
         <loading v-if="loading" />
@@ -16,17 +15,15 @@
                        v-for="conversation in conversations"
                        :key="conversation.id">
             <img class="item-primary" :src="avatarFor(conversation)">
-            <template v-if="conversation.lastMessage">
               <div class="item-content has-secondary">
-                <div>
-                    {{ conversation.name || conversation.lastMessage.sentBy.firstName }}
+                <div class="fs-chat-name">
+                    <strong v-if="conversation.name">{{ conversation.name }} </strong>{{ conversationMembers(conversation) }}
                 </div>
-                <div>{{ conversation.lastMessage.body }}</div>
+                <div v-if="conversation.lastMessage">{{ conversation.lastMessage.body }}</div>
               </div>
-              <div class="item-secondary stamp">
+              <div class="item-secondary stamp" v-if="conversation.lastMessage">
                 <from-now :date="conversation.lastMessageAt"></from-now>
               </div>
-            </template>
             <div class="item-secondary stamp" v-else>
               (keine Nachricht)
             </div>
@@ -62,6 +59,9 @@
         else {
           return '/statics/default-avatar.png'
         }
+      },
+      conversationMembers (conversation) {
+        return conversation.members.map(m => m.firstName).join(', ')
       }
     },
     created () {
@@ -74,5 +74,7 @@
   }
 </script>
 
-<style lang="styl">
+<style lang="stylus" scoped>
+.fs-chat-name
+  text-overflow: ellipsis
 </style>
