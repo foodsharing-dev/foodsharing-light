@@ -3,18 +3,12 @@
   <main-layout>
 
     <!-- MAIN -->
-    <div v-if="store">
+    <loading v-if="loading" />
+    <template v-else-if="!loading && store">
       <h6>
         {{ store.name }}
       </h6>
       <div class="card">
-
-        <!--
-        <div class="card-media">
-          <img :src="'statics/map.png'">
-          <button class="primary circular"><i>place</i></button>
-        </div>
-        -->
         <div class="card-content list no-border highlight">
           <div class="item two-lines">
             <i class="item-primary">location_on</i>
@@ -63,7 +57,7 @@
           </i>
         </router-link>
       </div>
-    </div>
+    </template>
 
     <!-- MAIN END -->
 
@@ -77,6 +71,7 @@ import api from 'services/api'
 export default {
   data () {
     return {
+      loading: false,
       store: null
     }
   },
@@ -84,8 +79,10 @@ export default {
   },
   created () {
     this.id = this.$route.params.id
+    this.loading = true
     api.getStore(this.id).then(store => {
       this.store = store
+      this.loading = false
     })
   }
 }
