@@ -1,9 +1,7 @@
 <template>
   <main-layout>
 
-    <div v-if="loading" style="text-align: center; padding-top: 30px;">
-      <spinner color="#4a3520" :size="48" name="hourglass"></spinner>
-    </div>
+    <loading v-if="loading" />
 
     <div v-if="conversation" class="conversation">
       <div v-for="message in conversation.messages"

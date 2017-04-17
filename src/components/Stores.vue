@@ -1,29 +1,33 @@
 <template>
   <div>
     <main-layout>
-
-      <!-- MAIN -->
-      <div v-if="stores">
-        <h6>Deine Betriebe</h6>
-        <div class="card">
-          <div class="list no-border">
-            <router-link :to="'/store/' + store.id" tag="div" class="item two-lines item-link" v-for="store in stores" :key="store.id">
-              <div class="item-primary">
-                <i>store</i>
-              </div>
-              <div class="item-content">
-                <div>{{ store.name }}</div>
-                <div>
-                  {{ store.street }} {{ store.streetNumber }}, {{ store.zip }} {{ store.city }}
+      <h6>
+        Deine Betriebe
+      </h6>
+      <div class="card">
+        <div class="card-content">
+          <loading v-if="loading" />
+          <template v-else-if="stores && stores.length !== 0">
+            <div class="list no-border">
+              <router-link :to="'/store/' + store.id" tag="div" class="item two-lines item-link" v-for="store in stores" :key="store.id">
+                <div class="item-primary">
+                  <i>store</i>
                 </div>
-              </div>
-            </router-link>
-            <hr class="inset">
-          </div>
+                <div class="item-content">
+                  <div>{{ store.name }}</div>
+                  <div>
+                    {{ store.street }} {{ store.streetNumber }}, {{ store.zip }} {{ store.city }}
+                  </div>
+                </div>
+              </router-link>
+              <hr class="inset">
+            </div>
+          </template>
+          <template v-else>
+            Du bist in keinem Betrieb. Verwende die Desktop Version, um einem Betrieb beizutreten.
+          </template>
         </div>
       </div>
-      <!-- MAIN END -->
-
     </main-layout>
   </div>
 </template>
@@ -34,14 +38,17 @@
   export default {
     data () {
       return {
+        loading: false,
         stores: null
       }
     },
     methods: {
     },
     created () {
+      this.loading = true
       api.getStoreList().then(stores => {
         this.stores = stores
+        this.loading = false
       })
     }
   }
