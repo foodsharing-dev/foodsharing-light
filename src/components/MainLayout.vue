@@ -40,15 +40,16 @@
         <div class="absolute-bottom">
           <div class="card-content">
 
-            <p>Thanks for trying Foodsharing Light :)</p>
-            <p>We would love some feedback!</p>
+            <p>Willkommen auf foodsharing light <strong>beta</strong>.</p>
+            <p>Hier gibt's keine Garantie, dass alles funktioniert.</p>
+            <p>Bitte gib uns Feedback über Fehler und Verbesserungsvorschlage!</p>
 
             <div class="list contact-us-list">
 
               <div class="item">
                 <img src="/statics/GitHub-Mark-64px.png" class="item-primary" style="top: 10px; height: 25px; width: 25px;">
                 <div class="item-content">
-                  <a href="https://github.com/foodsharing-dev/foodsharing-light/issues/new" class="full-width">
+                  <a href="https://github.com/foodsharing-dev/foodsharing-light/issues" target="_blank" class="full-width">
                     Github
                   </a>
                 </div>
@@ -57,9 +58,29 @@
               <div class="item">
                 <i class="item-primary">chat</i>
                 <div class="item-content">
-                  <a href="https://slackin.yunity.org" class="full-width">
-                    <div>Slack</div>
+                  <a href="https://slackin.yunity.org" target="_blank" class="full-width">
+                    <div>yunity Slack</div>
                     <div><small>#foodsharing-dev</small></div>
+                  </a>
+                </div>
+              </div>
+
+              <div class="item">
+                <i class="item-primary">email</i>
+                <div class="item-content">
+                  <a href="mailto:fslight@matthias-larisch.de" target="_blank" class="full-width">
+                    <div>Email Matthias</div>
+                    <div><small>Deutsch / Englisch</small></div>
+                  </a>
+                </div>
+              </div>
+
+              <div class="item">
+                <i class="item-primary">email</i>
+                <div class="item-content">
+                  <a href="mailto:fslight@nicksellen.co.uk" target="_blank" class="full-width">
+                    <div>Email Nick</div>
+                    <div><small>English</small></div>
                   </a>
                 </div>
               </div>
