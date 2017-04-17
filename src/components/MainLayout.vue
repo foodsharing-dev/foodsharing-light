@@ -96,6 +96,7 @@
 
     <div class="layout-view">
       <div class="layout-padding">
+        <q-ajax-bar position="bottom"></q-ajax-bar>
         <slot></slot>
       </div>
     </div>
