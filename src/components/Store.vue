@@ -13,17 +13,23 @@
           <div class="item two-lines">
             <i class="item-primary">location_on</i>
             <div class="item-content">
-              <div class="item-title">Adresse</div>
-              <div>{{ store.street }} {{ store.streetNumber }}, {{ store.zip }} {{ store.city }}</div>
+              <div><template v-if="!address">{{ store.name }}</template>{{ address }}</div>
+              <div>Adresse</div>
             </div>
           </div>
-          <div class="item two-lines">
+          <div class="item two-lines" v-if="store.notes">
             <i class="item-primary">info</i>
             <div class="item-content">
-              <div class="item-title">Besonderheiten</div>
               <div>{{ store.notes }}</div>
+              <div>Besonderheiten</div>
             </div>
           </div>
+          <router-link tag="div" :to="{ name: 'chat', params: { id: store.teamConversation.id } }" class="item item-link" v-if="store.teamConversation.id">
+            <i class="item-primary">chat</i>
+            <div class="item-content">
+              Chat
+            </div>
+          </router-link>
         </div>
       </div>
       <div class="card">
@@ -56,10 +62,16 @@ export default {
   },
   computed: {
     team () {
-      return this.store ? this.store.team.filter(team => !team.coordinator) : []
+      return this.store && this.store.team.filter(team => !team.coordinator)
     },
     coordinators () {
-      return this.store ? this.store.team.filter(team => team.coordinator) : []
+      return this.store && this.store.team.filter(team => team.coordinator)
+    },
+    address () {
+      let { store } = this
+      if (!store) return
+      return [store.street, store.streetNumber, store.zip, store.city]
+        .filter(v => v).join(' ')
     }
   },
   methods: {

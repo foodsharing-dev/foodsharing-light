@@ -15,9 +15,7 @@
                 </div>
                 <div class="item-content">
                   <div>{{ store.name }}</div>
-                  <div>
-                    {{ store.street }} {{ store.streetNumber }}, {{ store.zip }} {{ store.city }}
-                  </div>
+                  <div>{{ formatAddress(store) }}</div>
                 </div>
               </router-link>
               <hr class="inset">
@@ -45,6 +43,10 @@
       }
     },
     methods: {
+      formatAddress (store) {
+        return [store.street, store.streetNumber, store.zip, store.city]
+          .filter(v => v).join(' ')
+      }
     },
     created () {
       this.loading = true

@@ -11,25 +11,33 @@
           <div class="item two-lines">
             <i class="item-primary">alarm</i>
             <div class="item-content">
-              <div class="item-title">{{ pickup.at }}</div>
+              <div><formatted-date :date="pickup.at"></formatted-date></div>
               <div>Datum / Uhrzeit</div>
             </div>
           </div>
+
           <router-link tag="div" :to="{ name: 'store', params: { id: store.id } }" class="item two-lines item-link">
             <i class="item-primary">store</i>
             <div class="item-content">
-              <div class="item-title">{{ store.streetNumber }} {{ store.street }}, {{ store.zip }} {{ store.city }}</div>
+              <div><template v-if="!address">{{ store.name }}</template>{{ address }}</div>
               <div>Adresse</div>
             </div>
           </router-link>
 
-          <div class="item two-lines">
+          <div class="item two-lines" v-if="store.notes">
             <i class="item-primary">info</i>
             <div class="item-content">
-              <div class="item-title">Besonderheiten</div>
               <div>{{ store.notes }}</div>
+              <div>Besonderheiten</div>
             </div>
           </div>
+
+          <router-link tag="div" :to="{ name: 'chat', params: { id: store.teamConversation.id } }" class="item item-link" v-if="store.teamConversation.id">
+            <i class="item-primary">chat</i>
+            <div class="item-content">
+              Chat
+            </div>
+          </router-link>
         </div>
         <hr>
         <user-list :users=pickup.members title="Abholer"></user-list>
@@ -55,7 +63,13 @@
         store: null
       }
     },
-    methods: {
+    computed: {
+      address () {
+        let { store } = this
+        if (!store) return
+        return [store.street, store.streetNumber, store.zip, store.city]
+          .filter(v => v).join(' ')
+      }
     },
     created () {
       let { id } = this.$route.params

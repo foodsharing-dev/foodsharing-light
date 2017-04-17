@@ -15,7 +15,7 @@
             <i>store</i>
           </div>
           <div class="item-content inset has-secondary">
-            <div>{{ formatDate(p.at) }}</div>
+            <div><formatted-date :date="p.at"></formatted-date></div>
             <div>
               <span>{{ p.store.name }}</span><br>
               {{ p.store.streetNumber }} {{ p.store.street }}, {{ p.store.zip }} {{ p.store.city }}
@@ -35,8 +35,6 @@
 
 <script>
   import { Toast } from 'quasar'
-  import moment from 'moment'
-
   import api from 'services/api'
 
   export default {
@@ -44,11 +42,6 @@
       return {
         pickups: [],
         loading: false
-      }
-    },
-    methods: {
-      formatDate (val) {
-        return moment(val).calendar()
       }
     },
     created () {
