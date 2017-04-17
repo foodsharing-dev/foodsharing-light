@@ -51,13 +51,17 @@
 
   export default {
     data () {
-      return {
-        email: 'userbot@example.com',
-        password: 'userbot'
-        /*
-        email: 'user1@example.com',
-        password: 'user1'
-        */
+      if (process.env.NODE_ENV !== 'production') {
+        return {
+          email: 'userbot@example.com',
+          password: 'userbot'
+        }
+      }
+      else {
+        return {
+          email: '',
+          password: ''
+        }
       }
     },
     mounted () {
