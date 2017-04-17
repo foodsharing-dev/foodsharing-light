@@ -27,7 +27,6 @@ const protectRoute = (to, from, next) => {
     next()
   }
   else {
-    next()
     auth.state.to = to
     next({ name: 'login' })
   }
