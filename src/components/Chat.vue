@@ -2,7 +2,6 @@
   <main-layout>
 
     <loading v-if="loading" />
-
     <div v-if="conversation" class="conversation">
       <div v-for="message in conversation.messages"
            :key="message.id"
@@ -16,7 +15,10 @@
           <from-now :date="message.sentAt"></from-now>
         </div>
         <div class="chat-message">
-          <p>{{ message.body }}</p>
+          <p>
+            <strong v-if="isMultiChat">{{ message.sentBy.firstName }}<br></strong>
+            {{ message.body }}
+          </p>
         </div>
       </div>
     </div>
@@ -51,7 +53,13 @@
       }
     },
     computed: {
-      user: () => auth.state.user
+      user () {
+        return auth.state.user
+      },
+      // TODO store/group chats with 2 people should also return true here
+      isMultiChat () {
+        return this.conversation && this.conversation.members.length > 2
+      }
     },
     methods: {
       isMe (message) {
