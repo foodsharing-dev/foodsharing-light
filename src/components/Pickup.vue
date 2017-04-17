@@ -52,7 +52,7 @@
   </div></template>
 
 <script>
-  import { Dialog, ActionSheet } from 'quasar'
+  import { ActionSheet } from 'quasar'
 
   import api from 'services/api'
   import log from 'services/log'
