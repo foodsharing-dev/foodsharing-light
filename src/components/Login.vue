@@ -61,6 +61,7 @@
 </template>
 
 <script>
+  import { Toast } from 'quasar'
   import auth from 'services/auth'
 
   export default {
@@ -73,6 +74,7 @@
     methods: {
       login () {
         return auth.login(this.email, this.password)
+          .catch(err => Toast.create.negative('Login fehlgeschlagen'))
       }
     }
   }

@@ -31,7 +31,7 @@ export default {
   },
 
   login (email, password) {
-    api.login(email, password).then(({ user }) => {
+    return api.login(email, password).then(({ user }) => {
       Object.assign(state, { user })
     }).then(() => {
       // Login to foodsharing, then connect to it's websocket
