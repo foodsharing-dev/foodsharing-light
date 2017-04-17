@@ -58,7 +58,8 @@
                 <i class="item-primary">chat</i>
                 <div class="item-content">
                   <a href="https://slackin.yunity.org" class="full-width">
-                    Slack
+                    <div>Slack</div>
+                    <div><small>#foodsharing-dev</small></div>
                   </a>
                 </div>
               </div>
