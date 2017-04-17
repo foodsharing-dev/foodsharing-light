@@ -62,7 +62,7 @@
           return '/fs/images/thumb_crop_' + user.photo
         }
         else {
-          return '/statics/mini_q_avatar.png'
+          return '/statics/default-avatar.png'
         }
       },
       send () {
@@ -103,6 +103,7 @@
 <style lang="stylus" scoped>
 
 .chat-input
+  // a nice big clean chat message input
   border: none !important
   font-size: 1.5rem !important
   margin-top: 0.3rem
@@ -112,10 +113,15 @@
 
 .chat-message
   p
-   word-break: break-all
-   padding-top: 5px
-   padding-bottom: 5px
-   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+    // message content should always wrap
+    word-break: break-all
+
+    // make the chat bubbles a little bit more space effecient
+    padding-top: 5px
+    padding-bottom: 5px
+
+    // and make them float a bit lower
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
 
 .chat-date
   color: #4A3520 !important
@@ -123,6 +129,7 @@
 .chat-you
   .chat-message
     p
+      // override the default chat colours
       background-color: #fff !important;
       color: #4A3520 !important;
 

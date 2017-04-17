@@ -50,7 +50,7 @@
           return '/fs/images/thumb_crop_' + lastMessage.sentBy.photo
         }
         else {
-          return '/statics/mini_q_avatar.png'
+          return '/statics/default-avatar.png'
         }
       }
     },
