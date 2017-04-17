@@ -55,6 +55,12 @@ export default {
     return axios.get('/api/v1/stores').then(({ data: { stores } }) => {
       return stores
     })
+  },
+
+  getStore (id) {
+    return axios.get(`/api/v1/stores/${id}`).then(({ data: { store } }) => {
+      return store
+    })
   }
 }
 
