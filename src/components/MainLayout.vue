@@ -24,16 +24,49 @@
 
     <q-drawer ref="leftDrawer">
       <slot name="left-drawer">
+
         <div class="toolbar light">
           <q-toolbar-title :padding="1">
-            Actions
+            {{ auth.user.firstName }} {{ auth.user.lastName }}
           </q-toolbar-title>
         </div>
+
         <div class="list no-border platform-delimiter">
           <q-drawer-link icon="exit_to_app" :to="{ name: 'logout' }" exact>
             Logout
           </q-drawer-link>
         </div>
+
+        <div class="absolute-bottom">
+          <div class="card-content">
+
+            <p>Thanks for trying Foodsharing Light :)</p>
+            <p>We would love some feedback!</p>
+
+            <div class="list contact-us-list">
+
+              <div class="item">
+                <img src="/statics/GitHub-Mark-64px.png" class="item-primary" style="top: 10px; height: 25px; width: 25px;">
+                <div class="item-content">
+                  <a href="https://github.com/foodsharing-dev/foodsharing-light/issues/new" class="full-width">
+                    Github
+                  </a>
+                </div>
+              </div>
+
+              <div class="item">
+                <i class="item-primary">chat</i>
+                <div class="item-content">
+                  <a href="https://slackin.yunity.org" class="full-width">
+                    Slack
+                  </a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
       </slot>
     </q-drawer>
 
@@ -64,9 +97,11 @@
 </template>
 
 <script>
+  import auth from 'services/auth'
   export default {
     data () {
       return {
+        auth: auth.state,
         currentPage: ''
       }
     }
@@ -104,5 +139,8 @@
   }
   .layout-footer {
     background-color: white !important;
+  }
+  .contact-us-list a {
+    display: block;
   }
 </style>
