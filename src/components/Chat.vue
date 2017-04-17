@@ -82,6 +82,7 @@
         this.loading = false
         Object.assign(this, { conversation })
       }).catch(err => {
+        this.loading = false
         Toast.create.negative(err.message)
       })
     },
