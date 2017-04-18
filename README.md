@@ -30,7 +30,7 @@ In the future we may offer a public developer deployment of the two backends for
 
 ### main foodsharing site
 
-This is not currently open source. Please join [yunity slack](https://slackin.yunity.org) in *foodsharing-dev* channel to request access.
+This is not currently open source. Please join [yunity slack](https://slackin.yunity.org) in *#foodsharing-dev* channel to request access.
 
 It is hosted at [gitlab.com/foodsharing-dev](https://gitlab.com/foodsharing-dev).
 
