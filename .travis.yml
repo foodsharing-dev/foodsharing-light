@@ -1,24 +1,25 @@
 language: node_js
 env:
-  # https://docs.travis-ci.com/user/languages/javascript-with-nodejs#Node.js-v4-(or-io.js-v3)-compiler-requirements
-  - TRAVIS_CI=true CXX="g++-4.8" CC="gcc-4.8"
+- TRAVIS_CI=true CXX="g++-4.8" CC="gcc-4.8"
 node_js:
-  - 7
+- 7
 addons:
   firefox: latest
   apt:
     sources:
-      - ubuntu-toolchain-r-test
+    - ubuntu-toolchain-r-test
     packages:
-      - g++-4.8
+    - g++-4.8
 cache:
   yarn: true
 before_install:
-  - npm install -g codecov
+- npm install -g codecov
 before_script:
-  # http://docs.travis-ci.com/user/gui-and-headless-browsers/#Using-xvfb-to-Run-Tests-That-Require-GUI-(e.g.-a-Web-browser)
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
-  - sleep 3 # give xvfb some time to start
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+- sleep 3
 after_script:
-  - codecov
+- codecov
+notifications:
+  slack:
+    secure: byMSN3DSO4JZ/jK8y4QYFftv8eWdagBS0tpGJmeLN6gtzGIYeZuTLZ/1I1dMwJmkZrZdSx03N0UUkon/BtZXtOvVEpBfY2t6BO2Zt+LeztZjUpfQ+th2BiIiYvwIH4mcZIV+Y52Ceywehv0txw3GCj9WtUGudS7a1M56XFeCjdMdr3vv5u4tB7PZZRKjJSWkaTezvBH6Vi2Nac7wAlYHHXMYc3+siMK0q9miwqBNMCgvA3uQPEUrSHFLgg8PFtu49Sgs7iGZ10PoxaziIgX6gpqRiD8nOHKpT7KAHOvEEQrwGGVS/UZcgyDnCat+oIqJxIMQqdN67xvCdlTv2lqmxTEKWEtH5V5VirS5gbCTaQQLPS2PAXtQaPB0mWcYtt6NsnJr/J3iZoFh7Sf+Gwt+0ItnP3970KfJKMwx0BA+Ee/DmOYRAgAMHPzTYIM29RL2EK+ImsqlK3e8K38m2MLIaTGCj5uReWgDzRsIgXRG2uUi8MH9AilB46Aomrn9QxhOSpN/AyaBg0o61qiEA/r0zjkrNlTiekRX+t2RVjTZs1Z2U4cd1ZTNDa9acimUKznmnADySLiCKxJOEHiwNHyCuEk++K8UMIv5V4AP3K2wYIfHh7Bx6J4PSgi7wDT60K4bKDTjpBDPrhgLfdPn/RCP/h3OZLy04hcDC72UV/QrjDg=
