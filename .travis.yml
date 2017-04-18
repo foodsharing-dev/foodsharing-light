@@ -1,12 +1,16 @@
 language: node_js
 env:
-  - TRAVIS_CI=true
   # https://docs.travis-ci.com/user/languages/javascript-with-nodejs#Node.js-v4-(or-io.js-v3)-compiler-requirements
-  - CXX="g++-4.8" CC="gcc-4.8"
+  - TRAVIS_CI=true CXX="g++-4.8" CC="gcc-4.8"
 node_js:
   - 7
 addons:
   firefox: latest
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8
 cache:
   yarn: true
 before_install:
