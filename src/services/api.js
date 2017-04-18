@@ -43,7 +43,7 @@ export default {
       conversationDecodeHtmlEntities(conversation)
       let usersById = {}
       conversation.members.forEach(member => {
-        usersById[member.id] = member
+        usersById[member.id] = member.user
       })
       conversation.messages.forEach(message => {
         let member = usersById[message.sentBy.id]
