@@ -33,3 +33,4 @@ deploy:
   file: dist.tar.gz
   on:
     repo: foodsharing-dev/foodsharing-light
+    tags: true
