@@ -42,7 +42,7 @@ Open source Symfony RESTful API available at [github.com/foodsharing-dev/foodsha
 
 Point it at the database inside the docker container:
 
-```
+```yaml
 # In app/config/parameters.yml
 parameters:
     database_host: 127.0.0.1
