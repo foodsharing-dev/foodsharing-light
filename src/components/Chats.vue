@@ -61,7 +61,7 @@
         }
       },
       conversationMembers (conversation) {
-        return conversation.members.map(m => m.firstName).join(', ')
+        return conversation.members.map(m => m.user.firstName).join(', ')
       }
     },
     created () {
