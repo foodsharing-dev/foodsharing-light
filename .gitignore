@@ -2,6 +2,7 @@
 node_modules/
 .idea/
 dist/
+dist.tar.gz
 blabla/
 npm-debug.log
 npm-debug.log.*
