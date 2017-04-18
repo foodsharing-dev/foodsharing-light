@@ -65,3 +65,10 @@ npm run test:watch # run tests and re-run on change
 npm run test:xvfb
 npm run test:watch:xvfb
 ```
+
+## Deploying in production
+
+Currently, deployment runs manually.
+The run `scripts/deploy.sh` from root folder to deploy to live foodsharing site.
+
+For sure, you need to have to have SSH keys setup to access production :-)
