@@ -49,6 +49,8 @@
   import { Toast } from 'quasar'
   import auth from 'services/auth'
 
+  console.log('loaded auth in Login', auth)
+
   export default {
     data () {
       if (process.env.NODE_ENV !== 'production') {
@@ -80,7 +82,7 @@
   }
 </script>
 
-<style lang="styl">
+<style lang="css">
   h1, h2, h3, h4, h5, .toolbar-title, button {
     font-family:'Alfa Slab One';
     font-weight: normal !important;

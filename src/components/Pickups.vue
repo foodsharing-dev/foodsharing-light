@@ -4,6 +4,9 @@
     <!-- MAIN -->
 
     <h6>Deine Abholtermine</h6>
+
+    <loading></loading>
+
     <div class="card">
       <div class="list no-border">
         <router-link v-for="p in pickups"

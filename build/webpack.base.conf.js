@@ -51,6 +51,38 @@ module.exports = {
         include: projectRoot,
         exclude: /node_modules/
       },
+      /*
+      {
+        test: /\.vue$/,
+        // https://github.com/vuejs/vue-loader/issues/644#issuecomment-279728229
+        oneOf: [
+          {
+            test: /\.vue$/,
+            resourceQuery: '?inject',
+            loader: 'vue-loader',
+            options: {
+              inject: true,
+              postcss: cssUtils.postcss,
+              loaders: merge({js: 'babel-loader'}, cssUtils.styleLoaders({
+                sourceMap: useCssSourceMap,
+                extract: env.prod
+              }))
+            }
+          },
+          {
+            test: /\.vue$/,
+            loader: 'vue-loader',
+            options: {
+              postcss: cssUtils.postcss,
+              loaders: merge({js: 'babel-loader'}, cssUtils.styleLoaders({
+                sourceMap: useCssSourceMap,
+                extract: env.prod
+              }))
+            }
+          }
+        ]
+      },
+      */
       {
         test: /\.vue$/,
         loader: 'vue-loader',
