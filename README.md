@@ -12,6 +12,9 @@ $ npm install -g quasar-cli
 # install dependencies
 $ npm install
 
+# ... alternatively using yarn
+$ yarn
+
 # serve with hot reload at localhost:8080
 $ quasar dev
 
@@ -42,7 +45,7 @@ Open source Symfony RESTful API available at [github.com/foodsharing-dev/foodsha
 
 Point it at the database inside the docker container:
 
-```yaml
+``` yaml
 # In app/config/parameters.yml
 parameters:
     database_host: 127.0.0.1
@@ -58,21 +61,22 @@ We use [chai](http://chaijs.com) for assertions, here is the [full list of avail
 
 You can run the tests with:
 
-```
+``` bash
 # one off test run
-npm run test
+$ npm run test
 
 # run tests and re-run on change
-npm run test:watch
+$ npm run test:watch
 ```
 
 Currently it will start Firefox to run the tests in, you can avoid it showing the UI by installing [xvfb](https://en.wikipedia.org/wiki/Xvfb) and ensuring `xvfb-run` is available on your path, then:
-```
+
+``` bash
 # one off test run
-npm run test:xvfb
+$ npm run test:xvfb
 
 # run tests and re-run on change
-npm run test:watch:xvfb
+$ npm run test:watch:xvfb
 ```
 
 ## Deploying in production
