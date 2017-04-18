@@ -29,7 +29,7 @@
           <input type="text" class="chat-input full-width" v-model="newMessage">
         </div>
         <div>
-          <button class="primary circular" type="submit">
+          <button type="submit" class="primary circular small">
             <i>send</i>
           </button>
         </div>
@@ -111,13 +111,16 @@
 <style lang="stylus" scoped>
 
 .chat-input
-  // a nice big clean chat message input
   border: none !important
-  font-size: 1.5rem !important
+  font-size: 1.1rem
   margin-top: 0.3rem
 
 .chat-footer
-  padding: 0.5rem 0.5rem 0 0.5rem
+  padding: 0 0rem 0 0.5rem
+  form
+    margin-bottom: 0
+  button
+    margin: 5px
 
 .chat-message
   p
@@ -132,7 +135,12 @@
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
 
 .chat-date
-  color: #4A3520 !important
+  color: #4A3520
+  font-size: 0.7rem
+
+.chat-you, .chat-other
+  // a bit more compact chat
+  margin-top: 30px
 
 .chat-you
   .chat-message
@@ -145,17 +153,17 @@
 // as foodsharing profile images are not square
 .chat-user
   .image-wrapper
-    width: 65px
-    height: 65px
+    width: 55px
+    height: 55px
     overflow: hidden
     border-radius: 50%
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
     img
-      width: 65px !important
-      height: 80px !important
-      border-radius: 0 !important
-      box-shadow: none !important
+      width: 55px
+      height: 65px
+      border-radius: 0
+      box-shadow: none
       position: relative
-      bottom: 5px
+      bottom: 3px
 
 </style>
