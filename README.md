@@ -59,11 +59,19 @@ We use [chai](http://chaijs.com) for assertions, here is the [full list of avail
 You can run the tests with:
 
 ```
-npm run test       # one off test run
-npm run test:watch # run tests and re-run on change
+# one off test run
+npm run test
 
-# if you have xvfb run installed you can use it with
+# run tests and re-run on change
+npm run test:watch
+```
+
+Currently it will start Firefox to run the tests in, you can avoid it showing the UI by installing [xvfb](https://en.wikipedia.org/wiki/Xvfb) and ensuring `xvfb-run` is available on your path, then:
+```
+# one off test run
 npm run test:xvfb
+
+# run tests and re-run on change
 npm run test:watch:xvfb
 ```
 
