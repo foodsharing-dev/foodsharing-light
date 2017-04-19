@@ -12,6 +12,8 @@ addons:
     - g++-4.8
 cache:
   yarn: true
+  directories:
+    - node_modules
 before_install:
 - npm install -g codecov
 before_script:
