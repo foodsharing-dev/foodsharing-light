@@ -1,8 +1,6 @@
 # foodsharing light
 
-[![Build Status](https://travis-ci.org/foodsharing-dev/foodsharing-light.svg?branch=master)](https://travis-ci.org/foodsharing-dev/foodsharing-light)
-
-[![codecov](https://codecov.io/gh/foodsharing-dev/foodsharing-light/branch/master/graph/badge.svg)](https://codecov.io/gh/foodsharing-dev/foodsharing-light)
+[![Build Status](https://travis-ci.org/foodsharing-dev/foodsharing-light.svg?branch=master)](https://travis-ci.org/foodsharing-dev/foodsharing-light) [![codecov](https://codecov.io/gh/foodsharing-dev/foodsharing-light/branch/master/graph/badge.svg)](https://codecov.io/gh/foodsharing-dev/foodsharing-light)
 
 A mobile-friendly frontend for foodsharing.de.
 Focused on the tasks you need to do _now_!
