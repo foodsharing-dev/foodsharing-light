@@ -113,7 +113,9 @@ export default {
     return {
       // Foodsharing does not return timezone information, but seems to be in UTC
       // Not sure if this works in production or is because of my docker backend...
-      sentAt: sentAt + '+0000',
+      // Removed for now, but is not resolved
+      // See https://github.com/foodsharing-dev/foodsharing-light/issues/7
+      sentAt: sentAt, // + '+0000',
       body: this.decodeHtmlEntities(body),
       sentBy: {
         id: parseInt(userId, 10),
