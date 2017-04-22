@@ -195,7 +195,7 @@ describe('services/foodsharing', () => {
     it('does not eval value', () => {
       expect(() => {
         convertJsonp('unused', 'somename("oops")')
-      }).to.throw(/unexpected character/)
+      }).to.throw(/JSON/) // some error about JSON (specific error depends on browser)
     })
   })
 })
