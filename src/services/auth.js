@@ -38,14 +38,14 @@ export default {
     return api.login(email, password).then(({ user }) => {
       Object.assign(state, { user })
     }).then(() => {
-      // Login to foodsharing, then connect to it's websocket
+      // Login to foodsharing
       return foodsharing.login(email, password)
-        .then(() => {
-          socket.connect()
-            .catch(err => {
-              log.error('failed to connect to foodsharing socket', err)
-              return Promise.reject(err)
-            })
+    }).then(() => {
+      // Connect to foodsharing websocket
+      return socket.connect()
+        .catch(err => {
+          log.error('failed to connect to foodsharing socket', err)
+          return Promise.reject(err)
         })
     }).then(() => {
       state.authenticated = true
