@@ -1,0 +1,14 @@
+Login:
+  heading: Melde Dich an
+  submit: 'Login'
+  form:
+    email: E-Mail Addresse
+    password: Passwort
+  failed: Login fehlgeschlagen
+  cookiesDisabled: Bitte aktiviere Cookies in deinem Browser, um dich einloggen zu können!
+  not_registered: |
+    Noch nicht dabei?
+    <a href="https://foodsharing.de/" target="_blank">Registrieren</a>
+    musst Du Dich auf der Desktop
+    Version von
+    <a href="https://foodsharing.de/" target="_blank">foodsharing.de</a>

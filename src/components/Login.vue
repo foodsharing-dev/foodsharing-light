@@ -1,3 +1,6 @@
+<i18n>
+</i18n>
+
 <template>
   <q-layout>
 
@@ -8,6 +11,7 @@
         <q-toolbar-title :padding="1" class="toolbar-logo">
           <router-link :to="{ name: 'index' }">food<span>sharing</span></router-link>
         </q-toolbar-title>
+        <lang-switcher></lang-switcher>
       </div>
     </slot>
     <!-- HEADER END -->
@@ -15,29 +19,28 @@
     <!-- MAIN -->
     <div class="layout-view">
       <div class="layout-padding">
-        <h6>Melde Dich an</h6>
-
+        <h6>{{ $t('Login.heading') }}</h6>
         <div class="card">
           <form v-on:submit.stop.prevent="login()">
             <div class="list">
               <div class="item two-lines">
                 <i class="item-primary">email</i>
                 <div class="item-content">
-                  <input v-model="email" class="full-width" type="email" placeholder="E-Mail Addresse">
+                  <input v-model="email" class="full-width" type="email" :placeholder="$t('Login.form.email')">
                 </div>
               </div>
               <hr>
               <div class="item two-lines">
                 <i class="item-primary">lock</i>
                 <div class="item-content">
-                  <input v-model="password" placeholder="Passwort" type="password" class="full-width">
+                  <input v-model="password"  :placeholder="$t('Login.form.password')" type="password" class="full-width">
                 </div>
               </div>
             </div>
-            <button type="submit" class="primary big full-width">Login</button>
+            <button type="submit" class="primary big full-width">{{ $t('Login.submit' )}}</button>
           </form>
         </div>
-        <p>Noch nicht dabei? <a href="https://foodsharing.de/" target="_blank">Registrieren</a> musst Du Dich auf der Desktop Version von <a href="https://foodsharing.de/" target="_blank">foodsharing.de</a></p>
+        <p v-html="$t('Login.not_registered')"></p>
       </div>
     </div>
     <!-- MAIN END -->
@@ -73,10 +76,10 @@
     methods: {
       login () {
         if (!navigator.cookieEnabled) {
-          Toast.create.negative('Bitte aktiviere Cookies in deinem Browser, um dich einloggen zu können!')
+          Toast.create.negative(this.$t('Login.cookiesDisabled'))
         }
         return auth.login(this.email, this.password).catch(() =>
-          Toast.create.negative('Login fehlgeschlagen'))
+          Toast.create.negative(this.$t('Login.failed')))
       }
     }
   }

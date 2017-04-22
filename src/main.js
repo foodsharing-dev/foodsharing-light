@@ -11,18 +11,21 @@ import Quasar from 'quasar'
 import moment from 'moment'
 
 import router from './router'
+import i18n from 'i18n'
 import auth from 'services/auth'
 import socket from 'services/socket'
 import chat from 'services/chat'
 import FromNow from 'components/FromNow'
 import FormattedDate from 'components/FormattedDate'
 import Loading from 'components/Loading'
+import LangSwitcher from 'components/LangSwitcher'
 
 Vue.use(Quasar) // Install Quasar Framework
 
 Vue.component('from-now', FromNow)
 Vue.component('formatted-date', FormattedDate)
 Vue.component('loading', Loading)
+Vue.component('lang-switcher', LangSwitcher)
 
 moment.locale('de')
 
@@ -37,6 +40,7 @@ auth.check().then(() => {
     /* eslint-disable no-new */
     new Vue({
       el: '#q-app',
+      i18n,
       router,
       render: h => h(require('./App'))
     })
