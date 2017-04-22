@@ -130,5 +130,5 @@ export default {
 }
 
 export function convertJsonp (name, value) {
-  return JSON.parse(value.replace(new RegExp(`^${name}\\(`), '').replace(/\);$/, ''))
+  return JSON.parse(value.replace(new RegExp(`^${name}\\(`), '').replace(/\);?$/, ''))
 }
