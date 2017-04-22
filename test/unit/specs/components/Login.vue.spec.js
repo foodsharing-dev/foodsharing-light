@@ -1,13 +1,17 @@
 import Vue from 'vue'
 
+import Login from 'components/Login'
+import auth from 'services/auth'
+
+const sandbox = sinon.sandbox.create()
+
 describe('components/Login.vue', () => {
-  let vm, login
+  let vm, loginStub
+
+  afterEach(() => sandbox.restore())
 
   beforeEach(() => {
-    login = sinon.stub().returns(Promise.resolve())
-    let Login = require('!!vue-loader?inject!components/Login.vue')({
-      'services/auth': { login }
-    })
+    loginStub = sandbox.stub(auth, 'login').resolves(null)
     vm = new Vue(Login).$mount()
   })
 
@@ -17,7 +21,7 @@ describe('components/Login.vue', () => {
       password: 'testpassword'
     })
     return vm.login().then(() => {
-      expect(login).to.have.been.calledWith('test@test.com', 'testpassword')
+      expect(loginStub).to.have.been.calledWith('test@test.com', 'testpassword')
     })
   })
 })

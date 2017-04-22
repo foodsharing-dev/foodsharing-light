@@ -1,5 +1,5 @@
 import chat from 'services/chat'
-import api from 'services/api' // for stubbing
+import api from 'services/api'
 
 const sandbox = sinon.sandbox.create()
 
@@ -66,7 +66,7 @@ describe('services/chat', () => {
       it('requests the list if it is not already there', () => {
         message.conversationId = 2 // for a new conversation!
         return chat.receiveMessage(message).then(() => {
-          expect(getConversationListStub.called).to.be.true
+          expect(getConversationListStub).to.have.been.called
         })
       })
     })
