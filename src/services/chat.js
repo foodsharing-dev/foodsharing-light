@@ -63,8 +63,9 @@ export default {
     }
     else {
       // we don't have this conversation in our list, reload the list
-      this.loadConversationList()
+      return this.loadConversationList()
     }
+    return Promise.resolve()
   }
 
 }
