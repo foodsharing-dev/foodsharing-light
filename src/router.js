@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import MainLayout from 'components/MainLayout'
 
 import auth from 'services/auth'
 import log from 'services/log'
@@ -8,19 +7,9 @@ import chat from 'services/chat'
 
 Vue.use(VueRouter)
 
-// global components
-Vue.component('main-layout', MainLayout)
-
 function load (component) {
-  return () => System.import(`components/${component}.vue`)
+  return () => System.import(`pages/${component}.vue`)
 }
-
-/*
- Is this needed to do some live reload stuff?
- function load (component) {
- return () => System.import(`components/${component}.vue`)
- }
- */
 
 const protectRoute = (to, from, next) => {
   if (auth.state.authenticated) {

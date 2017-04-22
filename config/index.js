@@ -6,7 +6,9 @@ module.exports = {
     quasar: path.resolve(__dirname, '../node_modules/quasar-framework/'),
     src: path.resolve(__dirname, '../src'),
     assets: path.resolve(__dirname, '../src/assets'),
-    components: path.resolve(__dirname, '../src/components')
+    components: path.resolve(__dirname, '../src/components'),
+    pages: path.resolve(__dirname, '../src/pages'),
+    layouts: path.resolve(__dirname, '../src/layouts')
   },
 
   // Progress Bar Webpack plugin format

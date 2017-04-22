@@ -19,13 +19,16 @@ import FromNow from 'components/FromNow'
 import FormattedDate from 'components/FormattedDate'
 import Loading from 'components/Loading'
 import LangSwitcher from 'components/LangSwitcher'
+import MainLayout from 'layouts/MainLayout'
 
 Vue.use(Quasar) // Install Quasar Framework
 
+// global components
 Vue.component('from-now', FromNow)
 Vue.component('formatted-date', FormattedDate)
 Vue.component('loading', Loading)
 Vue.component('lang-switcher', LangSwitcher)
+Vue.component('main-layout', MainLayout)
 
 moment.locale('de')
 

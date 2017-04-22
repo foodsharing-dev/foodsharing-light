@@ -1,11 +1,11 @@
 import Vue from 'vue'
 
-import Login from 'components/Login'
+import Login from 'pages/Login'
 import auth from 'services/auth'
 
 const sandbox = sinon.sandbox.create()
 
-describe('components/Login.vue', () => {
+describe('pages/Login.vue', () => {
   let vm, loginStub
 
   afterEach(() => sandbox.restore())
