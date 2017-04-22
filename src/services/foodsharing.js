@@ -4,6 +4,8 @@
 
 import axios from 'axios'
 
+import htmlEntities from 'services/foodsharing.htmlentities'
+
 // Must have a proxy configured to forward this path to foodsharing site
 // and then remove the prefix
 export function prefix (path) {
@@ -84,17 +86,9 @@ export default {
    * Foodsharing db has encoded html entities (e.g. "fish &amp; chips")
    *
    * Function to reverse php htmlentities() function
-   * Get list of entities by running:
-   *
-   *   php -r 'var_dump(get_html_translation_table());`
-   *
    */
   decodeHtmlEntities (str) {
-    return str
-      .replace(/&amp;/g, '&')
-      .replace(/&quot;/g, '""')
-      .replace(/&lt;/g, '<')
-      .replace(/&gt;/g, '>')
+    return str.replace(/&[a-z]+;/g, m => htmlEntities[m] || m)
   },
 
   /*
