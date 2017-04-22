@@ -187,7 +187,7 @@ describe('services/foodsharing', () => {
       expect(result).to.deep.equal(data)
     })
 
-    it('does not eval json', () => {
+    it('does not eval value', () => {
       expect(() => {
         convertJsonp('unused', 'functionthatdoesnotexist("oops")')
       }).to.throw(/unexpected keyword/)
