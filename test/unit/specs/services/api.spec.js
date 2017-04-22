@@ -167,7 +167,7 @@ describe('services/api', () => {
       return api.checkLogin().then(() => {
         chai.assert.fail(null, null, 'should not have succeeded')
       }).catch(err => {
-        if (!err.response) return Promise.reject(err)
+        if (err.name === 'AssertionError') return Promise.reject(err)
         expect(err.response.status).to.equal(500)
       })
     })
