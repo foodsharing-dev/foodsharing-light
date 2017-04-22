@@ -140,6 +140,15 @@ describe('services/api', () => {
     })
   })
 
+  describe('login', () => {
+    it('creates session', () => {
+      mock.onPost('/api/v1/session').reply(200, { user: { id: 1 } })
+      return api.login().then(({ user }) => {
+        expect(user.id).to.equal(1)
+      })
+    })
+  })
+
   describe('logout', () => {
     it('deletes session', () => {
       mock.onDelete('/api/v1/session').reply(200)
