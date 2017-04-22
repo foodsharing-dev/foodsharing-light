@@ -1,8 +1,24 @@
 <template>
-  <div class="fs-loading">
-    <spinner :size="48" name="hourglass"></spinner>
+  <div class="fs-loading" v-if="show">
+    <spinner :size="48"></spinner>
   </div>
 </template>
+
+<script>
+export default {
+  data () {
+    return { show: false }
+  },
+  mounted () {
+    this.timer = setTimeout(() => {
+      this.show = true
+    }, 500)
+  },
+  destroyed () {
+    clearTimeout(this.timer)
+  }
+}
+</script>
 
 <style lang="stylus" scoped>
 .fs-loading
