@@ -64,6 +64,7 @@ export default {
 
   getPickup (id) {
     return axios.get(`/api/v1/pickups/${id}`).then(({ data: { pickup } }) => {
+      setPickupId(pickup)
       return pickup
     })
   },
