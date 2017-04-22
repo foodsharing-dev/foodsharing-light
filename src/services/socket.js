@@ -27,7 +27,7 @@ export default {
   connect () {
     if (io) return Promise.resolve()
     return new Promise((resolve, reject) => {
-      io = socketio({ path: '/foodsharing/socket' })
+      io = socketio.connect({ path: '/foodsharing/socket' })
       io.on('connect', () => {
         io.emit('register')
         log.info('connected to websocket!')
