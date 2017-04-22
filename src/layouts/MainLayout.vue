@@ -47,7 +47,7 @@
             <div class="list">
 
               <div class="item">
-                <img src="/statics/GitHub-Mark-64px.png" class="item-primary" style="top: 10px; height: 25px; width: 25px;">
+                <img src="../assets/GitHub-Mark-64px.png" class="item-primary" style="top: 10px; height: 25px; width: 25px;">
                 <div class="item-content">
                   <a href="https://github.com/foodsharing-dev/foodsharing-light/issues" target="_blank" class="full-width">
                     Github
@@ -133,11 +133,11 @@
 <style>
   @font-face {
     font-family: 'Alfa Slab One';
-    src: url('/statics/fonts/alfaslabone/alfaslabone-regular.eot');
-    src: url('/statics/fonts/alfaslabone/alfaslabone-regular.eot?#iefix') format('embedded-opentype'),
-    url('/statics/fonts/alfaslabone/alfaslabone-regular.woff') format('woff'),
-    url('/statics/fonts/alfaslabone/alfaslabone-regular.ttf') format('truetype'),
-    url('/statics/fonts/alfaslabone/alfaslabone-regular.svg#alfa_slab_oneregular') format('svg');
+    src: url('../assets/fonts/alfaslabone/alfaslabone-regular.eot');
+    src: url('../assets/fonts/alfaslabone/alfaslabone-regular.eot?#iefix') format('embedded-opentype'),
+    url('../assets/fonts/alfaslabone/alfaslabone-regular.woff') format('woff'),
+    url('../assets/fonts/alfaslabone/alfaslabone-regular.ttf') format('truetype'),
+    url('../assets/fonts/alfaslabone/alfaslabone-regular.svg#alfa_slab_oneregular') format('svg');
     font-weight: normal;
     font-style: normal;
 

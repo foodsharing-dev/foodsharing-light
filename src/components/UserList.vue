@@ -16,6 +16,8 @@
 <script>
   import { ActionSheet } from 'quasar'
 
+  import defaultAvatar from 'assets/default-avatar.png'
+
   export default {
     props: ['users', 'title'],
     data () {
@@ -29,7 +31,7 @@
           return '/fs/images/thumb_crop_' + user.photo
         }
         else {
-          return '/statics/default-avatar.png'
+          return defaultAvatar
         }
       },
       showActionSheetWithIcons (user) {

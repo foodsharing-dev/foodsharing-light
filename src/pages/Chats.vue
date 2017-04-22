@@ -43,6 +43,7 @@
 
 <script>
   import chat from 'services/chat'
+  import defaultAvatar from 'assets/default-avatar.png'
   export default {
     data () {
       return {
@@ -57,7 +58,7 @@
           return '/fs/images/thumb_crop_' + lastMessage.sentBy.photo
         }
         else {
-          return '/statics/default-avatar.png'
+          return defaultAvatar
         }
       },
       conversationMembers (conversation) {

@@ -43,6 +43,7 @@
   import { Toast } from 'quasar'
   import chat from 'services/chat'
   import auth from 'services/auth'
+  import defaultAvatar from 'assets/default-avatar.png'
   export default {
     data () {
       return {
@@ -70,7 +71,7 @@
           return '/fs/images/thumb_crop_' + user.photo
         }
         else {
-          return '/statics/default-avatar.png'
+          return defaultAvatar
         }
       },
       send () {
