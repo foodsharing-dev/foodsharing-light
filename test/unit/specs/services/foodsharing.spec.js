@@ -151,14 +151,19 @@ describe('services/foodsharing', () => {
       id: '5',
       cid: '10'
     }
+    let convertedMsg = {
+      messageId: 5,
+      conversationId: 10,
+      sentBy: {
+        id: 1,
+        firstName: 'myname',
+        photo: 'aphoto.jpg'
+      },
+      body: 'cats & dogs',
+      sentAt: 'some time'
+    }
     it('works nicely :)', () => {
-      let message = foodsharing.convertMessage(msg)
-      expect(message.messageId).to.equal(5)
-      expect(message.conversationId).to.equal(10)
-      expect(message.sentBy.id).to.equal(1)
-      expect(message.sentBy.firstName).to.equal('myname')
-      expect(message.sentBy.photo).to.equal('aphoto.jpg')
-      expect(message.body).to.equal('cats & dogs')
+      expect(foodsharing.convertMessage(msg)).to.deep.equal(convertedMsg)
     })
   })
 
