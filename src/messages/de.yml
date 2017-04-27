@@ -1,6 +1,7 @@
+---
 Login:
   heading: Melde Dich an
-  submit: 'Login'
+  submit: Login
   form:
     email: E-Mail Addresse
     password: Passwort
