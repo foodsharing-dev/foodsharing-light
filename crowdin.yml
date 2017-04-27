@@ -1,0 +1,3 @@
+files:
+  - source: /src/messages/en.yml
+    translation: /src/messages/%two_letters_code%.yml
