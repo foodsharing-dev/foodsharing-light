@@ -3,7 +3,7 @@ Login:
   heading: Melde Dich an
   submit: Login
   form:
-    email: E-Mail Addresse
+    email: E-Mail-Adresse
     password: Passwort
   failed: Login fehlgeschlagen
   cookiesDisabled: Bitte aktiviere Cookies in deinem Browser, um dich einloggen zu können!
