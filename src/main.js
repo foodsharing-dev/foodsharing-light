@@ -1,11 +1,3 @@
-// === DEFAULT / CUSTOM STYLE ===
-// WARNING! always comment out ONE of the two require() calls below.
-// 1. use next line to activate CUSTOM STYLE (./src/themes)
-require(`./themes/app.${__THEME}.styl`)
-// 2. or, use next line to activate DEFAULT QUASAR STYLE
-// require(`quasar/dist/quasar.${__THEME}.css`)
-// ==============================
-
 import Vue from 'vue'
 import Quasar from 'quasar'
 import moment from 'moment'
@@ -20,6 +12,14 @@ import FormattedDate from 'components/FormattedDate'
 import Loading from 'components/Loading'
 import LangSwitcher from 'components/LangSwitcher'
 import MainLayout from 'layouts/MainLayout'
+
+// === DEFAULT / CUSTOM STYLE ===
+// WARNING! always comment out ONE of the two require() calls below.
+// 1. use next line to activate CUSTOM STYLE (./src/themes)
+require(`./themes/app.${__THEME}.styl`)
+// 2. or, use next line to activate DEFAULT QUASAR STYLE
+// require(`quasar/dist/quasar.${__THEME}.css`)
+// ==============================
 
 Vue.use(Quasar) // Install Quasar Framework
 
