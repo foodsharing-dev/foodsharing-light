@@ -130,17 +130,6 @@ describe('services/foodsharing', () => {
     })
   })
 
-  describe('decodeHtmlEntities', () => {
-    let pairs = [
-      ['&amp;', '&']
-    ]
-    pairs.forEach(([from, to]) => {
-      it(`converts "${from}" -> "${to}"`, () => {
-        expect(foodsharing.decodeHtmlEntities(from)).to.equal(to)
-      })
-    })
-  })
-
   describe('convertMessage', () => {
     let msg = {
       time: 'some time',
