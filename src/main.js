@@ -1,12 +1,14 @@
 import Vue from 'vue'
 import Quasar, { Toast } from 'quasar'
 import moment from 'moment'
+import axios from 'axios'
 
 import router from './router'
 import i18n from 'i18n'
 import auth from 'services/auth'
 import socket from 'services/socket'
 import chat from 'services/chat'
+import fcm from 'services/fcm'
 import FromNow from 'components/FromNow'
 import FormattedDate from 'components/FormattedDate'
 import Loading from 'components/Loading'
@@ -35,6 +37,12 @@ Vue.prototype.layoutViewScrollToBottom = () => {
 }
 
 moment.locale('de')
+
+if (process.env.BASE_URL) {
+  Object.assign(axios.defaults, {
+    baseURL: process.env.BASE_URL
+  })
+}
 
 // wireup socket to chats
 // TODO: make it unsubscribe
