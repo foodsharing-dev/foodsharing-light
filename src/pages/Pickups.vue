@@ -43,19 +43,15 @@
   export default {
     data () {
       return {
-        pickups: [],
-        loading: false
+        pickups: []
       }
     },
     created () {
-      this.loading = true
       api.getNextPickupList().then(pickups => {
         this.pickups = pickups
       }).catch(() => {
         // TODO: translate to German
         Toast.create.negative('Could not load pickups')
-      }).then(() => {
-        this.loading = false
       })
     }
   }

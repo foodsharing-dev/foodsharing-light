@@ -1,9 +1,5 @@
-<i18n>
-</i18n>
-
 <template>
   <q-layout>
-
     <!-- HEADER -->
     <slot name="header">
       <div slot="header" class="toolbar">

@@ -6,8 +6,8 @@
       </h6>
       <div class="card">
         <div class="card-content">
-          <loading v-if="loading" />
-          <template v-else-if="stores && stores.length !== 0">
+          <loading></loading>
+          <template v-if="stores && stores.length !== 0">
             <div class="list no-border">
               <router-link :to="'/store/' + store.id" tag="div" class="item two-lines item-link" v-for="store in stores" :key="store.id">
                 <div class="item-primary">
@@ -49,14 +49,11 @@
       }
     },
     created () {
-      this.loading = true
       api.getStoreList().then(stores => {
         this.stores = stores
       }).catch(() => {
         // TODO: translate to German
         Toast.create.negative('Could not load stores')
-      }).then(() => {
-        this.loading = false
       })
     }
   }

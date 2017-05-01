@@ -1,7 +1,7 @@
 <template>
   <main-layout>
 
-    <loading v-if="loading" />
+    <loading></loading>
     <div v-if="conversation" class="conversation">
       <div v-for="message in conversation.messages"
            :key="message.id"
@@ -47,7 +47,6 @@
   export default {
     data () {
       return {
-        loading: false,
         id: null,
         conversation: null,
         newMessage: ''
@@ -82,12 +81,9 @@
     },
     created () {
       this.id = this.$route.params.id
-      this.loading = true
       chat.loadConversation(this.id).then(conversation => {
-        this.loading = false
         Object.assign(this, { conversation })
       }).catch(err => {
-        this.loading = false
         Toast.create.negative(err.message)
       })
     },

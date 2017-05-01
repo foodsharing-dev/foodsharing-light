@@ -1,15 +1,40 @@
 <template>
   <div class="fs-loading">
-    <spinner :size="48" v-if="show"></spinner>
+    <spinner :size="48" v-if="isLoading && show"></spinner>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+
+let activeRequestCount = 0
+
+axios.interceptors.request.use(config => {
+  activeRequestCount++
+  return config
+}, err => {
+  activeRequestCount--
+  return Promise.reject(err)
+})
+
+axios.interceptors.response.use(response => {
+  activeRequestCount--
+  return response
+}, err => {
+  activeRequestCount--
+  return Promise.reject(err)
+})
+
 export default {
   data () {
     return { show: false }
   },
-  mounted () {
+  computed: {
+    isLoading () {
+      return activeRequestCount > 0
+    }
+  },
+  created () {
     this.timer = setTimeout(() => {
       this.show = true
     }, 500)

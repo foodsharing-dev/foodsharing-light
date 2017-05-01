@@ -6,6 +6,7 @@ import router from './router'
 import i18n from 'i18n'
 import auth from 'services/auth'
 import socket from 'services/socket'
+import log from 'services/log'
 import chat from 'services/chat'
 import FromNow from 'components/FromNow'
 import FormattedDate from 'components/FormattedDate'
@@ -38,8 +39,10 @@ socket.subscribe(message => {
   chat.receiveMessage(message)
 })
 
-auth.check().then(() => {
-  Quasar.start(() => {
+Quasar.start(() => {
+  auth.check().catch(err => {
+    log.error('failed to check auth status', err)
+  }).then(() => {
     /* eslint-disable no-new */
     new Vue({
       el: '#q-app',

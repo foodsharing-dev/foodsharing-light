@@ -3,8 +3,8 @@
   <main-layout>
 
     <!-- MAIN -->
-    <loading v-if="loading" />
-    <template v-else-if="!loading && store">
+    <loading></loading>
+    <template v-if="store">
       <h6>
         {{ store.name }}
       </h6>
@@ -56,7 +56,6 @@ export default {
   },
   data () {
     return {
-      loading: false,
       store: null
     }
   },
@@ -78,10 +77,8 @@ export default {
   },
   created () {
     this.id = this.$route.params.id
-    this.loading = true
     api.getStore(this.id).then(store => {
       this.store = store
-      this.loading = false
     })
   }
 }

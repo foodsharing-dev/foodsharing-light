@@ -5,8 +5,8 @@
       <!-- MAIN -->
       <h6>Deine Unterhaltungen</h6>
       <div class="card">
-        <loading v-if="loading" />
-        <div class="list no-border" v-else-if="!loading && conversations">
+        <loading></loading>
+        <div class="list no-border" v-if="conversations">
 
           <!-- CHAT ITEM -->
           <router-link tag="div"
@@ -47,7 +47,6 @@
   export default {
     data () {
       return {
-        loading: false,
         conversations: null
       }
     },
@@ -66,10 +65,8 @@
       }
     },
     created () {
-      this.loading = true
       chat.loadConversationList().then(conversations => {
         this.conversations = conversations
-        this.loading = false
       })
     }
   }
