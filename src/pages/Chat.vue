@@ -26,7 +26,7 @@
     <div slot="app-footer" class="chat-footer">
       <form class="row small-gutter" v-on:submit.stop.prevent="send()">
         <div class="auto">
-          <input type="text" class="chat-input full-width" v-model="newMessage">
+          <input type="text" class="chat-input full-width" v-autofocus v-model="newMessage">
         </div>
         <div>
           <button type="submit" class="primary circular small">
@@ -90,10 +90,6 @@
       if (this.id) {
         chat.clearConversation(this.id)
       }
-    },
-    mounted () {
-      // autofocus (TODO: extract to directive)
-      this.$el.querySelector('input').focus()
     },
     updated () {
       this.layoutViewScrollToBottom()
