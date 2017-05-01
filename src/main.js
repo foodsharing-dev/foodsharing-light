@@ -1,12 +1,11 @@
 import Vue from 'vue'
-import Quasar from 'quasar'
+import Quasar, { Toast } from 'quasar'
 import moment from 'moment'
 
 import router from './router'
 import i18n from 'i18n'
 import auth from 'services/auth'
 import socket from 'services/socket'
-import log from 'services/log'
 import chat from 'services/chat'
 import FromNow from 'components/FromNow'
 import FormattedDate from 'components/FormattedDate'
@@ -45,7 +44,7 @@ socket.subscribe(message => {
 
 Quasar.start(() => {
   auth.check().catch(err => {
-    log.error('failed to check auth status', err)
+    Toast.create.negative('Auth check error. ' + err.message)
   }).then(() => {
     /* eslint-disable no-new */
     new Vue({
