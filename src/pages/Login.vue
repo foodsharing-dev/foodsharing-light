@@ -19,7 +19,7 @@
               <div class="item two-lines">
                 <i class="item-primary">email</i>
                 <div class="item-content">
-                  <input v-model="email" class="full-width" type="email" :placeholder="$t('Login.form.email')">
+                  <input v-autofocus v-model="email" class="full-width" type="email" :placeholder="$t('Login.form.email')">
                 </div>
               </div>
               <hr>
@@ -57,10 +57,6 @@
           password: ''
         }
       }
-    },
-    mounted () {
-      // autofocus (TODO: extract to directive)
-      this.$el.querySelector('input').focus()
     },
     methods: {
       login () {

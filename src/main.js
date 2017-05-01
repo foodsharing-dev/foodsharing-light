@@ -14,6 +14,8 @@ import Loading from 'components/Loading'
 import LangSwitcher from 'components/LangSwitcher'
 import MainLayout from 'layouts/MainLayout'
 
+import autofocus from 'directives/autofocus'
+
 // === DEFAULT / CUSTOM STYLE ===
 // WARNING! always comment out ONE of the two require() calls below.
 // 1. use next line to activate CUSTOM STYLE (./src/themes)
@@ -30,6 +32,8 @@ Vue.component('formatted-date', FormattedDate)
 Vue.component('loading', Loading)
 Vue.component('lang-switcher', LangSwitcher)
 Vue.component('main-layout', MainLayout)
+
+Vue.directive('autofocus', autofocus)
 
 moment.locale('de')
 
