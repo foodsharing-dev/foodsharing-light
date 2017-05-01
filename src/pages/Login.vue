@@ -1,6 +1,5 @@
 <template>
   <q-layout>
-    <!-- HEADER -->
     <slot name="header">
       <div slot="header" class="toolbar">
         <i>lock</i>
@@ -10,9 +9,7 @@
         <lang-switcher></lang-switcher>
       </div>
     </slot>
-    <!-- HEADER END -->
 
-    <!-- MAIN -->
     <div class="layout-view">
       <div class="layout-padding">
         <h6>{{ $t('Login.heading') }}</h6>
@@ -39,8 +36,6 @@
         <p v-html="$t('Login.not_registered')"></p>
       </div>
     </div>
-    <!-- MAIN END -->
-
   </q-layout>
 </template>
 

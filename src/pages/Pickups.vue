@@ -1,10 +1,6 @@
 <template>
   <main-layout>
-
-    <!-- MAIN -->
-
     <h6>Deine Abholtermine</h6>
-
     <loading></loading>
 
     <div class="card">
@@ -30,9 +26,6 @@
         </router-link>
       </div>
     </div>
-
-    <!-- MAIN END -->
-
   </main-layout>
 </template>
 

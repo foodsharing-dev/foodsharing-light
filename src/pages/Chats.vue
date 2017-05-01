@@ -1,44 +1,34 @@
 <template>
-  <div>
-    <main-layout>
-
-      <!-- MAIN -->
-      <h6>Deine Unterhaltungen</h6>
-      <div class="card">
-        <loading></loading>
-        <div class="list no-border" v-if="conversations">
-
-          <!-- CHAT ITEM -->
-          <router-link tag="div"
-                       class="item item-link two-lines"
-                       :to="{ name: 'chat', params: { id: conversation.id } }"
-                       v-for="conversation in conversations"
-                       :key="conversation.id">
-            <img class="item-primary" :src="avatarFor(conversation)">
-              <div class="item-content has-secondary">
-                <div class="fs-chat-name">
-                    <strong v-if="conversation.name">{{ conversation.name }} </strong>{{ conversationMembers(conversation) }}
-                </div>
-                <div v-if="conversation.lastMessage">{{ conversation.lastMessage.body }}</div>
+  <main-layout>
+    <h6>Deine Unterhaltungen</h6>
+    <div class="card">
+      <loading></loading>
+      <div class="list no-border" v-if="conversations">
+        <router-link tag="div"
+                     class="item item-link two-lines"
+                     :to="{ name: 'chat', params: { id: conversation.id } }"
+                     v-for="conversation in conversations"
+                     :key="conversation.id">
+          <img class="item-primary" :src="avatarFor(conversation)">
+            <div class="item-content has-secondary">
+              <div class="fs-chat-name">
+                  <strong v-if="conversation.name">{{ conversation.name }} </strong>{{ conversationMembers(conversation) }}
               </div>
-              <div class="item-secondary stamp" v-if="conversation.lastMessage">
-                <from-now :date="conversation.lastMessageAt"></from-now>
-              </div>
-            <div class="item-secondary stamp" v-else>
-              (keine Nachricht)
+              <div v-if="conversation.lastMessage">{{ conversation.lastMessage.body }}</div>
             </div>
-          </router-link>
-          <!-- CHAT ITEM END -->
-
-        </div>
-        <template v-else>
-          Du hast keine Unterhaltungen.
-        </template>
+            <div class="item-secondary stamp" v-if="conversation.lastMessage">
+              <from-now :date="conversation.lastMessageAt"></from-now>
+            </div>
+          <div class="item-secondary stamp" v-else>
+            (keine Nachricht)
+          </div>
+        </router-link>
       </div>
-      <!-- MAIN END-->
-
-    </main-layout>
-  </div>
+      <template v-else>
+        Du hast keine Unterhaltungen.
+      </template>
+    </div>
+  </main-layout>
 </template>
 
 <script>

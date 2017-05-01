@@ -1,7 +1,5 @@
 <template>
   <q-layout>
-
-    <!-- HEADER -->
     <slot name="header">
       <div slot="header" class="toolbar">
         <button class="hide-on-drawer-visible" @click="$refs.leftDrawer.open()">
@@ -11,18 +9,13 @@
         <q-toolbar-title :padding="1">
           Foodsharing Signup
         </q-toolbar-title>
-
       </div>
     </slot>
-    <!-- HEADER END -->
 
-    <!-- MAIN -->
     <div class="layout-view">
       <div class="layout-padding">
-
         <q-stepper @finish="finish()" ref="stepper">
           <q-step title="personal information">
-
             <div class="list">
               <div class="item two-lines">
                 <i class="item-primary">email</i>
@@ -38,11 +31,10 @@
                 </div>
               </div>
             </div>
-
           </q-step>
+
           <!-- Step specifying when user should be able to jump to next step -->
           <q-step title="Take a strong Password" :ready="ready">
-
             <div class="list">
               <div class="item two-lines">
                 <i class="item-primary">lock</i>
@@ -65,24 +57,6 @@
         </q-stepper>
       </div>
     </div>
-    <!-- MAIN END -->
-
-
-
-    <router-view class="layout-view"></router-view>
-
-
-
-    <!--
-    <div slot="footer" class="toolbar">
-      <div class="auto flex justify-center within-iframe-hide">
-
-      </div>
-      <q-toolbar-title :padding="0" class="within-iframe-only">
-        Footer
-      </q-toolbar-title>
-    </div>
-    -->
   </q-layout>
 </template>
 

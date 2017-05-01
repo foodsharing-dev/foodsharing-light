@@ -1,8 +1,5 @@
 <template>
-
   <main-layout>
-
-    <!-- MAIN -->
     <loading></loading>
     <template v-if="store">
       <h6>
@@ -36,15 +33,9 @@
         <user-list :users="coordinators" title="Betriebsverantwortliche" />
         <user-list :users="team" title="Team" />
       </div>
-
-
     </template>
-
-    <!-- MAIN END -->
-
-
   </main-layout>
-  </div></template>
+</template>
 
 <script>
 import api from 'services/api'

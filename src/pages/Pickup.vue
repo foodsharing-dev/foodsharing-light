@@ -1,10 +1,6 @@
 <template>
-
   <main-layout>
-
-    <!-- MAIN -->
     <div v-if="pickup">
-
       <h6>Abholung {{ store.name }}</h6>
       <div class="card">
         <div class="card-content list no-border highlight">
@@ -43,10 +39,8 @@
         <user-list :users=pickup.members title="Abholer"></user-list>
       </div>
     </div>
-
-    <!-- MAIN END -->
   </main-layout>
-  </div></template>
+</template>
 
 <script>
   import api from 'services/api'

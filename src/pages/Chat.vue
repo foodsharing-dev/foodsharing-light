@@ -1,7 +1,7 @@
 <template>
   <main-layout>
-
     <loading></loading>
+
     <div v-if="conversation" class="conversation">
       <div v-for="message in conversation.messages"
            :key="message.id"
@@ -35,7 +35,6 @@
         </div>
       </form>
     </div>
-
   </main-layout>
 </template>
 
