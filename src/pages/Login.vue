@@ -43,8 +43,6 @@
   import { Toast } from 'quasar'
   import auth from 'services/auth'
 
-  console.log('loaded auth in Login', auth)
-
   export default {
     data () {
       if (process.env.NODE_ENV !== 'production') {

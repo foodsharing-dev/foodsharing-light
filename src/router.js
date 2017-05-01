@@ -57,7 +57,6 @@ export default new VueRouter({
       name: 'logout',
       path: '/logout',
       beforeEnter: (to, from, next) => {
-        console.log('logging out!')
         auth.logout().then(() => {
           next({ name: 'login' })
         })
