@@ -44,7 +44,6 @@
 
 <script>
   import api from 'services/api'
-  import log from 'services/log'
   import UserList from 'components/UserList'
 
   export default {
@@ -67,7 +66,6 @@
     },
     created () {
       let { id } = this.$route.params
-      log.info('pickup id is', id)
       api.getPickup(id).then(pickup => {
         this.pickup = pickup
         this.store = pickup.store
@@ -75,6 +73,3 @@
     }
   }
 </script>
-
-<style lang="styl">
-</style>

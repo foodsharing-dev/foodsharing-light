@@ -1,12 +1,9 @@
 <template>
-  <div>
-    <main-layout>
-      <div>
-        <h1>Error 404</h1>
-      </div>
-    </main-layout>
-
-  </div>
+  <main-layout>
+    <div>
+      <h1>Error 404</h1>
+    </div>
+  </main-layout>
 </template>
 
 <script>
@@ -16,6 +13,3 @@
     }
   }
 </script>
-
-<style lang="styl">
-</style>
