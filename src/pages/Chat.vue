@@ -96,10 +96,7 @@
       this.$el.querySelector('input').focus()
     },
     updated () {
-      // auto scroll to bottom...
-      // TODO: this is using global selector, bad!
-      let el = document.querySelector('.layout-view')
-      el.scrollTop = el.scrollHeight
+      this.layoutViewScrollToBottom()
     }
   }
 </script>

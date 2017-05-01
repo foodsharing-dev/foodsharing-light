@@ -34,6 +34,12 @@ Vue.component('main-layout', MainLayout)
 
 Vue.directive('autofocus', autofocus)
 
+// this is better than having it in the component, but not by much
+Vue.prototype.layoutViewScrollToBottom = () => {
+  let el = document.querySelector('.layout-view')
+  el.scrollTop = el.scrollHeight
+}
+
 moment.locale('de')
 
 // wireup socket to chats
