@@ -26,8 +26,8 @@
       <slot name="left-drawer">
 
         <div class="toolbar light">
-          <q-toolbar-title :padding="1">
-            {{ auth.user.firstName }} {{ auth.user.lastName }}
+          <q-toolbar-title :padding="1" v-if="user">
+            {{ user.firstName }} {{ user.lastName }}
           </q-toolbar-title>
         </div>
 
@@ -124,8 +124,12 @@
   export default {
     data () {
       return {
-        auth: auth.state,
         currentPage: ''
+      }
+    },
+    computed: {
+      user () {
+        return auth.state.user
       }
     }
   }
