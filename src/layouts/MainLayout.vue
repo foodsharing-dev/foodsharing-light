@@ -134,3 +134,10 @@
     }
   }
 </script>
+
+<style lang="stylus" scoped>
+.fs-contact-us
+  z-index:-1
+  a
+    display: block
+</style>
