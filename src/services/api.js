@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import foodsharing from 'services/foodsharing'
+import decodeHtmlEntities from 'services/decodeHtmlEntities'
 
 export default {
 
@@ -89,10 +89,10 @@ export function setPickupId (pickup) {
 export function conversationDecodeHtmlEntities (conversation) {
   if (conversation.messages) {
     conversation.messages.forEach(message => {
-      message.body = foodsharing.decodeHtmlEntities(message.body)
+      message.body = decodeHtmlEntities(message.body)
     })
   }
   if (conversation.lastMessage) {
-    conversation.lastMessage.body = foodsharing.decodeHtmlEntities(conversation.lastMessage.body)
+    conversation.lastMessage.body = decodeHtmlEntities(conversation.lastMessage.body)
   }
 }

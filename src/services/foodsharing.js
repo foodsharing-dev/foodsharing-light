@@ -4,7 +4,7 @@
 
 import axios from 'axios'
 
-import htmlEntities from 'services/foodsharing.htmlentities'
+import decodeHtmlEntities from 'services/decodeHtmlEntities'
 
 // Must have a proxy configured to forward this path to foodsharing site
 // and then remove the prefix
@@ -83,15 +83,6 @@ export default {
   },
 
   /*
-   * Foodsharing db has encoded html entities (e.g. "fish &amp; chips")
-   *
-   * Function to reverse php htmlentities() function
-   */
-  decodeHtmlEntities (str) {
-    return str.replace(/&[a-z]+;/g, m => htmlEntities[m] || m)
-  },
-
-  /*
    * Convert message from existing foodsharing format to our format
    * See /api/doc#get--api-v1-conversation-{id}
    */
@@ -110,7 +101,7 @@ export default {
       // Removed for now, but is not resolved
       // See https://github.com/foodsharing-dev/foodsharing-light/issues/7
       sentAt: sentAt, // + '+0000',
-      body: this.decodeHtmlEntities(body),
+      body: decodeHtmlEntities(body),
       sentBy: {
         id: parseInt(userId, 10),
         firstName,
