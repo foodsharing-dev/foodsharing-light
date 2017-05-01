@@ -1,7 +1,5 @@
 <template>
   <q-layout>
-
-    <!-- HEADER -->
     <slot name="header">
       <div slot="header" class="toolbar">
         <button class="hide-on-drawer-visible" @click="$refs.leftDrawer.open()">
@@ -10,21 +8,16 @@
         <q-toolbar-title :padding="1" class="toolbar-logo">
           <router-link :to="{ name: 'index' }">food<span>sharing {{ currentPage }}</span></router-link>
         </q-toolbar-title>
-        <!-- NAVIGATION -->
         <q-tabs slot="navigation">
           <q-tab icon="directions_bike" :route="{ name: 'pickups' }"></q-tab>
           <q-tab icon="chat" :route="{ name: 'chats' }"></q-tab>
           <q-tab icon="shopping_cart" :route="{ name: 'stores' }"></q-tab>
         </q-tabs>
-        <!-- NAVIGATION END -->
       </div>
-
     </slot>
-    <!-- HEADER END -->
 
     <q-drawer ref="leftDrawer">
       <slot name="left-drawer">
-
         <div class="toolbar light">
           <q-toolbar-title :padding="1" v-if="user">
             {{ user.firstName }} {{ user.lastName }}
@@ -39,13 +32,11 @@
 
         <div class="absolute-bottom fs-contact-us">
           <div class="card-content">
-
             <p>Willkommen auf foodsharing light <strong>beta</strong>.</p>
             <p>Hier gibt's keine Garantie, dass alles funktioniert.</p>
             <p>Bitte gib uns Feedback über Fehler und Verbesserungsvorschlage!</p>
 
             <div class="list">
-
               <div class="item">
                 <img src="../assets/GitHub-Mark-64px.png" class="item-primary" style="top: 10px; height: 25px; width: 25px;">
                 <div class="item-content">
@@ -84,15 +75,11 @@
                   </a>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
-
       </slot>
     </q-drawer>
-
-    <!-- MAIN -->
 
     <div class="layout-view">
       <div class="layout-padding">
@@ -100,22 +87,10 @@
         <slot></slot>
       </div>
     </div>
-    <!-- MAIN END -->
 
     <div slot="footer">
       <slot name="app-footer"></slot>
     </div>
-
-    <!--
-    <div slot="footer" class="toolbar">
-      <div class="auto flex justify-center within-iframe-hide">
-
-      </div>
-      <q-toolbar-title :padding="0" class="within-iframe-only">
-        Footer
-      </q-toolbar-title>
-    </div>
-    -->
   </q-layout>
 </template>
 
