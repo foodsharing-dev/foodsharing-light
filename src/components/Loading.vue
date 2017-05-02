@@ -1,6 +1,8 @@
 <template>
-  <div class="fs-loading">
-    <spinner :size="48" v-if="isLoading && show"></spinner>
+  <div>
+    <div class="fs-loading" v-if="isLoading && show">
+      <spinner :size="48"></spinner>
+    </div>
   </div>
 </template>
 
