@@ -3,10 +3,8 @@ import Vue from 'vue'
 const sandbox = sinon.sandbox.create()
 
 describe('components/Loading.vue', () => {
-  let Loading
   let vm
   let clock
-  let originalIsLoading
 
   beforeEach(() => {
     clock = sandbox.useFakeTimers()
@@ -14,16 +12,7 @@ describe('components/Loading.vue', () => {
   afterEach(() => sandbox.restore())
 
   beforeEach(() => {
-    Loading = require('components/Loading')
-    originalIsLoading = Loading.computed.isLoading
-    // force to always be true (or we have to trick axios)
-    Loading.computed.isLoading = () => true
-    vm = new Vue(Loading).$mount()
-  })
-
-  afterEach(() => {
-    // reset it
-    Loading.computed.isLoading = originalIsLoading
+    vm = new Vue(require('components/Loading')).$mount()
   })
 
   it('does not show spinner initially', () => {

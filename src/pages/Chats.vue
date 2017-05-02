@@ -2,8 +2,10 @@
   <main-layout>
     <h6>Deine Unterhaltungen</h6>
     <div class="card">
-      <loading></loading>
-      <div class="list no-border" v-if="conversations">
+      <div v-if="isLoading" class="card-content">
+        <loading/>
+      </div>
+      <div class="list no-border" v-else-if="conversations.length > 0">
         <router-link tag="div"
                      class="item item-link two-lines"
                      :to="{ name: 'chat', params: { id: conversation.id } }"
@@ -24,20 +26,23 @@
           </div>
         </router-link>
       </div>
-      <template v-else>
+      <div v-else class="card-content">
         Du hast keine Unterhaltungen.
-      </template>
+      </div>
     </div>
   </main-layout>
 </template>
 
 <script>
+  import { Toast } from 'quasar'
   import chat from 'services/chat'
   import defaultAvatar from 'assets/default-avatar.png'
+
   export default {
     data () {
       return {
-        conversations: null
+        isLoading: false,
+        conversations: []
       }
     },
     methods: {
@@ -55,8 +60,14 @@
       }
     },
     created () {
+      this.isLoading = true
       chat.loadConversationList().then(conversations => {
         this.conversations = conversations
+      }).catch(() => {
+        // TODO: translate to German
+        Toast.create.negative('Could not load conversations')
+      }).then(() => {
+        this.isLoading = false
       })
     }
   }

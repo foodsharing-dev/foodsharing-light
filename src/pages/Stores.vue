@@ -5,8 +5,8 @@
     </h6>
     <div class="card">
       <div class="card-content">
-        <loading></loading>
-        <template v-if="stores && stores.length !== 0">
+        <loading v-if="isLoading"/>
+        <template v-else-if="stores.length > 0">
           <div class="list no-border">
             <router-link :to="'/store/' + store.id" tag="div" class="item two-lines item-link" v-for="store in stores" :key="store.id">
               <div class="item-primary">
@@ -20,7 +20,7 @@
             <hr class="inset">
           </div>
         </template>
-        <template v-else>
+        <template v-else-if="stores">
           Du bist in keinem Betrieb. Verwende die Desktop Version, um einem Betrieb beizutreten.
         </template>
       </div>
@@ -36,8 +36,8 @@
   export default {
     data () {
       return {
-        loading: false,
-        stores: null
+        isLoading: false,
+        stores: []
       }
     },
     methods: {
@@ -47,11 +47,14 @@
       }
     },
     created () {
+      this.isLoading = true
       api.getStoreList().then(stores => {
         this.stores = stores
       }).catch(() => {
         // TODO: translate to German
         Toast.create.negative('Could not load stores')
+      }).then(() => {
+        this.isLoading = false
       })
     }
   }

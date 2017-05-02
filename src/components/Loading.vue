@@ -1,40 +1,13 @@
 <template>
-  <div>
-    <div class="fs-loading" v-if="isLoading && show">
-      <spinner :size="48"></spinner>
-    </div>
+  <div class="fs-loading">
+    <spinner v-if="show" :size="48" color="#4a3520" />
   </div>
 </template>
 
 <script>
-import axios from 'axios'
-
-let activeRequestCount = 0
-
-axios.interceptors.request.use(config => {
-  activeRequestCount++
-  return config
-}, err => {
-  activeRequestCount--
-  return Promise.reject(err)
-})
-
-axios.interceptors.response.use(response => {
-  activeRequestCount--
-  return response
-}, err => {
-  activeRequestCount--
-  return Promise.reject(err)
-})
-
 export default {
   data () {
     return { show: false }
-  },
-  computed: {
-    isLoading () {
-      return activeRequestCount > 0
-    }
   },
   created () {
     this.timer = setTimeout(() => {
@@ -50,7 +23,6 @@ export default {
 <style lang="stylus" scoped>
 .fs-loading
   text-align: center
-  padding-top: 30px
-  spinner
-    color: #4a3520
+  svg
+    margin: 10px 0
 </style>
