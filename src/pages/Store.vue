@@ -38,37 +38,37 @@
 </template>
 
 <script>
-import api from 'services/api'
-import UserList from 'components/UserList'
+  import api from 'services/api'
+  import UserList from 'components/UserList'
 
-export default {
-  components: {
-    UserList
-  },
-  data () {
-    return {
-      store: null
-    }
-  },
-  computed: {
-    team () {
-      return this.store && this.store.team.filter(team => !team.coordinator)
+  export default {
+    components: {
+      UserList
     },
-    coordinators () {
-      return this.store && this.store.team.filter(team => team.coordinator)
+    data () {
+      return {
+        store: null
+      }
     },
-    address () {
-      let { store } = this
-      if (!store) return
-      return [store.street, store.streetNumber, store.zip, store.city]
-        .filter(v => v).join(' ')
+    computed: {
+      team () {
+        return this.store && this.store.team.filter(team => !team.coordinator)
+      },
+      coordinators () {
+        return this.store && this.store.team.filter(team => team.coordinator)
+      },
+      address () {
+        let { store } = this
+        if (!store) return
+        return [store.street, store.streetNumber, store.zip, store.city]
+          .filter(v => v).join(' ')
+      }
+    },
+    created () {
+      this.id = this.$route.params.id
+      api.getStore(this.id).then(store => {
+        this.store = store
+      })
     }
-  },
-  created () {
-    this.id = this.$route.params.id
-    api.getStore(this.id).then(store => {
-      this.store = store
-    })
   }
-}
 </script>
