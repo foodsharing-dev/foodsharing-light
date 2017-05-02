@@ -5,19 +5,19 @@
 </template>
 
 <script>
-export default {
-  data () {
-    return { show: false }
-  },
-  created () {
-    this.timer = setTimeout(() => {
-      this.show = true
-    }, 500)
-  },
-  destroyed () {
-    clearTimeout(this.timer)
+  export default {
+    data () {
+      return { show: false }
+    },
+    created () {
+      this.timer = setTimeout(() => {
+        this.show = true
+      }, 500)
+    },
+    destroyed () {
+      clearTimeout(this.timer)
+    }
   }
-}
 </script>
 
 <style lang="stylus" scoped>
