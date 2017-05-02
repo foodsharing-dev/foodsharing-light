@@ -30,24 +30,8 @@ describe('components/Loading.vue', () => {
   it('shows spinner after 500ms', () => {
     expect(vm.$el.querySelector('spinner')).to.not.be.ok
     clock.tick(600)
-    return nextTick(() => {
+    return Vue.nextTick().then(() => {
       expect(vm.$el.querySelector('spinner')).to.be.ok
     })
   })
 })
-
-// Run nextTick, but return a promise with errors handled properly
-// TODO: extract to test util lib
-function nextTick (fn) {
-  return new Promise((resolve, reject) => {
-    Vue.nextTick(() => {
-      try {
-        fn()
-        resolve()
-      }
-      catch (err) {
-        reject(err)
-      }
-    })
-  })
-}
