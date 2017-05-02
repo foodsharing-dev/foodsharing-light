@@ -47,24 +47,19 @@ describe('pages/Pickups.vue', () => {
         }
       ])
       vm = new Vue({ ...Pickups, router }).$mount()
+      return Vue.nextTick().then(() => Vue.nextTick())
     })
 
     it('calls api and sets the pickups data', () => {
       expect(api.getNextPickupList).to.have.been.called
-      expect(vm.pickups.length).to.equal(0)
-      return Vue.nextTick().then(() => {
-        expect(vm.pickups.length).to.equal(2)
-      })
+      expect(vm.pickups.length).to.equal(2)
     })
 
     it('renders a list of pickups', () => {
-      return Vue.nextTick().then(() => {
-        expect(vm.pickups.length).to.equal(2)
-        expect(vm.$el.querySelectorAll('.item').length).to.equal(0)
-        return Vue.nextTick().then(() => {
-          expect(vm.$el.querySelectorAll('.item').length).to.equal(2)
-        })
-      })
+      expect(vm.pickups.length).to.equal(2)
+      expect(vm.$el.querySelectorAll('.item').length).to.equal(2)
+      expect(vm.$el.textContent).to.contain('storeName1')
+      expect(vm.$el.textContent).to.contain('storeName2')
     })
   })
 
@@ -72,16 +67,12 @@ describe('pages/Pickups.vue', () => {
     beforeEach(() => {
       sandbox.stub(api, 'getNextPickupList').resolves([])
       vm = new Vue({ ...Pickups, router }).$mount()
+      return Vue.nextTick().then(() => Vue.nextTick())
     })
 
     it('shows a message if there are no pickups', () => {
-      return Vue.nextTick().then(() => {
-        expect(vm.isLoading).to.be.true
-        return Vue.nextTick().then(() => {
-          expect(vm.isLoading).to.be.false
-          expect(vm.$el.textContent).to.contain('Du hast keine pickups')
-        })
-      })
+      expect(vm.isLoading).to.be.false
+      expect(vm.$el.textContent).to.contain('Du hast keine pickups')
     })
   })
 })
