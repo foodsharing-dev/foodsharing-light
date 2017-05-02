@@ -7,8 +7,6 @@ import foodsharing from 'services/foodsharing'
 const sandbox = sinon.sandbox.create()
 
 describe('services/chat', () => {
-  let apiGetConversationListStub
-
   afterEach(() => sandbox.restore())
 
   afterEach(() => {
@@ -26,7 +24,7 @@ describe('services/chat', () => {
     describe('conversation map', () => {
       beforeEach(() => {
         chat.state.conversations[1] = { id: 1, messages: [] }
-        apiGetConversationListStub = sandbox
+        sandbox
           .stub(api, 'getConversationList')
           .resolves({ conversations: [] })
       })
@@ -54,7 +52,7 @@ describe('services/chat', () => {
     describe('conversation list', () => {
       beforeEach(() => {
         chat.state.conversationList.push({ id: 1 })
-        apiGetConversationListStub = sandbox
+        sandbox
           .stub(api, 'getConversationList')
           .resolves({ conversations: [] })
       })
@@ -74,7 +72,7 @@ describe('services/chat', () => {
       it('requests the list if it is not already there', () => {
         message.conversationId = 2 // for a new conversation!
         return chat.receiveMessage(message).then(() => {
-          expect(apiGetConversationListStub).to.have.been.called
+          expect(api.getConversationList).to.have.been.called
         })
       })
     })
@@ -82,18 +80,18 @@ describe('services/chat', () => {
 
   describe('send', () => {
     it('sends to foodsharing and receives resulting message', () => {
-      let foodsharingSendMessageStub = sandbox
+      sandbox
         .stub(foodsharing, 'sendMessage')
         .callsFake((conversationId, body) => {
           return Promise.resolve({ conversationId, body })
         })
-      let chatReceiveMessageStub = sandbox
+      sandbox
         .stub(chat, 'receiveMessage')
         .resolves(null)
 
       return chat.send(1, 'heya').then(() => {
-        expect(foodsharingSendMessageStub).to.have.been.calledWith(1, 'heya')
-        expect(chatReceiveMessageStub).to.have.been.calledWith({
+        expect(foodsharing.sendMessage).to.have.been.calledWith(1, 'heya')
+        expect(chat.receiveMessage).to.have.been.calledWith({
           conversationId: 1, body: 'heya'
         })
       })
@@ -102,19 +100,19 @@ describe('services/chat', () => {
 
   describe('getOrCreateConversationForUser', () => {
     it('calls foodsharing user2conv', () => {
-      let stub = sandbox.stub(foodsharing, 'user2conv').resolves(10)
+      sandbox.stub(foodsharing, 'user2conv').resolves(10)
       return chat.getOrCreateConversationForUser(1).then(conversationId => {
         expect(conversationId).to.equal(10)
-        expect(stub).to.have.been.calledWith(1)
+        expect(foodsharing.user2conv).to.have.been.calledWith(1)
       })
     })
   })
 
   describe('loadConversation', () => {
     it('loads from the api then sets the conversations map', () => {
-      let stub = sandbox.stub(api, 'getConversation').resolves({ id: 'convid' })
+      sandbox.stub(api, 'getConversation').resolves({ id: 'convid' })
       return chat.loadConversation(154).then(() => {
-        expect(stub).to.have.been.calledWith(154)
+        expect(api.getConversation).to.have.been.calledWith(154)
         expect(chat.state.conversations[154]).to.deep.equal({ id: 'convid' })
       })
     })
