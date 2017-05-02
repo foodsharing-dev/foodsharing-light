@@ -64,8 +64,6 @@ export default {
         .filter(v => v).join(' ')
     }
   },
-  methods: {
-  },
   created () {
     this.id = this.$route.params.id
     api.getStore(this.id).then(store => {
