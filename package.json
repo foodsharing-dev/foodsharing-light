@@ -27,7 +27,7 @@
     "vue-router": "^2.0.0"
   },
   "devDependencies": {
-    "autoprefixer": "^6.4.0",
+    "autoprefixer": "^7.0.0",
     "axios-mock-adapter": "^1.8.1",
     "babel-core": "^6.0.0",
     "babel-eslint": "^7.0.0",
