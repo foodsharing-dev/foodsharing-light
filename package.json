@@ -22,7 +22,7 @@
     "quasar-framework": "^0.13.4",
     "roboto-fontface": "^0.7.0",
     "socket.io-client": "1.7.4",
-    "vue": "^2.3.2",
+    "vue": "2.3.2",
     "vue-i18n": "^6.1.1",
     "vue-router": "^2.0.0"
   },
