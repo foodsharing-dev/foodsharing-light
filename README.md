@@ -74,7 +74,7 @@ $ npm run test
 $ npm run test:watch
 ```
 
-Currently it will start Firefox to run the tests in, you can avoid it showing the UI by installing [xvfb](https://en.wikipedia.org/wiki/Xvfb) and ensuring `xvfb-run` is available on your path, then:
+Currently it will start Firefox as well as chrome to run the tests in, you can avoid it showing the UI by installing [xvfb](https://en.wikipedia.org/wiki/Xvfb) and ensuring `xvfb-run` is available on your path, then:
 
 ``` bash
 # one off test run
@@ -83,6 +83,8 @@ $ npm run test:xvfb
 # run tests and re-run on change
 $ npm run test:watch:xvfb
 ```
+
+When you use chromium and don't have chrome installed, you may need to set the `CHROME_BIN=chromium` environment variable (e.g. in your .bashrc)
 
 ## Deploying in production
 
