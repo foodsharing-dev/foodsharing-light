@@ -10,6 +10,7 @@ const sandbox = sinon.sandbox.create()
 
 describe('services/auth', () => {
   afterEach(() => sandbox.restore())
+  afterEach(() => socket.disconnect())
 
   beforeEach(() => {
     // TOD: should probably be a reset function inside services/auth
