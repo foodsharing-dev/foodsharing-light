@@ -1,8 +1,8 @@
- /*
-  * Foodsharing db has encoded html entities (e.g. "fish &amp; chips")
-  *
-  * Function to reverse php htmlentities() function
-  */
+/*
+ * Foodsharing db has encoded html entities (e.g. "fish &amp; chips")
+ *
+ * Function to reverse php htmlentities() function
+ */
 export default function (str) {
   return str.replace(/&[a-z]+;/g, m => HTML_ENTITIES[m] || m)
 }
