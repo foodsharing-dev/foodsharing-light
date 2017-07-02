@@ -26,33 +26,39 @@ describe('services/auth', () => {
       let user = { id: 'user1', firstName: 'Peter' }
       sandbox.stub(api, 'checkLogin').resolves(user)
       sandbox.stub(foodsharing, 'checkLogin').resolves(true)
+      sandbox.stub(socket, 'connect').resolves(true)
       return auth.check().then(() => {
         expect(api.checkLogin).to.have.been.called
         expect(foodsharing.checkLogin).to.have.been.called
         expect(auth.state.user).to.deep.equal(user)
         expect(auth.state.authenticated).to.be.true
+        expect(socket.connect).to.have.been.called
       })
     })
 
     it('does not check foodsharing if api is not logged in', () => {
       sandbox.stub(api, 'checkLogin').resolves(null)
       sandbox.stub(foodsharing, 'checkLogin').resolves(true)
+      sandbox.stub(socket, 'connect').resolves(true)
       return auth.check().then(() => {
         expect(api.checkLogin).to.have.been.called
         expect(foodsharing.checkLogin).to.not.have.been.called
         expect(auth.state.user).to.be.null
         expect(auth.state.authenticated).to.be.false
+        expect(socket.connect).to.have.not.been.called
       })
     })
 
     it('will not assign user if foodsharing check fails', () => {
       sandbox.stub(api, 'checkLogin').resolves({ id: 1 })
       sandbox.stub(foodsharing, 'checkLogin').resolves(false)
+      sandbox.stub(socket, 'connect').resolves(true)
       return auth.check().then(() => {
         expect(api.checkLogin).to.have.been.called
         expect(foodsharing.checkLogin).to.have.been.called
         expect(auth.state.user).to.be.null
         expect(auth.state.authenticated).to.be.false
+        expect(socket.connect).to.have.not.been.called
       })
     })
   })
