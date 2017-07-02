@@ -69,10 +69,3 @@
     }
   }
 </script>
-
-<style lang="css">
-  h1, h2, h3, h4, h5, .toolbar-title, button {
-    font-family:'Alfa Slab One';
-    font-weight: normal !important;
-  }
-</style>

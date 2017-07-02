@@ -12,21 +12,21 @@ describe('services/socket', () => {
 
   describe('connect', () => {
     it('connects and emits "register"', () => {
-      let emitStub = sandbox.stub().returns()
-      let onStub = sandbox.stub().callsFake((name, fn) => {
+      let emit = sandbox.stub().returns()
+      let on = sandbox.stub().callsFake((name, fn) => {
         if (name === 'connect') fn()
       })
-      let connectStub = sandbox.stub(socketio, 'connect')
+      sandbox.stub(socketio, 'connect')
         .callsFake(() => ({
-          on: onStub,
-          emit: emitStub,
+          on,
+          emit,
           disconnect: () => {}
         }))
       return socket.connect().then(() => {
-        expect(connectStub).to.have.been.calledWith({ path: '/foodsharing/socket' })
-        expect(onStub).to.have.been.calledTwice
-        expect(onStub).to.have.been.calledWithMatch('connect')
-        expect(emitStub).to.have.been.calledWith('register')
+        expect(socketio.connect).to.have.been.calledWith({ path: '/foodsharing/socket' })
+        expect(on).to.have.been.calledTwice
+        expect(on).to.have.been.calledWithMatch('connect')
+        expect(emit).to.have.been.calledWith('register')
       })
     })
 
@@ -34,21 +34,21 @@ describe('services/socket', () => {
       let spy = sinon.spy()
       socket.subscribe(spy)
       let payload = { o: JSON.stringify({ some: 'message' }) }
-      let emitStub = sandbox.stub().returns()
+      let emit = sandbox.stub().returns()
       let onConvFn
-      let onStub = sandbox.stub().callsFake((name, fn) => {
+      let on = sandbox.stub().callsFake((name, fn) => {
         if (name === 'connect') fn()
         if (name === 'conv') onConvFn = fn
       })
       sandbox.stub(foodsharing, 'convertMessage').callsFake(msg => msg)
       sandbox.stub(socketio, 'connect')
         .callsFake(() => ({
-          on: onStub,
-          emit: emitStub,
+          on,
+          emit,
           disconnect: () => {}
         }))
       return socket.connect().then(() => {
-        expect(onStub).to.have.been.calledWithMatch('conv')
+        expect(on).to.have.been.calledWithMatch('conv')
         onConvFn(payload)
         expect(spy).to.have.been.calledWith({
           some: 'message'

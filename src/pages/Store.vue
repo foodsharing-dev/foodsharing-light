@@ -1,6 +1,6 @@
 <template>
   <main-layout>
-    <loading></loading>
+    <loading v-if="isLoading"></loading>
     <template v-if="store">
       <h6>
         {{ store.name }}
@@ -38,39 +38,42 @@
 </template>
 
 <script>
-import api from 'services/api'
-import UserList from 'components/UserList'
+  import api from 'services/api'
+  import UserList from 'components/UserList'
 
-export default {
-  components: {
-    UserList
-  },
-  data () {
-    return {
-      store: null
-    }
-  },
-  computed: {
-    team () {
-      return this.store && this.store.team.filter(team => !team.coordinator)
+  export default {
+    components: {
+      UserList
     },
-    coordinators () {
-      return this.store && this.store.team.filter(team => team.coordinator)
+    data () {
+      return {
+        isLoading: false,
+        store: null
+      }
     },
-    address () {
-      let { store } = this
-      if (!store) return
-      return [store.street, store.streetNumber, store.zip, store.city]
-        .filter(v => v).join(' ')
+    computed: {
+      team () {
+        return this.store && this.store.team.filter(team => !team.coordinator)
+      },
+      coordinators () {
+        return this.store && this.store.team.filter(team => team.coordinator)
+      },
+      address () {
+        let { store } = this
+        if (!store) return
+        return [store.street, store.streetNumber, store.zip, store.city]
+          .filter(v => v).join(' ')
+      }
+    },
+    created () {
+      this.id = this.$route.params.id
+      this.isLoading = true
+      api.getStore(this.id).then(store => {
+        this.store = store
+        this.isLoading = false
+      }).catch(() => {
+        this.isLoading = false
+      })
     }
-  },
-  methods: {
-  },
-  created () {
-    this.id = this.$route.params.id
-    api.getStore(this.id).then(store => {
-      this.store = store
-    })
   }
-}
 </script>

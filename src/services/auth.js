@@ -30,6 +30,9 @@ export default {
       return foodsharing.checkLogin().then(fsLoggedIn => {
         if (!fsLoggedIn) return false
         Object.assign(state, { authenticated: true, user })
+        socket.connect().catch(err => {
+          log.error('failed to connect to foodsharing socket', err)
+        })
       })
     })
   },

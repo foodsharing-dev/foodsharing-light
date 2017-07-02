@@ -1,7 +1,10 @@
 language: node_js
 dist: trusty
 env:
-- TRAVIS_CI=true CXX="g++-4.8" CC="gcc-4.8"
+  matrix:
+  - TRAVIS_CI=true CXX="g++-4.8" CC="gcc-4.8"
+  global:
+    secure: Fi3tIzS0rdTNAew1gARk+5G/g8qAKXtuCx3l3TPeSY7DHl4e3E9YbNUo9tFe7LnFsAGx/dq+t0JxRt1NuGy7O4sCR8x3ULzQEeTiIWLyIq5SJYZlYsfV638toBQ5RSz5TWG5dQikU8Ki0BRBiHYy9jZf4l0guvUpLyGwp0vm5YlmgxGkVzp9215TXT0sauRCQVha85DBRjL9751qWk4zetfJ9P0IqHLrUODBkKmkDDwC1bf1uRblni0p3MRnb5r14WG3V9vpcsPSqbPbQs34P1X11E+v7xRoF7+NG4rr8d6Nyk8lZ4ZItL0bkN+lhT4F2mxz5Q5FWwnO22jF/M5D7s4SheZf59Lb/KvshoppNBhdwdxl6P8mFGHCp9NY6nxWy5MWdjCkEViXlY7p5o4B2FeuRNt+W96wSWVykBdJI7770lmBnFyf1o3bPIq447HasZH6bonSlBVsIewKHO4vF4HfN4FZUhPpHrv2mkvkgaSlvvfwYrb/nGcnHtM5LnkycX/vOiqmxuNFr3O+MjPIysipzG+IA0g2Ikgc1bzvfc/PWZUvxlOS+pY3d8PqupB4MstPklM0PSnQZuZxeh95GXtAK7NgrGjDq3Xfp4tFvGl9ZnIMSOvBV8NIe+ekmpFXHKYETa5BRFlcUHO4TaxkNXpbOBqwgiT1tUjms1gY/Tg=
 node_js:
 - 7
 addons:
@@ -15,21 +18,23 @@ addons:
 cache:
   yarn: true
   directories:
-    - node_modules
+  - node_modules
 before_install:
 - npm install -g codecov
 before_script:
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
 - sleep 3
+after_success:
+- bash yarn.sh
 after_script:
 - codecov
 notifications:
   slack:
     secure: byMSN3DSO4JZ/jK8y4QYFftv8eWdagBS0tpGJmeLN6gtzGIYeZuTLZ/1I1dMwJmkZrZdSx03N0UUkon/BtZXtOvVEpBfY2t6BO2Zt+LeztZjUpfQ+th2BiIiYvwIH4mcZIV+Y52Ceywehv0txw3GCj9WtUGudS7a1M56XFeCjdMdr3vv5u4tB7PZZRKjJSWkaTezvBH6Vi2Nac7wAlYHHXMYc3+siMK0q9miwqBNMCgvA3uQPEUrSHFLgg8PFtu49Sgs7iGZ10PoxaziIgX6gpqRiD8nOHKpT7KAHOvEEQrwGGVS/UZcgyDnCat+oIqJxIMQqdN67xvCdlTv2lqmxTEKWEtH5V5VirS5gbCTaQQLPS2PAXtQaPB0mWcYtt6NsnJr/J3iZoFh7Sf+Gwt+0ItnP3970KfJKMwx0BA+Ee/DmOYRAgAMHPzTYIM29RL2EK+ImsqlK3e8K38m2MLIaTGCj5uReWgDzRsIgXRG2uUi8MH9AilB46Aomrn9QxhOSpN/AyaBg0o61qiEA/r0zjkrNlTiekRX+t2RVjTZs1Z2U4cd1ZTNDa9acimUKznmnADySLiCKxJOEHiwNHyCuEk++K8UMIv5V4AP3K2wYIfHh7Bx6J4PSgi7wDT60K4bKDTjpBDPrhgLfdPn/RCP/h3OZLy04hcDC72UV/QrjDg=
 before_deploy:
-  - npm run build
-  - tar cvf dist.tar.gz dist
+- npm run build
+- tar cvf dist.tar.gz dist
 deploy:
   provider: releases
   api_key:

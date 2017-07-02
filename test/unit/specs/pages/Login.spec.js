@@ -6,12 +6,12 @@ import auth from 'services/auth'
 const sandbox = sinon.sandbox.create()
 
 describe('pages/Login.vue', () => {
-  let vm, loginStub
+  let vm
 
   afterEach(() => sandbox.restore())
 
   beforeEach(() => {
-    loginStub = sandbox.stub(auth, 'login').resolves(null)
+    sandbox.stub(auth, 'login').resolves(null)
     vm = new Vue(Login).$mount()
   })
 
@@ -21,7 +21,7 @@ describe('pages/Login.vue', () => {
       password: 'testpassword'
     })
     return vm.login().then(() => {
-      expect(loginStub).to.have.been.calledWith('test@test.com', 'testpassword')
+      expect(auth.login).to.have.been.calledWith('test@test.com', 'testpassword')
     })
   })
 })

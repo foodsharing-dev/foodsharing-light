@@ -20,11 +20,6 @@
 
   export default {
     props: ['users', 'title'],
-    data () {
-      return {
-
-      }
-    },
     methods: {
       avatarFor (user) {
         if (user.photo) {
