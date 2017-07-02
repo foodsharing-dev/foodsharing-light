@@ -1,6 +1,6 @@
 <template>
   <main-layout>
-    <loading></loading>
+    <loading v-if="isLoading"></loading>
 
     <div v-if="conversation" class="conversation">
       <div v-for="message in conversation.messages"
@@ -46,6 +46,7 @@
   export default {
     data () {
       return {
+        isLoading: false,
         id: null,
         conversation: null,
         newMessage: ''
@@ -80,10 +81,13 @@
     },
     created () {
       this.id = this.$route.params.id
+      this.isLoading = true
       chat.loadConversation(this.id).then(conversation => {
         Object.assign(this, { conversation })
+        this.isLoading = false
       }).catch(err => {
         Toast.create.negative(err.message)
+        this.isLoading = false
       })
     },
     destroyed () {
