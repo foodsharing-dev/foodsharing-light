@@ -1,6 +1,6 @@
 <template>
   <main-layout>
-    <loading></loading>
+    <loading v-if="isLoading"></loading>
     <template v-if="store">
       <h6>
         {{ store.name }}
@@ -47,6 +47,7 @@
     },
     data () {
       return {
+        isLoading: false,
         store: null
       }
     },
@@ -66,8 +67,12 @@
     },
     created () {
       this.id = this.$route.params.id
+      this.isLoading = true
       api.getStore(this.id).then(store => {
         this.store = store
+        this.isLoading = false
+      }).catch(() => {
+        this.isLoading = false
       })
     }
   }
