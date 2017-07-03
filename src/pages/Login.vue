@@ -11,7 +11,7 @@
     <div class="layout-view">
       <div class="layout-padding">
         <h6>{{ $t('Login.heading') }}</h6>
-        <q-card>
+        <q-card color="white">
           <form v-on:submit.stop.prevent="login()">
             <q-field icon="email">
               <q-input v-autofocus v-model="email" :float-label="$t('Login.form.email')" />
