@@ -3,8 +3,10 @@
 </template>
 
 <script>
+  import { QSelect } from 'quasar'
   import i18n from '../i18n'
   export default {
+    components: { QSelect },
     data () {
       return {
         locale: i18n.locale,
