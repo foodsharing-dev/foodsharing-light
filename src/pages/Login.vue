@@ -11,14 +11,20 @@
     <div class="layout-view">
       <div class="layout-padding">
         <h6>{{ $t('Login.heading') }}</h6>
-        <q-card color="white">
+
+        <q-card color="white" >
           <form v-on:submit.stop.prevent="login()">
-            <q-field icon="email">
-              <q-input v-autofocus v-model="email" :float-label="$t('Login.form.email')" />
-            </q-field>
-            <q-field icon="lock">
-              <q-input v-model="password" type="password" :float-label="$t('Login.form.password')" />
-            </q-field>
+            <q-card-main>
+              <q-field icon="email">
+                <q-input v-autofocus v-model="email" :float-label="$t('Login.form.email')" />
+              </q-field>
+            </q-card-main>
+            <q-card-separator inset />
+            <q-card-main>
+              <q-field icon="lock">
+                <q-input v-model="password" type="password" :float-label="$t('Login.form.password')" />
+              </q-field>
+            </q-card-main>
             <q-btn big type="submit" color="primary" class="full-width">{{ $t('Login.submit' )}}</q-btn>
           </form>
         </q-card>
@@ -29,7 +35,7 @@
 </template>
 
 <script>
-  import { Toast, QBtn, QCard, QField, QIcon, QInput, QToolbar, QToolbarTitle } from 'quasar'
+  import { Toast, QBtn, QCard, QCardMain, QCardSeperator, QField, QIcon, QInput, QToolbar, QToolbarTitle } from 'quasar'
   import auth from 'services/auth'
   import LangSwitcher from '@/LangSwitcher.vue'
 
@@ -38,6 +44,8 @@
       LangSwitcher,
       QBtn,
       QCard,
+      QCardMain,
+      QCardSeperator,
       QField,
       QIcon,
       QInput,
