@@ -6,8 +6,8 @@ Vue.use(VueI18n)
 const i18n = new VueI18n({
   locale: 'de',
   messages: {
-    en: require('./messages/en.yml'),
-    de: require('./messages/de.yml')
+    en: require('strings/en.yml'),
+    de: require('strings/de.yml')
   }
 })
 
@@ -15,10 +15,10 @@ export default i18n
 
 if (module.hot) {
   module.hot.accept([
-    './messages/en.yml',
-    './messages/de.yml'
+    'strings/en.yml',
+    'strings/de.yml'
   ], () => {
-    i18n.setLocaleMessage('en', require('./messages/en.yml'))
-    i18n.setLocaleMessage('de', require('./messages/de.yml'))
+    i18n.setLocaleMessage('en', require('strings/en.yml'))
+    i18n.setLocaleMessage('de', require('strings/de.yml'))
   })
 }
