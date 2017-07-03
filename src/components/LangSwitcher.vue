@@ -1,5 +1,5 @@
 <template>
-  <q-select type="list" v-model="locale" :options="langOptions"></q-select>
+  <q-select inverted type="list" v-model="locale" :options="langOptions"></q-select>
 </template>
 
 <script>
