@@ -13,8 +13,8 @@ describe('components/LangSwitcher.vue', () => {
 
   it('has Deutsch and English language options', () => {
     expect(vm.langOptions).to.deep.equal([
-      { value: 'de', label: 'Deutsch' },
-      { value: 'en', label: 'English' }
+      { value: 'de', label: 'DE' },
+      { value: 'en', label: 'EN' }
     ])
   })
 
