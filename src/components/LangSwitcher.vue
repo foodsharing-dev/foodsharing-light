@@ -9,8 +9,8 @@
       return {
         locale: i18n.locale,
         langOptions: [
-          { value: 'de', label: 'Deutsch' },
-          { value: 'en', label: 'English' }
+          { value: 'de', label: 'DE' },
+          { value: 'en', label: 'EN' }
         ]
       }
     },
