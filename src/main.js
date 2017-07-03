@@ -11,7 +11,6 @@ import chat from 'services/chat'
 import FromNow from 'components/FromNow'
 import FormattedDate from 'components/FormattedDate'
 import Loading from 'components/Loading'
-import LangSwitcher from 'components/LangSwitcher'
 import MainLayout from 'layouts/MainLayout'
 
 import autofocus from 'directives/autofocus'
@@ -39,7 +38,6 @@ Vue.use(Quasar) // Install Quasar Framework
 Vue.component('from-now', FromNow)
 Vue.component('formatted-date', FormattedDate)
 Vue.component('loading', Loading)
-Vue.component('lang-switcher', LangSwitcher)
 Vue.component('main-layout', MainLayout)
 
 Vue.directive('autofocus', autofocus)

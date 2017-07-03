@@ -13,6 +13,7 @@
           <q-tab icon="chat" :route="{ name: 'chats' }"></q-tab>
           <q-tab icon="shopping_cart" :route="{ name: 'stores' }"></q-tab>
         </q-tabs>
+        <lang-switcher></lang-switcher>
       </div>
     </slot>
 
@@ -95,8 +96,12 @@
 </template>
 
 <script>
+  import LangSwitcher from '@/LangSwitcher.vue'
   import auth from 'services/auth'
   export default {
+    components: {
+      LangSwitcher
+    },
     data () {
       return {
         currentPage: ''

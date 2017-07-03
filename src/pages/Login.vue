@@ -42,8 +42,12 @@
 <script>
   import { Toast } from 'quasar'
   import auth from 'services/auth'
+  import LangSwitcher from '@/LangSwitcher.vue'
 
   export default {
+    components: {
+      LangSwitcher
+    },
     data () {
       if (process.env.NODE_ENV !== 'production') {
         return {
