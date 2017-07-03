@@ -19,7 +19,7 @@
             <q-field icon="lock">
               <q-input v-model="password" type="password" :float-label="$t('Login.form.password')" />
             </q-field>
-            <q-btn type="submit" class="primary big full-width">{{ $t('Login.submit' )}}</q-btn>
+            <q-btn big type="submit" color="primary" class="full-width">{{ $t('Login.submit' )}}</q-btn>
           </form>
         </q-card>
         <p v-html="$t('Login.not_registered')"></p>
