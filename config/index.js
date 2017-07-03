@@ -11,7 +11,7 @@ module.exports = {
     components: path.resolve(__dirname, '../src/components'),
     pages: path.resolve(__dirname, '../src/pages'),
     layouts: path.resolve(__dirname, '../src/layouts'),
-    directives: path.resolve(__dirname, '../src/directives').
+    directives: path.resolve(__dirname, '../src/directives'),
     variables: path.resolve(__dirname, '../src/themes/quasar.variables.styl')
   },
 
