@@ -21,9 +21,9 @@
       </div>
 
       <div class="list no-border platform-delimiter">
-        <q-drawer-link icon="exit_to_app" :to="{ name: 'logout' }" exact>
+        <q-btn icon="exit_to_app" :to="{ name: 'logout' }" exact>
           Logout
-        </q-drawer-link>
+        </q-btn>
       </div>
 
       <div class="absolute-bottom fs-contact-us">
