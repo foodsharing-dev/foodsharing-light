@@ -1,8 +1,8 @@
 <template>
   <q-layout ref="layout" view="lHh Lpr fff">
     <q-toolbar slot="header">
-      <q-btn flat icon="menu" class="hide-on-drawer-visible" @click="$refs.layout.toggleLeft()" />
-      <q-toolbar-title :padding="1" class="toolbar-logo">
+      <q-btn flat icon="menu" @click="$refs.layout.toggleLeft()" />
+      <q-toolbar-title class="toolbar-logo">
         <router-link :to="{ name: 'index' }">food<span>sharing {{ currentPage }}</span></router-link>
       </q-toolbar-title>
       <q-tabs slot="navigation">
@@ -14,81 +14,91 @@
     </q-toolbar>
 
     <div slot="left">
-      <div class="toolbar light">
-        <q-toolbar-title :padding="1" v-if="user">
-          {{ user.firstName }} {{ user.lastName }}
+      <q-toolbar color="light">
+        <q-toolbar-title>
+          <h6>{{ user.firstName }} {{ user.lastName }}</h6>
         </q-toolbar-title>
-      </div>
-
+      </q-toolbar>
       <div class="list no-border platform-delimiter">
-        <q-btn icon="exit_to_app" :to="{ name: 'logout' }" exact>
+        <q-btn icon="exit_to_app" class="full-width" :to="{ name: 'logout' }" exact>
           Logout
         </q-btn>
       </div>
-
-      <div class="absolute-bottom fs-contact-us">
-        <q-card color="white" >
-          <form v-on:submit.stop.prevent="login()">
-            <q-card-main>
-              <p>Willkommen auf foodsharing light <strong>beta</strong>.</p>
-              <p>Hier gibt's keine Garantie, dass alles funktioniert.</p>
-              <p>Bitte gib uns Feedback über Fehler und Verbesserungsvorschlage!</p>
-            </q-card-main>
-            <q-card-separator inset />
-            <q-card-main>
-              <q-field icon="lock">
-                <q-input v-model="password" type="password" :float-label="$t('Login.form.password')" />
-              </q-field>
-            </q-card-main>
-            <q-btn big type="submit" color="primary" class="full-width">{{ $t('Login.submit' )}}</q-btn>
-          </form>
+      <div class="fs-contact-us card-content">
+        <q-card color="white">
+          <p>Willkommen auf foodsharing light <strong>beta</strong>.</p>
+          <p>Hier gibt's keine Garantie, dass alles funktioniert.</p>
+          <p>Bitte gib uns Feedback über Fehler und Verbesserungsvorschlage!</p>
         </q-card>
-        <p v-html="$t('Login.not_registered')"></p>
       </div>
-
-        <div class="card-content">
-          <div class="list">
-            <div class="item">
-              <img src="../assets/GitHub-Mark-64px.png" class="item-primary" style="top: 10px; height: 25px; width: 25px;">
-              <div class="item-content">
-                <a href="https://github.com/foodsharing-dev/foodsharing-light/issues" target="_blank" class="full-width">
-                  Github
-                </a>
-              </div>
-            </div>
-
-            <div class="item">
-              <i class="item-primary">chat</i>
-              <div class="item-content">
+      <q-card>
+        <q-list>
+        <q-item>
+          <q-item-side>
+            <img src="../assets/GitHub-Mark-64px.png" class="item-primary" style="top: 10px; height: 25px; width: 25px;">
+          </q-item-side>
+          <q-item-main>
+            <q-item-tile label>
+              <a href="https://github.com/foodsharing-dev/foodsharing-light/issues" target="_blank" class="full-width">
+                Github
+              </a>
+            </q-item-tile>
+          </q-item-main>
+        </q-item>
+        <q-item>
+          <q-item-side>
+            <q-item-tile color="red" icon="chat" />
+          </q-item-side>
+          <q-item-main>
+              <q-item-tile label>
                 <a href="https://slackin.yunity.org" target="_blank" class="full-width">
                   <div>yunity Slack</div>
                   <div><small>#foodsharing-dev</small></div>
                 </a>
-              </div>
-            </div>
-
-            <div class="item">
-              <i class="item-primary">email</i>
-              <div class="item-content">
+              </q-item-tile>
+            </q-item-main>
+          </q-item>
+          <q-item>
+            <q-item-side>
+              <q-item-tile color="amber" icon="email" />
+            </q-item-side>
+            <q-item-main>
+              <q-item-tile label>
                 <a href="mailto:fslight@matthias-larisch.de" target="_blank" class="full-width">
                   <div>Email Matthias</div>
                   <div><small>Deutsch / Englisch</small></div>
                 </a>
-              </div>
-            </div>
-
-            <div class="item">
-              <i class="item-primary">email</i>
-              <div class="item-content">
+              </q-item-tile>
+            </q-item-main>
+          </q-item>
+          <q-item>
+            <q-item-side>
+              <q-item-tile color="amber" icon="email" />
+            </q-item-side>
+            <q-item-main>
+              <q-item-tile label>
                 <a href="mailto:fslight@nicksellen.co.uk" target="_blank" class="full-width">
                   <div>Email Nick</div>
                   <div><small>English</small></div>
                 </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+              </q-item-tile>
+            </q-item-main>
+          </q-item>
+          <q-item>
+            <q-item-side>
+              <q-item-tile color="amber" icon="email" />
+            </q-item-side>
+            <q-item-main>
+              <q-item-tile label>
+                <a href="mailto:nitram@disroot.org" target="_blank" class="full-width">
+                  <div>Email Mikato</div>
+                  <div><small>Deutsch / Englisch</small></div>
+                </a>
+              </q-item-tile>
+            </q-item-main>
+          </q-item>
+        </q-list>
+      </q-card>
     </div>
 
     <div class="layout-view">
@@ -105,14 +115,17 @@
 </template>
 
 <script>
-  import { QBtn, QIcon, QLayout, QTabs, QTab, QToolbar, QToolbarTitle } from 'quasar'
+  import { QBtn, QCard, QCardMain, QIcon, QItem, QLayout, QTabs, QTab, QToolbar, QToolbarTitle } from 'quasar'
   import LangSwitcher from '@/LangSwitcher.vue'
   import auth from 'services/auth'
   export default {
     components: {
       LangSwitcher,
       QBtn,
+      QCard,
+      QCardMain,
       QIcon,
+      QItem,
       QLayout,
       QTabs,
       QTab,
@@ -133,6 +146,11 @@
 </script>
 
 <style lang="stylus" scoped>
+@import '~variables'
+
+p
+  color $text-color
+
 .fs-contact-us
   z-index:-1
   a
