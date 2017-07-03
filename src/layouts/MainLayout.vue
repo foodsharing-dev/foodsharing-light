@@ -27,10 +27,26 @@
       </div>
 
       <div class="absolute-bottom fs-contact-us">
+        <q-card color="white" >
+          <form v-on:submit.stop.prevent="login()">
+            <q-card-main>
+              <p>Willkommen auf foodsharing light <strong>beta</strong>.</p>
+              <p>Hier gibt's keine Garantie, dass alles funktioniert.</p>
+              <p>Bitte gib uns Feedback über Fehler und Verbesserungsvorschlage!</p>
+            </q-card-main>
+            <q-card-separator inset />
+            <q-card-main>
+              <q-field icon="lock">
+                <q-input v-model="password" type="password" :float-label="$t('Login.form.password')" />
+              </q-field>
+            </q-card-main>
+            <q-btn big type="submit" color="primary" class="full-width">{{ $t('Login.submit' )}}</q-btn>
+          </form>
+        </q-card>
+        <p v-html="$t('Login.not_registered')"></p>
+      </div>
+
         <div class="card-content">
-          <p>Willkommen auf foodsharing light <strong>beta</strong>.</p>
-          <p>Hier gibt's keine Garantie, dass alles funktioniert.</p>
-          <p>Bitte gib uns Feedback über Fehler und Verbesserungsvorschlage!</p>
           <div class="list">
             <div class="item">
               <img src="../assets/GitHub-Mark-64px.png" class="item-primary" style="top: 10px; height: 25px; width: 25px;">

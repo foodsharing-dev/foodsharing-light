@@ -2,7 +2,7 @@
   <q-layout>
     <q-toolbar slot="header">
       <q-icon name="lock" />
-      <q-toolbar-title :padding="1" class="toolbar-logo">
+      <q-toolbar-title class="toolbar-logo">
         <router-link :to="{ name: 'index' }">food<span>sharing {{ currentPage }}</span></router-link>
       </q-toolbar-title>
       <lang-switcher></lang-switcher>
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-  import { Toast, QBtn, QCard, QCardMain, QCardSeperator, QField, QIcon, QInput, QToolbar, QToolbarTitle } from 'quasar'
+  import { Toast, QBtn, QCard, QCardMain, QField, QIcon, QInput, QToolbar, QToolbarTitle } from 'quasar'
   import auth from 'services/auth'
   import LangSwitcher from '@/LangSwitcher.vue'
 
@@ -45,7 +45,6 @@
       QBtn,
       QCard,
       QCardMain,
-      QCardSeperator,
       QField,
       QIcon,
       QInput,
