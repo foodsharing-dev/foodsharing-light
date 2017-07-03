@@ -1,38 +1,27 @@
 <template>
   <q-layout>
-    <slot name="header">
-      <div slot="header" class="toolbar">
-        <i>lock</i>
-        <q-toolbar-title :padding="1" class="toolbar-logo">
-          <router-link :to="{ name: 'index' }">food<span>sharing</span></router-link>
-        </q-toolbar-title>
-        <lang-switcher></lang-switcher>
-      </div>
-    </slot>
+    <q-toolbar slot="header">
+      <q-icon name="lock" />
+      <q-toolbar-title :padding="1" class="toolbar-logo">
+        <router-link :to="{ name: 'index' }">food<span>sharing {{ currentPage }}</span></router-link>
+      </q-toolbar-title>
+      <lang-switcher></lang-switcher>
+    </q-toolbar>
 
     <div class="layout-view">
       <div class="layout-padding">
         <h6>{{ $t('Login.heading') }}</h6>
-        <div class="card">
+        <q-card>
           <form v-on:submit.stop.prevent="login()">
-            <div class="list">
-              <div class="item two-lines">
-                <i class="item-primary">email</i>
-                <div class="item-content">
-                  <input v-autofocus v-model="email" class="full-width" type="email" :placeholder="$t('Login.form.email')">
-                </div>
-              </div>
-              <hr>
-              <div class="item two-lines">
-                <i class="item-primary">lock</i>
-                <div class="item-content">
-                  <input v-model="password"  :placeholder="$t('Login.form.password')" type="password" class="full-width">
-                </div>
-              </div>
-            </div>
-            <button type="submit" class="primary big full-width">{{ $t('Login.submit' )}}</button>
+            <q-field icon="email">
+              <q-input v-autofocus v-model="email" :float-label="$t('Login.form.email')" />
+            </q-field>
+            <q-field icon="lock">
+              <q-input v-model="password" type="password" :float-label="$t('Login.form.password')" />
+            </q-field>
+            <q-btn type="submit" class="primary big full-width">{{ $t('Login.submit' )}}</q-btn>
           </form>
-        </div>
+        </q-card>
         <p v-html="$t('Login.not_registered')"></p>
       </div>
     </div>
@@ -40,13 +29,20 @@
 </template>
 
 <script>
-  import { Toast } from 'quasar'
+  import { Toast, QBtn, QCard, QField, QIcon, QInput, QToolbar, QToolbarTitle } from 'quasar'
   import auth from 'services/auth'
   import LangSwitcher from '@/LangSwitcher.vue'
 
   export default {
     components: {
-      LangSwitcher
+      LangSwitcher,
+      QBtn,
+      QCard,
+      QField,
+      QIcon,
+      QInput,
+      QToolbar,
+      QToolbarTitle
     },
     data () {
       if (process.env.NODE_ENV !== 'production') {
