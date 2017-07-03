@@ -19,6 +19,15 @@ require(`./themes/app.${__THEME}.styl`)
 
 Vue.use(Quasar) // Install Quasar Framework
 
+if (__THEME === 'mat') {
+  require('quasar-extras/roboto-font')
+}
+
+import 'quasar-extras/material-icons'
+// import 'quasar-extras/ionicons'
+// import 'quasar-extras/fontawesome'
+// import 'quasar-extras/animate'
+
 // global components
 Vue.component('from-now', FromNow)
 Vue.component('formatted-date', FormattedDate)
