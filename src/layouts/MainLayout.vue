@@ -46,7 +46,7 @@
 
 <script>
   import Contact from '@/Contact.vue'
-  import { QBtn, QCard, QCardMain, QIcon, QItem, QItemTile, QItemSide, QItemMain, QLayout, QRouteTab, QTab, QTabs, QToolbar, QToolbarTitle } from 'quasar'
+  import { QBtn, QLayout, QRouteTab, QTab, QTabs, QToolbar, QToolbarTitle } from 'quasar'
   import LangSwitcher from '@/LangSwitcher.vue'
   import auth from 'services/auth'
   export default {
@@ -54,13 +54,7 @@
       Contact,
       LangSwitcher,
       QBtn,
-      QCard,
-      QCardMain,
-      QIcon,
-      QItem,
-      QItemTile,
-      QItemSide,
-      QItemMain,
+
       QLayout,
       QRouteTab,
       QTab,
