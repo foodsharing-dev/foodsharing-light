@@ -15,19 +15,17 @@
       </div>
     </div>
 
-    <div slot="app-footer" class="chat-footer">
-      <form class="row small-gutter" v-on:submit.stop.prevent="send()">
-        <q-input type="text" class="chat-input " v-autofocus v-model="newMessage" />
-        <div>
-          <q-btn type="submit" class="primary circular small" icon="send" />
-        </div>
-      </form>
-    </div>
+    <div slot="app-footer" class="full-width">
+      <q-toolbar color="white">
+        <q-input v-model="newMessage" class="full-width"
+          :after="[{icon: 'send', content: true, handler() { send() } }]" />
+      </q-toolbar>
+  </div>
   </main-layout>
 </template>
 
 <script>
-  import { Toast, QBtn, QChatMessage, QInput } from 'quasar'
+  import { Toast, QBtn, QChatMessage, QInput, QToolbar } from 'quasar'
   import chat from 'services/chat'
   import auth from 'services/auth'
   import defaultAvatar from 'assets/default-avatar.png'
@@ -36,7 +34,8 @@
       Toast,
       QBtn,
       QChatMessage,
-      QInput
+      QInput,
+      QToolbar
     },
     data () {
       return {
@@ -152,5 +151,4 @@
       box-shadow: none
       position: relative
       bottom: 3px
-
 </style>

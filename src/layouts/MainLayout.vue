@@ -1,5 +1,5 @@
 <template>
-  <q-layout ref="layout" view="lHh Lpr fff">
+  <q-layout ref="layout" view="lHh Lpr fFf">
     <q-toolbar slot="header">
       <q-btn flat icon="menu" @click="$refs.layout.toggleLeft()" />
       <q-toolbar-title class="toolbar-logo">
@@ -27,7 +27,7 @@
           </q-btn>
         </router-link>
       </div>
-      <Contact></Contact>
+      <contact></contact>
 
     </div>
 
@@ -41,12 +41,14 @@
     <div slot="footer">
       <slot name="app-footer"></slot>
     </div>
+
+
   </q-layout>
 </template>
 
 <script>
   import Contact from '@/Contact.vue'
-  import { QBtn, QLayout, QRouteTab, QTab, QTabs, QToolbar, QToolbarTitle } from 'quasar'
+  import { QBtn, QFixedPosition, QLayout, QRouteTab, QTab, QTabs, QToolbar, QToolbarTitle } from 'quasar'
   import LangSwitcher from '@/LangSwitcher.vue'
   import auth from 'services/auth'
   export default {
@@ -54,7 +56,7 @@
       Contact,
       LangSwitcher,
       QBtn,
-
+      QFixedPosition,
       QLayout,
       QRouteTab,
       QTab,
@@ -76,5 +78,9 @@
 </script>
 
 <style lang="stylus" scoped>
+.q-toolbar
+  height 0rem
 
+.footer
+  background-color #f00
 </style>
