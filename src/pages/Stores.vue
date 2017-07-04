@@ -3,11 +3,11 @@
     <h6>
       Deine Betriebe
     </h6>
-    <q-card >
+    <q-card>
         <loading v-if="isLoading"/>
         <template v-else-if="stores.length > 0">
         <q-list>
-          <router-link :to="'/store/' + store.id" tag="div" class="item two-lines item-link" v-for="store in stores" :key="store.id">
+          <router-link :to="'/store/' + store.id" v-for="store in stores" :key="store.id">
             <q-item>
               <q-item-side>
                 <q-item-tile icon="store" />
@@ -69,3 +69,6 @@
     }
   }
 </script>
+<style lang="stylus">
+
+</style>

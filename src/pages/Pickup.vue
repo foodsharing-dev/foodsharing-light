@@ -12,7 +12,7 @@
             </div>
           </div>
 
-          <router-link tag="div" :to="{ name: 'store', params: { id: store.id } }" class="item two-lines item-link">
+          <router-link :to="{ name: 'store', params: { id: store.id } }" class="item two-lines item-link">
             <i class="item-primary">store</i>
             <div class="item-content">
               <div><template v-if="!address">{{ store.name }}</template>{{ address }}</div>
@@ -28,7 +28,7 @@
             </div>
           </div>
 
-          <router-link tag="div" :to="{ name: 'chat', params: { id: store.teamConversation.id } }" class="item item-link" v-if="store.teamConversation.id">
+          <router-link :to="{ name: 'chat', params: { id: store.teamConversation.id } }" class="item item-link" v-if="store.teamConversation.id">
             <i class="item-primary">chat</i>
             <div class="item-content">
               Chat

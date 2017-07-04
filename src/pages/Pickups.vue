@@ -9,7 +9,6 @@
         <router-link v-for="p in pickups"
                      :to="{ name: 'pickup', params: { id: p.id } }"
                      :key="p.id"
-                     tag="div"
                      class="item two-lines item-link">
           <div class="item-primary">
             <q-icon name="store" />

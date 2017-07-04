@@ -12,8 +12,8 @@
               <q-item-tile icon="location_on" />
             </q-item-side>
             <q-item-main>
-              <div><template v-if="!address">{{ store.name }}</template>{{ address }}</div>
-              <div>Adresse</div>
+              <q-item-tile label><template v-if="!address">{{ store.name }}</template>{{ address }}</q-item-tile>
+              <q-item-tile sublabel>Adresse</q-item-tile>
             </q-item-main>
           </q-item>
           <q-item v-if="store.notes">
@@ -21,17 +21,17 @@
               <q-item-tile icon="info" />
             </q-item-side>
             <q-item-main>
-              <div>{{ store.notes }}</div>
-              <div>Besonderheiten</div>
+              <q-item-tile label>{{ store.notes }}</q-item-tile>
+              <q-item-tile sublabel>Besonderheiten</q-item-tile>
             </q-item-main>
           </q-item>
-          <router-link tag="div" :to="{ name: 'chat', params: { id: store.teamConversation.id } }" class="item item-link" v-if="store.teamConversation.id">
+          <router-link :to="{ name: 'chat', params: { id: store.teamConversation.id } }" class="item item-link" v-if="store.teamConversation.id">
             <q-item>
               <q-item-side>
                 <q-item-tile icon="chat" />
               </q-item-side>
               <q-item-main>
-                Chat
+                <q-item-tile label>Chat</q-item-tile>
               </q-item-main>
             </q-item>
           </router-link>
@@ -95,3 +95,9 @@
     }
   }
 </script>
+<style lang="stylus">
+@import '~variables'
+
+.q-card
+  background-color $white
+</style>
