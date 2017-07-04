@@ -96,8 +96,5 @@
   }
 </script>
 <style lang="stylus">
-@import '~variables'
 
-.q-card
-  background-color $white
 </style>

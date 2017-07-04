@@ -1,44 +1,57 @@
 <template>
   <main-layout>
     <h6>Deine Unterhaltungen</h6>
-    <div class="card">
-      <div v-if="isLoading" class="card-content">
-        <loading/>
-      </div>
-      <div class="list no-border" v-else-if="conversations.length > 0">
-        <router-link tag="div"
-                     class="item item-link two-lines"
-                     :to="{ name: 'chat', params: { id: conversation.id } }"
-                     v-for="conversation in conversations"
-                     :key="conversation.id">
-          <img class="item-primary" :src="avatarFor(conversation)">
-            <div class="item-content has-secondary">
-              <div class="fs-chat-name">
-                  <strong v-if="conversation.name">{{ conversation.name }} </strong>{{ conversationMembers(conversation) }}
-              </div>
-              <div v-if="conversation.lastMessage">{{ conversation.lastMessage.body }}</div>
-            </div>
-            <div class="item-secondary stamp" v-if="conversation.lastMessage">
-              <from-now :date="conversation.lastMessageAt"></from-now>
-            </div>
-          <div class="item-secondary stamp" v-else>
-            (keine Nachricht)
-          </div>
-        </router-link>
-      </div>
-      <div v-else class="card-content">
-        Du hast keine Unterhaltungen.
-      </div>
-    </div>
+    <q-card>
+        <q-card-main v-if="isLoading">
+          <loading/>
+        </q-card-main>
+        <q-card-main v-else-if="conversations.length > 0">
+          <router-link :to="{ name: 'chat', params: { id: conversation.id } }"
+            v-for="conversation in conversations"
+            key="conversation.id">
+            <q-item>
+              <q-item-side :avatar="avatarFor(conversation)" />
+              <q-item-main class="has-secondary">
+                <q-item-tile label class="fs-chat-name" v-if="conversation.name">
+                  <strong>{{ conversation.name }}</strong>
+                </q-item-tile>
+                <q-item-tile label class="fs-chat-name">
+                  {{ conversationMembers(conversation) }}
+                </q-item-tile>
+                <q-item-tile label v-if="conversation.lastMessage">{{ conversation.lastMessage.body }}</q-item-tile>
+                <q-item-tile sublabel class="stamp" v-if="conversation.lastMessage">
+                  <from-now :date="conversation.lastMessageAt"></from-now>
+                </q-item-tile>
+                <q-item-tile sublabel class="stamp" v-else>
+                  (keine Nachricht)
+                </q-item-tile>
+              </q-item-main>
+            </q-item>
+          </router-link>
+        </q-card-main>
+        <q-card-main v-else>
+          Du hast keine Unterhaltungen.
+        </q-card-main>
+    </q-card>
   </main-layout>
 </template>
 
 <script>
-  import { Toast } from 'quasar'
+  import { Toast, QCard, QCardMain, QItem, QItemMain, QItemSide, QItemTile, QList } from 'quasar'
   import chat from 'services/chat'
   import defaultAvatar from 'assets/default-avatar.png'
 
   export default {
+    components: {
+      Toast,
+      QCard,
+      QCardMain,
+      QItem,
+      QItemTile,
+      QItemSide,
+      QItemMain,
+      QList
+    },
     data () {
       return {
         isLoading: false,

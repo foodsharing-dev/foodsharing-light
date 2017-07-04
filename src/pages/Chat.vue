@@ -6,32 +6,20 @@
       <div v-for="message in conversation.messages"
            :key="message.id"
            v-bind:class="{ 'chat-other': isMe(message), 'chat-you': !isMe(message) }">
-        <div class="chat-user">
-          <div class="image-wrapper">
-            <img :src="avatarFor(message.sentBy)">
-          </div>
-        </div>
-        <div class="chat-date">
-          <from-now :date="message.sentAt"></from-now>
-        </div>
-        <div class="chat-message">
-          <p>
-            <strong v-if="isMultiChat">{{ message.sentBy.firstName }}<br></strong>
-            {{ message.body }}
-          </p>
-        </div>
+        <q-chat-message
+          :avatar="avatarFor(message.sentBy)"
+          :stamp="message.sentAt"
+          :name="message.sentBy.firstName"
+          :text="message.body"
+        />
       </div>
     </div>
 
     <div slot="app-footer" class="chat-footer">
       <form class="row small-gutter" v-on:submit.stop.prevent="send()">
-        <div class="auto">
-          <input type="text" class="chat-input full-width" v-autofocus v-model="newMessage">
-        </div>
+        <q-input type="text" class="chat-input " v-autofocus v-model="newMessage" />
         <div>
-          <button type="submit" class="primary circular small">
-            <i>send</i>
-          </button>
+          <q-btn type="submit" class="primary circular small" icon="send" />
         </div>
       </form>
     </div>
@@ -39,11 +27,17 @@
 </template>
 
 <script>
-  import { Toast } from 'quasar'
+  import { Toast, QBtn, QChatMessage, QInput } from 'quasar'
   import chat from 'services/chat'
   import auth from 'services/auth'
   import defaultAvatar from 'assets/default-avatar.png'
   export default {
+    components: {
+      Toast,
+      QBtn,
+      QChatMessage,
+      QInput
+    },
     data () {
       return {
         isLoading: false,
