@@ -1,6 +1,5 @@
 <template>
-  <q-list>
-
+  <div>
     {{ title }}
     <q-item v-for="{user: u} in users"
            v-on:click="showActionSheetWithIcons(u)">
@@ -9,7 +8,7 @@
         <q-item-tile label>{{ u.firstName }}</q-item-tile>
       </q-item-main>
     </q-item>
-  </q-list>
+  </div>
 </template>
 
 <script>
@@ -67,3 +66,7 @@
     }
   }
 </script>
+<style lang="stylus">
+.q-item
+  cursor pointer
+</style>
