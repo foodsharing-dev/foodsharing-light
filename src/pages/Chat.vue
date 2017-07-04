@@ -1,16 +1,15 @@
 <template>
   <main-layout>
     <loading v-if="isLoading"></loading>
-
     <div v-if="conversation" class="conversation">
       <div v-for="message in conversation.messages"
            :key="message.id"
            v-bind:class="{ 'chat-other': isMe(message), 'chat-you': !isMe(message) }">
         <q-chat-message
+          :name="message.sentBy.firstName"
           :avatar="avatarFor(message.sentBy)"
           :stamp="message.sentAt"
-          :name="message.sentBy.firstName"
-          :text="message.body"
+          :text="[message.body]"
         />
       </div>
     </div>
@@ -25,12 +24,14 @@
 </template>
 
 <script>
+  import Loading from '@/Loading'
   import { Toast, QBtn, QChatMessage, QInput, QToolbar } from 'quasar'
   import chat from 'services/chat'
   import auth from 'services/auth'
   import defaultAvatar from 'assets/default-avatar.png'
   export default {
     components: {
+      Loading,
       Toast,
       QBtn,
       QChatMessage,

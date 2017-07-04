@@ -37,12 +37,14 @@
 </template>
 
 <script>
+  import Loading from '@/Loading'
   import { Toast, QCard, QCardMain, QItem, QItemMain, QItemSide, QItemTile, QList } from 'quasar'
   import chat from 'services/chat'
   import defaultAvatar from 'assets/default-avatar.png'
 
   export default {
     components: {
+      Loading,
       Toast,
       QCard,
       QCardMain,
