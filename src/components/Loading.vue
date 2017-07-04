@@ -1,11 +1,15 @@
 <template>
   <div class="fs-loading">
-    <spinner v-if="show" :size="48" color="#4a3520" />
+    <q-spinner v-if="show" :size="48" color="#4a3520" />
   </div>
 </template>
 
 <script>
+  import { QSpinner } from 'quasar'
   export default {
+    components: {
+      QSpinner
+    },
     data () {
       return { show: false }
     },

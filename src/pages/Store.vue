@@ -48,11 +48,13 @@
 </template>
 
 <script>
+  import Loading from '@/Loading'
   import api from 'services/api'
   import UserList from 'components/UserList'
   import { QCard, QCardMain, QIcon, QItem, QItemMain, QItemSide, QItemTile, QList } from 'quasar'
   export default {
     components: {
+      Loading,
       UserList,
       QCard,
       QCardMain,

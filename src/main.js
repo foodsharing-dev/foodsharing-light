@@ -10,10 +10,12 @@ import socket from 'services/socket'
 import chat from 'services/chat'
 import FromNow from 'components/FromNow'
 import FormattedDate from 'components/FormattedDate'
-import Loading from 'components/Loading'
 import MainLayout from 'layouts/MainLayout'
 
 import autofocus from 'directives/autofocus'
+
+import 'quasar-extras/animate/fadeIn.css'
+import 'quasar-extras/animate/fadeOut.css'
 
 import 'quasar-extras/material-icons'
 // import 'quasar-extras/ionicons'
@@ -37,7 +39,6 @@ Vue.use(Quasar) // Install Quasar Framework
 // global components
 Vue.component('from-now', FromNow)
 Vue.component('formatted-date', FormattedDate)
-Vue.component('loading', Loading)
 Vue.component('main-layout', MainLayout)
 
 Vue.directive('autofocus', autofocus)

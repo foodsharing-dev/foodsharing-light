@@ -1,5 +1,6 @@
 <template>
   <q-layout ref="layout" view="lHh Lpr fFf">
+
     <q-toolbar slot="header">
       <q-btn flat icon="menu" @click="$refs.layout.toggleLeft()" />
       <q-toolbar-title class="toolbar-logo">
@@ -42,19 +43,20 @@
       <slot name="app-footer"></slot>
     </div>
 
-
   </q-layout>
+
 </template>
 
 <script>
   import Contact from '@/Contact.vue'
-  import { QBtn, QFixedPosition, QLayout, QRouteTab, QTab, QTabs, QToolbar, QToolbarTitle } from 'quasar'
+  import { QAjaxBar, QBtn, QFixedPosition, QLayout, QRouteTab, QTab, QTabs, QToolbar, QToolbarTitle, QTransition } from 'quasar'
   import LangSwitcher from '@/LangSwitcher.vue'
   import auth from 'services/auth'
   export default {
     components: {
       Contact,
       LangSwitcher,
+      QAjaxBar,
       QBtn,
       QFixedPosition,
       QLayout,
@@ -62,7 +64,8 @@
       QTab,
       QTabs,
       QToolbar,
-      QToolbarTitle
+      QToolbarTitle,
+      QTransition
     },
     data () {
       return {

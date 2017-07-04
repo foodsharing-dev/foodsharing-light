@@ -33,11 +33,13 @@
 </template>
 
 <script>
+  import Loading from '@/Loading'
   import { Toast, QCard, QCardMain, QIcon } from 'quasar'
   import api from 'services/api'
 
   export default {
     components: {
+      Loading,
       Toast,
       QCard,
       QCardMain,

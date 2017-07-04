@@ -28,12 +28,14 @@
 </template>
 
 <script>
+  import Loading from '@/Loading'
   import { Toast, QCard, QCardMain, QIcon, QItem, QItemMain, QItemSide, QItemTile, QList } from 'quasar'
 
   import api from 'services/api'
 
   export default {
     components: {
+      Loading,
       Toast,
       QCard,
       QCardMain,
