@@ -2,8 +2,8 @@
   <main-layout>
     <div v-if="pickup">
       <h6>Abholung {{ store.name }}</h6>
-      <div class="card">
-        <div class="card-content list no-border highlight">
+      <q-card>
+        <q-card-main>
           <div class="item two-lines">
             <i class="item-primary">alarm</i>
             <div class="item-content">
@@ -34,10 +34,10 @@
               Chat
             </div>
           </router-link>
-        </div>
+        </q-card-main>
         <hr>
         <user-list :users=pickup.members title="Abholer"></user-list>
-      </div>
+      </q-card>
     </div>
   </main-layout>
 </template>
@@ -45,10 +45,12 @@
 <script>
   import api from 'services/api'
   import UserList from 'components/UserList'
-
+  import { QCard, QCardMain } from 'quasar'
   export default {
     components: {
-      UserList
+      UserList,
+      QCard,
+      QCardMain
     },
     data () {
       return {

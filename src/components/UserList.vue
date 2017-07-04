@@ -1,24 +1,31 @@
 <template>
-  <div class="list no-border">
-    <div class="list-label">{{ title }}</div>
+  <q-list>
 
-    <div v-for="{user: u} in users"
-         v-on:click="showActionSheetWithIcons(u)"
-         class="item two-lines item-link">
-      <img class="item-primary" :src="avatarFor(u)">
-      <div class="item-content">
-        {{ u.firstName }}
-      </div>
-    </div>
-  </div>
+    {{ title }}
+    <q-item v-for="{user: u} in users"
+           v-on:click="showActionSheetWithIcons(u)">
+      <q-item-side :avatar="avatarFor(u)"/>
+      <q-item-main>
+        <q-item-tile label>{{ u.firstName }}</q-item-tile>
+      </q-item-main>
+    </q-item>
+  </q-list>
 </template>
 
 <script>
-  import { ActionSheet } from 'quasar'
+  import { ActionSheet, QList, QItem, QItemMain, QItemSide, QItemTile } from 'quasar'
 
   import defaultAvatar from 'assets/default-avatar.png'
 
   export default {
+    components: {
+      ActionSheet,
+      QList,
+      QItem,
+      QItemMain,
+      QItemSide,
+      QItemTile
+    },
     props: ['users', 'title'],
     methods: {
       avatarFor (user) {

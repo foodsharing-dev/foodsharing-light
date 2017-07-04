@@ -3,37 +3,47 @@
     <h6>
       Deine Betriebe
     </h6>
-    <div class="card">
-      <div class="card-content">
+    <q-card >
         <loading v-if="isLoading"/>
         <template v-else-if="stores.length > 0">
-          <div class="list no-border">
-            <router-link :to="'/store/' + store.id" tag="div" class="item two-lines item-link" v-for="store in stores" :key="store.id">
-              <div class="item-primary">
-                <i>store</i>
-              </div>
-              <div class="item-content">
-                <div>{{ store.name }}</div>
-                <div>{{ formatAddress(store) }}</div>
-              </div>
-            </router-link>
-            <hr class="inset">
-          </div>
+        <q-list>
+          <router-link :to="'/store/' + store.id" tag="div" class="item two-lines item-link" v-for="store in stores" :key="store.id">
+            <q-item>
+              <q-item-side>
+                <q-item-tile icon="store" />
+              </q-item-side>
+              <q-item-main>
+                <q-item-tile label>{{ store.name }}</q-item-tile>
+                <q-item-tile sublabel>{{ formatAddress(store) }}</q-item-tile>
+              </q-item-main>
+            </q-item>
+          </router-link>
+        </q-list>
         </template>
         <template v-else-if="stores">
           Du bist in keinem Betrieb. Verwende die Desktop Version, um einem Betrieb beizutreten.
         </template>
-      </div>
-    </div>
+    </q-card>
   </main-layout>
 </template>
 
 <script>
-  import { Toast } from 'quasar'
+  import { Toast, QCard, QCardMain, QIcon, QItem, QItemMain, QItemSide, QItemTile, QList } from 'quasar'
 
   import api from 'services/api'
 
   export default {
+    components: {
+      Toast,
+      QCard,
+      QCardMain,
+      QIcon,
+      QItem,
+      QItemMain,
+      QItemSide,
+      QItemTile,
+      QList
+    },
     data () {
       return {
         isLoading: false,
