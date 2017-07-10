@@ -20,7 +20,7 @@
     "material-design-icons": "^3.0.1",
     "moment": "^2.15.0",
     "quasar-framework": "^0.13.4",
-    "roboto-fontface": "^0.7.0",
+    "roboto-fontface": "^0.8.0",
     "socket.io-client": "1.7.4",
     "vue": "^2.3.2",
     "vue-i18n": "^7.0.4",
