@@ -18,7 +18,7 @@
               </div>
               <div v-if="conversation.lastMessage">{{ conversation.lastMessage.body }}</div>
             </div>
-            <div class="item-secondary stamp" v-if="conversation.last_message">
+            <div class="item-secondary stamp" v-if="conversation.lastMessage">
               <from-now :date="conversation.lastMessage.sentAt"></from-now>
             </div>
           <div class="item-secondary stamp" v-else>

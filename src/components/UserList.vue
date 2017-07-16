@@ -52,7 +52,7 @@
         }
 
         ActionSheet.create({
-          title: user.first_name,
+          title: user.firstName,
           gallery: true,
           actions
         })
