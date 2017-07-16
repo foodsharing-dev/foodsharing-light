@@ -17,7 +17,7 @@ export default {
   login (email, password) {
     return axios.post('/api/v1/session/', {
       email, password
-    }).then(({ data: { user } }) => {
+    }).then(({ data: user }) => {
       return { user }
     })
   },
