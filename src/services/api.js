@@ -42,7 +42,7 @@ export default {
   },
 
   getConversationList () {
-    return axios.get('/api/v1/conversations/').then(({ data: conversations }) => {
+    return axios.get('/api/v1/conversations/').then(({ data: { results: conversations } }) => {
       conversations.forEach(conversationDecodeHtmlEntities)
       return conversations
     })
