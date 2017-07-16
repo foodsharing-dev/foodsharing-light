@@ -28,7 +28,7 @@
             </div>
           </div>
 
-          <router-link tag="div" :to="{ name: 'chat', params: { id: store.teamConversation.id } }" class="item item-link" v-if="store.teamConversation.id">
+          <router-link tag="div" :to="{ name: 'chat', params: { id: store.teamConversation } }" class="item item-link" v-if="store.teamConversation">
             <i class="item-primary">chat</i>
             <div class="item-content">
               Chat
@@ -60,7 +60,7 @@
       address () {
         let { store } = this
         if (!store) return
-        return [store.street, store.streetNumber, store.zip, store.city]
+        return [store.street, store.houseNumber, store.zip, store.city]
           .filter(v => v).join(' ')
       }
     },
