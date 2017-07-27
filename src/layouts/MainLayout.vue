@@ -76,6 +76,9 @@
       user () {
         return auth.state.user
       }
+    },
+    mounted () {
+      this.$refs.layout.hideLeft()
     }
   }
 </script>
