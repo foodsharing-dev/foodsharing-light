@@ -24,6 +24,7 @@
     "json-schema-traverse": "^0.3.1",
     "material-design-icons": "^3.0.1",
     "moment": "^2.15.0",
+    "negotiator": "^0.6.1",
     "quasar-extras": "0.0.7",
     "quasar-framework": "git+https://git@github.com/quasarframework/quasar-edge.git",
     "roboto-fontface": "^0.7.0",
