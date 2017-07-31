@@ -17,7 +17,7 @@
         <div class="chat-message">
           <p>
             <strong v-if="isMultiChat">{{ message.sentBy.firstName }}<br></strong>
-            {{ message.body }}
+            <span v-html="render(message.body)"></span>
           </p>
         </div>
       </div>
@@ -43,6 +43,7 @@
   import chat from 'services/chat'
   import auth from 'services/auth'
   import defaultAvatar from 'assets/default-avatar.png'
+  import { escape, autolink, nl2br } from 'services/stringUtils'
   export default {
     data () {
       return {
@@ -77,7 +78,13 @@
         chat.send(this.id, this.newMessage).then(() => {
           this.newMessage = ''
         })
+      },
+      render (body) {
+        // sanitize, autolink, add <br>
+        // https://gitlab.com/foodsharing-dev/foodsharing/blob/0fbbbac4322cd824378dc007e77e6dbd0e9adf3e/app/msg/msg.script.js#L419
+        return nl2br(autolink(escape(body)))
       }
+
     },
     created () {
       this.id = this.$route.params.id
