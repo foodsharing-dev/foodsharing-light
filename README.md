@@ -43,21 +43,14 @@ It is hosted at [gitlab.com/foodsharing-dev](https://gitlab.com/foodsharing-dev)
 
 Once you have access follow the docker setup instructions there.
 
-### foodsharing-api
+### foodsharing-django-api
 
-Open source Symfony RESTful API available at [github.com/foodsharing-dev/foodsharing-api](https://github.com/foodsharing-dev/foodsharing-api).
+Open source Django RESTful API available at [github.com/foodsharing-dev/foodsharing-django-api](https://github.com/foodsharing-dev/foodsharing-django-api).
 
-Point it at the database inside the docker container:
+Point it at the database inside the docker container, see the example local settings for MySQL configuration.
 
-``` yaml
-# In app/config/parameters.yml
-parameters:
-    database_host: 127.0.0.1
-    database_port: 13306
-    database_name: foodsharing
-    database_user: root
-    database_password: root
-```
+#### API docs
+If you want to develop the frontend, you can get an API documentation at [foodsharing light swagger documentation](https://beta.light.foodsharing.de/docs/).
 
 ## Testing
 

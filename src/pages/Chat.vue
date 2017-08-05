@@ -83,9 +83,10 @@
       this.id = this.$route.params.id
       this.isLoading = true
       chat.loadConversation(this.id).then(conversation => {
-        Object.assign(this, { conversation })
+        this.conversation = conversation
         this.isLoading = false
       }).catch(err => {
+        console.log(err)
         Toast.create.negative(err.message)
         this.isLoading = false
       })
