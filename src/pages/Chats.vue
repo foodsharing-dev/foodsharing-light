@@ -19,7 +19,7 @@
               <div v-if="conversation.lastMessage">{{ conversation.lastMessage.body }}</div>
             </div>
             <div class="item-secondary stamp" v-if="conversation.lastMessage">
-              <from-now :date="conversation.lastMessageAt"></from-now>
+              <from-now :date="conversation.lastMessage.sentAt"></from-now>
             </div>
           <div class="item-secondary stamp" v-else>
             (keine Nachricht)
@@ -56,16 +56,18 @@
         }
       },
       conversationMembers (conversation) {
-        return conversation.members.map(m => m.user.firstName).join(', ')
+        return conversation.members.map(m => m.firstName).join(', ')
       }
     },
     created () {
       this.isLoading = true
       chat.loadConversationList().then(conversations => {
         this.conversations = conversations
-      }).catch(() => {
+        console.log('conversation: ', conversations)
+      }).catch(err => {
         // TODO: translate to German
         Toast.create.negative('Could not load conversations')
+        console.error(err)
       }).then(() => {
         this.isLoading = false
       })
