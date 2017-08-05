@@ -1,5 +1,5 @@
 import Axios from 'axios'
-import { decodeHtmlEntities } from 'services/stringUtils'
+import { decodeHtmlEntities, nl2br, escape, autolink } from 'services/stringUtils'
 import camelCase from 'camelcase'
 
 const axios = Axios.create({
@@ -43,14 +43,14 @@ export default {
 
   getConversationList () {
     return axios.get('/api/v1/conversations/').then(({ data: { results: conversations } }) => {
-      conversations.forEach(conversationDecodeHtmlEntities)
+      conversations.forEach(conversationPrepare)
       return conversations
     })
   },
 
   getConversation (id) {
     return axios.get(`/api/v1/conversations/${id}/`).then(({ data: conversation }) => {
-      conversationDecodeHtmlEntities(conversation)
+      conversationPrepare(conversation)
       return conversation
     })
   },
@@ -87,13 +87,20 @@ export function setPickupId (pickup) {
   pickup.id = [pickup.store.id, pickup.at].join('/')
 }
 
-export function conversationDecodeHtmlEntities (conversation) {
+export function conversationPrepare (conversation) {
+  let render = (body) => {
+    // sanitize, autolink, add <br>
+    // https://gitlab.com/foodsharing-dev/foodsharing/blob/0fbbbac4322cd824378dc007e77e6dbd0e9adf3e/app/msg/msg.script.js#L419
+    return nl2br(autolink(escape(decodeHtmlEntities(body))))
+  }
+
   if (conversation.messages) {
     conversation.messages.forEach(message => {
-      message.body = decodeHtmlEntities(message.body)
+      message.body = render(message.body)
     })
   }
   if (conversation.lastMessage) {
+    // this is the preview, the UI doesn't support formatting
     conversation.lastMessage.body = decodeHtmlEntities(conversation.lastMessage.body)
   }
 }
