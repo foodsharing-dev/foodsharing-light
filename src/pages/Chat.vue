@@ -118,6 +118,7 @@
 
 .chat-message
   p
+    // handle newlines with CSS
     white-space: pre-line
 
     // message content should always wrap
@@ -129,6 +130,13 @@
 
     // and make them float a bit lower
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+
+.chat-other .chat-message p >>> a
+  // default background is green, same as links. make them black instead
+  color: black
+  &:hover
+    transition opacity 0.4s
+    opacity: 0.3
 
 .chat-date
   color: #4A3520
