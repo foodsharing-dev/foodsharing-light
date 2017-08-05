@@ -2,7 +2,7 @@
   <div class="list no-border">
     <div class="list-label">{{ title }}</div>
 
-    <div v-for="{user: u} in users"
+    <div v-for="u in users"
          v-on:click="showActionSheetWithIcons(u)"
          class="item two-lines item-link">
       <img class="item-primary" :src="avatarFor(u)">
