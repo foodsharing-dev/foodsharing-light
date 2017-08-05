@@ -42,7 +42,7 @@
     },
     methods: {
       formatAddress (store) {
-        return [store.street, store.streetNumber, store.zip, store.city]
+        return [store.street, store.houseNumber, store.zip, store.city]
           .filter(v => v).join(' ')
       }
     },
