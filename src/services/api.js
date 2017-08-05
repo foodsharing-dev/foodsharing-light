@@ -2,7 +2,7 @@ import Axios from 'axios'
 import decodeHtmlEntities from 'services/decodeHtmlEntities'
 import camelCase from 'camelcase'
 
-const axios = Axios.create({
+export const axios = Axios.create({
   xsrfCookieName: 'csrftoken',
   xsrfHeaderName: 'X-CSRFTOKEN'
 })
@@ -51,6 +51,16 @@ export default {
   getConversation (id) {
     return axios.get(`/api/v1/conversations/${id}/`).then(({ data: conversation }) => {
       conversationDecodeHtmlEntities(conversation)
+      let usersById = {}
+      conversation.members.forEach(({ user }) => {
+        usersById[user.id] = user
+      })
+      conversation.messages.forEach(message => {
+        let member = usersById[message.sentBy.id]
+        if (member) {
+          message.sentBy = member
+        }
+      })
       return conversation
     })
   },
