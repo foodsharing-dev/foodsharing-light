@@ -1,5 +1,5 @@
 import Axios from 'axios'
-import decodeHtmlEntities from 'services/decodeHtmlEntities'
+import { decodeHtmlEntities } from 'services/stringUtils'
 import camelCase from 'camelcase'
 
 const axios = Axios.create({
