@@ -1,4 +1,4 @@
-import { escape, autolink, nl2br, decodeHtmlEntities } from 'services/stringUtils'
+import { escape, autolink, decodeHtmlEntities } from 'services/stringUtils'
 
 describe('services/stringUtils', () => {
   it('escape', () => {
@@ -8,10 +8,6 @@ describe('services/stringUtils', () => {
 
   it('autolink', () => {
     expect(autolink('http://yunity.org')).to.equal('<a href="http://yunity.org" target="_blank">yunity.org</a>')
-  })
-
-  it('nl2br', () => {
-    expect(nl2br('hello\nworld\n')).to.equal('hello<br>world<br>')
   })
 
   context('decodeHtmlEntities', () => {

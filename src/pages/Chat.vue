@@ -118,6 +118,8 @@
 
 .chat-message
   p
+    white-space: pre-line
+
     // message content should always wrap
     word-break: break-all
 

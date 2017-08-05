@@ -25,10 +25,6 @@ export function autolink (str) {
   })
 }
 
-export function nl2br (str) {
-  return str.replace(/\n/g, '<br>')
-}
-
 /*
  * Foodsharing db has encoded html entities (e.g. "fish &amp; chips")
  *
