@@ -102,7 +102,8 @@ export function conversationPrepare (conversation) {
     conversation.messages.forEach(message => {
       // sanitize and autolink. linebreaks are done via CSS
       // https://gitlab.com/foodsharing-dev/foodsharing/blob/0fbbbac4322cd824378dc007e77e6dbd0e9adf3e/app/msg/msg.script.js#L419
-      message.body = autolink(escape(decodeHtmlEntities(message.body)))
+      message.escapedBody = autolink(escape(decodeHtmlEntities(message.body)))
+      delete message.body
     })
   }
   if (conversation.lastMessage) {

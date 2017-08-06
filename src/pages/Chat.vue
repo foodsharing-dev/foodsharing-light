@@ -17,7 +17,7 @@
         <div class="chat-message">
           <p>
             <strong v-if="isMultiChat">{{ message.sentBy.firstName }}<br></strong>
-            <span v-html="message.body"></span>
+            <span v-html="message.escapedBody"></span>
           </p>
         </div>
       </div>

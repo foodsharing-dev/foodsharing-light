@@ -68,7 +68,7 @@ describe('services/api', () => {
       })
     })
 
-    it('decodes the html entities in the messages', () => {
+    it('escapes the html entities in the messages', () => {
       mock.onGet('/api/v1/conversations/1/').reply(200, {
         id: 1,
         members: [
@@ -85,7 +85,8 @@ describe('services/api', () => {
         ]
       })
       return api.getConversation(1).then(conversation => {
-        expect(conversation.messages[0].body).to.equal('love & radio')
+        expect(conversation.messages[0].escapedBody).to.equal('love &amp; radio')
+        expect(conversation.messages[0].body).to.be.undefined
       })
     })
   })
