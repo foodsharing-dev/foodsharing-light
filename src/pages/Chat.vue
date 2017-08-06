@@ -131,6 +131,8 @@
     // and make them float a bit lower
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
 
+// the <a> is not rendered by Vue's template engine, skip the scope
+// https://vue-loader.vuejs.org/en/features/scoped-css.html
 .chat-other .chat-message p >>> a
   // default background is green, same as links. make them black instead
   color: black
