@@ -52,6 +52,16 @@ Point it at the database inside the docker container, see the example local sett
 #### API docs
 If you want to develop the frontend, you can get an API documentation at [foodsharing light swagger documentation](https://beta.light.foodsharing.de/docs/).
 
+### Developing on production backend
+
+Set the environment variables before running `quasar dev` like this:
+
+```
+FOODSHARING_BACKEND=https://foodsharing.de API_BACKEND=https://beta.light.foodsharing.de quasar dev
+```
+
+This will access your data on foodsharing.de, so be careful!
+
 ## Testing
 
 We use [chai](http://chaijs.com) for assertions, here is the [full list of available matchers](http://chaijs.com/api/bdd/).
