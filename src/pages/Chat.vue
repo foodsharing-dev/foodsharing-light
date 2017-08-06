@@ -121,8 +121,10 @@
     // handle newlines with CSS
     white-space: pre-line
 
-    // message content should always wrap
-    word-break: break-all
+    // long strings (e.g. URLs) should not break the layout
+    width: 100%
+    overflow-wrap: break-word
+    word-wrap: break-word
 
     // make the chat bubbles a little bit more space effecient
     padding-top: 5px
