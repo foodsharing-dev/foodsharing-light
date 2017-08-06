@@ -1,12 +1,11 @@
 # foodsharing light
 
+A mobile-friendly frontend for foodsharing.de.
+Focused on the tasks you need to do _now_!
 
 [![Build Status](https://travis-ci.org/foodsharing-dev/foodsharing-light.svg?branch=master)](https://travis-ci.org/foodsharing-dev/foodsharing-light)
 [![codecov](https://codecov.io/gh/foodsharing-dev/foodsharing-light/branch/master/graph/badge.svg)](https://codecov.io/gh/foodsharing-dev/foodsharing-light)
 [![Greenkeeper badge](https://badges.greenkeeper.io/foodsharing-dev/foodsharing-light.svg)](https://greenkeeper.io/)
-
-A mobile-friendly frontend for foodsharing.de.
-Focused on the tasks you need to do _now_!
 
 ## Build Setup
 
@@ -52,6 +51,16 @@ Point it at the database inside the docker container, see the example local sett
 
 #### API docs
 If you want to develop the frontend, you can get an API documentation at [foodsharing light swagger documentation](https://beta.light.foodsharing.de/docs/).
+
+### Developing on production backend
+
+Set the environment variables before running `quasar dev` like this:
+
+```
+FOODSHARING_BACKEND=https://foodsharing.de API_BACKEND=https://beta.light.foodsharing.de quasar dev
+```
+
+This will access your data on foodsharing.de, so be careful!
 
 ## Testing
 
