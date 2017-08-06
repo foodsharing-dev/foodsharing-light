@@ -1,8 +1,13 @@
 {
-  "name": "quasar-app",
+  "private": true,
+  "name": "foodsharing-light",
   "version": "0.0.3",
-  "description": "A Quasar App",
-  "author": "Your Name",
+  "description": "Foodsharing is a platform that allows you to give food to others before it gets bad.",
+  "author": "Foodsharing Dev Team",
+  "homepage": "https://foodsharing.de/",
+  "repository": "foodsharing-dev/foodsharing-light",
+  "bugs": "https://github.com/foodsharing-dev/foodsharing-light/issues",
+  "license": "MIT",
   "scripts": {
     "clean": "node build/script.clean.js",
     "dev": "node build/script.dev.js",
