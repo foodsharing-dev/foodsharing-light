@@ -54,13 +54,13 @@ module.exports = {
       // proxy to symfony api backend
       '/api': {
         target: require('./dev.backends').api,
-        changeOrigin: true
+        changeOrigin: false
       },
 
       // proxy to foodsharing socket.io
       '/foodsharing/socket': {
         target: require('./dev.backends').foodsharing,
-        changeOrigin: true,
+        changeOrigin: false,
         ws: true,
         pathRewrite: {
           '^/': '/chat/socket.io/'
@@ -70,7 +70,7 @@ module.exports = {
       // TODO: limit this to just login... /xhrapp.php?app=login&m=loginsubmit
       '/fs': {
         target: require('./dev.backends').foodsharing,
-        changeOrigin: true,
+        changeOrigin: false,
         pathRewrite: {
           '^/fs': ''
         }
