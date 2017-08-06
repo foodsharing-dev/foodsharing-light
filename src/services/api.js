@@ -98,15 +98,11 @@ export function setPickupId (pickup) {
 }
 
 export function conversationPrepare (conversation) {
-  let render = (body) => {
-    // sanitize and autolink. linebreaks are done via CSS
-    // https://gitlab.com/foodsharing-dev/foodsharing/blob/0fbbbac4322cd824378dc007e77e6dbd0e9adf3e/app/msg/msg.script.js#L419
-    return autolink(escape(decodeHtmlEntities(body)))
-  }
-
   if (conversation.messages) {
     conversation.messages.forEach(message => {
-      message.body = render(message.body)
+      // sanitize and autolink. linebreaks are done via CSS
+      // https://gitlab.com/foodsharing-dev/foodsharing/blob/0fbbbac4322cd824378dc007e77e6dbd0e9adf3e/app/msg/msg.script.js#L419
+      message.body = autolink(escape(decodeHtmlEntities(message.body)))
     })
   }
   if (conversation.lastMessage) {
