@@ -50,7 +50,7 @@ describe('services/api', () => {
       mock.onGet('/api/v1/conversations/1/').reply(200, {
         id: 1,
         members: [
-          { user: { id: 'user1', firstName: 'user1' } }
+          { id: 'user1', firstName: 'user1' }
         ],
         messages: [
           {

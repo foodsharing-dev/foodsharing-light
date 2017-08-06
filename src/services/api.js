@@ -52,7 +52,7 @@ export default {
     return axios.get(`/api/v1/conversations/${id}/`).then(({ data: conversation }) => {
       conversationDecodeHtmlEntities(conversation)
       let usersById = {}
-      conversation.members.forEach(({ user }) => {
+      conversation.members.forEach(user => {
         usersById[user.id] = user
       })
       conversation.messages.forEach(message => {
