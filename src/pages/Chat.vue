@@ -17,7 +17,7 @@
         <div class="chat-message">
           <p>
             <strong v-if="isMultiChat">{{ message.sentBy.firstName }}<br></strong>
-            {{ message.body }}
+            <span v-html="message.escapedBody"></span>
           </p>
         </div>
       </div>
@@ -118,8 +118,13 @@
 
 .chat-message
   p
-    // message content should always wrap
-    word-break: break-all
+    // handle newlines with CSS
+    white-space: pre-line
+
+    // long strings (e.g. URLs) should not break the layout
+    width: 100%
+    overflow-wrap: break-word
+    word-wrap: break-word
 
     // make the chat bubbles a little bit more space effecient
     padding-top: 5px
@@ -127,6 +132,15 @@
 
     // and make them float a bit lower
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+
+// the <a> is not rendered by Vue's template engine, skip the scope
+// https://vue-loader.vuejs.org/en/features/scoped-css.html
+.chat-other .chat-message p >>> a
+  // default background is green, same as links. make them black instead
+  color: black
+  &:hover
+    transition opacity 0.4s
+    opacity: 0.3
 
 .chat-date
   color: #4A3520
