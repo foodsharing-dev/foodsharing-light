@@ -4,7 +4,7 @@
 
 import axios from 'axios'
 
-import decodeHtmlEntities from 'services/decodeHtmlEntities'
+import { decodeHtmlEntities } from 'services/stringUtils'
 
 // Must have a proxy configured to forward this path to foodsharing site
 // and then remove the prefix
