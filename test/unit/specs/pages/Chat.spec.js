@@ -98,6 +98,7 @@ describe('pages/Chat.vue', () => {
 
     it('does not scroll if messages do not change', () => {
       sandbox.stub(vm, 'layoutViewScrollToBottom').returns()
+      vm.newMessage = 'an unrelated change'
       return timeout(() => {
         expect(vm.layoutViewScrollToBottom).to.have.not.been.called
       }, 100)
