@@ -7,26 +7,30 @@
       </h6>
       <div class="card">
         <div class="card-content list no-border highlight">
-          <div class="item two-lines">
-            <i class="item-primary">location_on</i>
-            <div class="item-content">
-              <div><template v-if="!address">{{ store.name }}</template>{{ address }}</div>
-              <div>Adresse</div>
-            </div>
-          </div>
-          <div class="item two-lines" v-if="store.notes">
-            <i class="item-primary">info</i>
-            <div class="item-content">
-              <div>{{ store.notes }}</div>
-              <div>Besonderheiten</div>
-            </div>
-          </div>
           <router-link tag="div" :to="{ name: 'chat', params: { id: store.teamConversation } }" class="item item-link" v-if="store.teamConversation">
             <i class="item-primary">chat</i>
             <div class="item-content">
               Chat
             </div>
           </router-link>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <i class="item-primary">location_on</i>
+          Adresse
+        </div>
+        <div class="card-content">
+          <template v-if="!address">{{ store.name }}</template>{{ address }}
+        </div>
+      </div>
+      <div class="card" v-if="store.notes">
+        <div class="card-title">
+          <i class="item-primary">info</i>
+          Besonderheiten
+        </div>
+        <div class="card-content">
+          {{ store.notes }}
         </div>
       </div>
       <div class="card">
