@@ -21,6 +21,11 @@ describe('services/chat', () => {
       sentAt: 'foo'
     }
 
+    let formattedMessage = {
+      ...message,
+      formattedBody: 'a nice message body!'
+    }
+
     describe('conversation map', () => {
       beforeEach(() => {
         chat.state.conversations[1] = { id: 1, messages: [] }
@@ -32,7 +37,7 @@ describe('services/chat', () => {
       it('adds new message to conversation', () => {
         return chat.receiveMessage(message).then(() => {
           expect(chat.state.conversations[1].messages.length).to.equal(1)
-          expect(chat.state.conversations[1].messages[0]).to.deep.equal(message)
+          expect(chat.state.conversations[1].messages[0]).to.deep.equal(formattedMessage)
         })
       })
 

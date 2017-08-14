@@ -85,8 +85,8 @@ describe('services/api', () => {
         ]
       })
       return api.getConversation(1).then(conversation => {
-        expect(conversation.messages[0].escapedBody).to.equal('love &amp; radio')
-        expect(conversation.messages[0].body).to.be.undefined
+        expect(conversation.messages[0].formattedBody).to.equal('love &amp; radio')
+        expect(conversation.messages[0].body).to.equal('love & radio')
       })
     })
   })

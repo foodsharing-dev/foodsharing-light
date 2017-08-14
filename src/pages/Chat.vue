@@ -17,7 +17,7 @@
         <div class="chat-message">
           <p>
             <strong v-if="isMultiChat">{{ message.sentBy.firstName }}<br></strong>
-            <span v-html="message.escapedBody"></span>
+            <span v-html="message.formattedBody"></span>
           </p>
         </div>
       </div>
@@ -26,7 +26,7 @@
     <div slot="app-footer" class="chat-footer">
       <form class="row small-gutter" v-on:submit.stop.prevent="send()">
         <div class="auto">
-          <input type="text" class="chat-input full-width" v-autofocus v-model="newMessage">
+          <input type="text" class="chat-input full-width" v-autofocus v-model.lazy="newMessage">
         </div>
         <div>
           <button type="submit" class="primary circular small">
@@ -49,7 +49,8 @@
         isLoading: false,
         id: null,
         conversation: null,
-        newMessage: ''
+        newMessage: '',
+        shouldScroll: false
       }
     },
     computed: {
@@ -101,8 +102,16 @@
         chat.clearConversation(this.id)
       }
     },
+    watch: {
+      'conversation.messages' (val) {
+        this.shouldScroll = true
+      }
+    },
     updated () {
-      this.layoutViewScrollToBottom()
+      if (this.shouldScroll) {
+        this.layoutViewScrollToBottom()
+        this.shouldScroll = false
+      }
     }
   }
 </script>
