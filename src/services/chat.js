@@ -2,6 +2,7 @@ import Vue from 'vue'
 
 import foodsharing from 'services/foodsharing'
 import api from 'services/api'
+import { escape, autolink } from 'services/stringUtils'
 
 export const state = {
 
@@ -48,6 +49,7 @@ export default {
   },
 
   receiveMessage (message) {
+    formatMessage(message)
     let { conversationId } = message
     let conversation = state.conversations[conversationId]
     if (conversation) {
@@ -68,4 +70,10 @@ export default {
     return Promise.resolve()
   }
 
+}
+
+export function formatMessage (message) {
+  // sanitize and autolink. linebreaks are done via CSS
+  // safe to output directly to html
+  message.formattedBody = autolink(escape(message.body))
 }
