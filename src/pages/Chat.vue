@@ -49,7 +49,8 @@
         isLoading: false,
         id: null,
         conversation: null,
-        newMessage: ''
+        newMessage: '',
+        shouldScroll: false
       }
     },
     computed: {
@@ -96,8 +97,16 @@
         chat.clearConversation(this.id)
       }
     },
+    watch: {
+      'conversation.messages' (val) {
+        this.shouldScroll = true
+      }
+    },
     updated () {
-      this.layoutViewScrollToBottom()
+      if (this.shouldScroll) {
+        this.layoutViewScrollToBottom()
+        this.shouldScroll = false
+      }
     }
   }
 </script>
