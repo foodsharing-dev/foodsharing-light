@@ -21,7 +21,7 @@ describe('services/chat', () => {
       sentAt: 'foo'
     }
 
-    let escapedMessage = {
+    let formattedMessage = {
       ...message,
       formattedBody: 'a nice message body!'
     }
@@ -37,7 +37,7 @@ describe('services/chat', () => {
       it('adds new message to conversation', () => {
         return chat.receiveMessage(message).then(() => {
           expect(chat.state.conversations[1].messages.length).to.equal(1)
-          expect(chat.state.conversations[1].messages[0]).to.deep.equal(escapedMessage)
+          expect(chat.state.conversations[1].messages[0]).to.deep.equal(formattedMessage)
         })
       })
 
