@@ -49,7 +49,7 @@ describe('pages/Chat.vue', () => {
         ]
       })
       vm = new Vue({ ...Chat, router }).$mount()
-      vm.layoutViewScrollToBottom = sandbox.stub()
+      vm.layoutViewScrollToBottom = () => {}
       return Vue.nextTick().then(() => Vue.nextTick())
     })
 
@@ -85,13 +85,30 @@ describe('pages/Chat.vue', () => {
     })
 
     it('scrolls to bottom on handleResize', () => {
+      sandbox.stub(vm, 'layoutViewScrollToBottom').returns()
       vm.handleResize()
       expect(vm.layoutViewScrollToBottom).to.have.been.called
     })
 
     it('scrolls to bottom on window resize', () => {
+      sandbox.stub(vm, 'layoutViewScrollToBottom').returns()
       triggerWindowResizeEvent()
       expect(vm.layoutViewScrollToBottom).to.have.been.called
+    })
+
+    it('does not scroll if messages do not change', () => {
+      sandbox.stub(vm, 'layoutViewScrollToBottom').returns()
+      return timeout(() => {
+        expect(vm.layoutViewScrollToBottom).to.have.not.been.called
+      }, 100)
+    })
+
+    it('scrolls to bottom if messages change', () => {
+      sandbox.stub(vm, 'layoutViewScrollToBottom').returns()
+      vm.conversation.messages.push({})
+      return timeout(() => {
+        expect(vm.layoutViewScrollToBottom).to.have.been.called
+      }, 100)
     })
   })
 })
@@ -101,4 +118,17 @@ function triggerWindowResizeEvent () {
   let event = document.createEvent('HTMLEvents')
   event.initEvent('resize', true, false)
   window.dispatchEvent(event)
+}
+
+function timeout (fn, ms) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      try {
+        Promise.resolve(fn()).then(resolve)
+      }
+      catch (err) {
+        reject(err)
+      }
+    }, ms)
+  })
 }
