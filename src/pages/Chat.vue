@@ -77,9 +77,13 @@
         chat.send(this.id, this.newMessage).then(() => {
           this.newMessage = ''
         })
+      },
+      handleResize () {
+        this.layoutViewScrollToBottom()
       }
     },
     created () {
+      window.addEventListener('resize', this.handleResize)
       this.id = this.$route.params.id
       this.isLoading = true
       chat.loadConversation(this.id).then(conversation => {
@@ -92,6 +96,7 @@
       })
     },
     destroyed () {
+      window.removeEventListener('resize', this.handleResize)
       if (this.id) {
         chat.clearConversation(this.id)
       }
