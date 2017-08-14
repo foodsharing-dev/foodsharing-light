@@ -26,7 +26,7 @@
     <div slot="app-footer" class="chat-footer">
       <form class="row small-gutter" v-on:submit.stop.prevent="send()">
         <div class="auto">
-          <input type="text" class="chat-input full-width" v-autofocus v-model="newMessage">
+          <input type="text" class="chat-input full-width" v-autofocus v-model.lazy="newMessage">
         </div>
         <div>
           <button type="submit" class="primary circular small">
