@@ -1,5 +1,6 @@
 import Axios from 'axios'
-import { decodeHtmlEntities, escape, autolink } from 'services/stringUtils'
+import { decodeHtmlEntities } from 'services/stringUtils'
+import { formatMessage } from 'services/chat'
 import camelCase from 'camelcase'
 
 export const axios = Axios.create({
@@ -98,18 +99,20 @@ export function setPickupId (pickup) {
 }
 
 export function conversationPrepare (conversation) {
+  // We remove htmlentities (undoing how they are stored on the server)
+  // Then add our custom formatted version
   if (conversation.messages) {
-    conversation.messages.forEach(message => {
-      // sanitize and autolink. linebreaks are done via CSS
-      // https://gitlab.com/foodsharing-dev/foodsharing/blob/0fbbbac4322cd824378dc007e77e6dbd0e9adf3e/app/msg/msg.script.js#L419
-      message.escapedBody = autolink(escape(decodeHtmlEntities(message.body)))
-      delete message.body
-    })
+    conversation.messages.forEach(messageDecodeHtmlEntities)
+    conversation.messages.forEach(formatMessage)
   }
   if (conversation.lastMessage) {
-    // this is the preview, the UI doesn't support formatting
-    conversation.lastMessage.body = decodeHtmlEntities(conversation.lastMessage.body)
+    messageDecodeHtmlEntities(conversation.lastMessage)
+    formatMessage(conversation.lastMessage)
   }
+}
+
+export function messageDecodeHtmlEntities (message) {
+  message.body = decodeHtmlEntities(message.body)
 }
 
 export function isObject (x) {
