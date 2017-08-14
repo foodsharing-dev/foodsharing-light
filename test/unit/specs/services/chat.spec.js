@@ -17,13 +17,13 @@ describe('services/chat', () => {
   describe('receiveMessage', () => {
     let message = {
       conversationId: 1,
-      body: 'a nice message & body!',
+      body: 'a nice message body!',
       sentAt: 'foo'
     }
 
     let escapedMessage = {
       ...message,
-      escapedBody: 'a nice message &amp; body!'
+      formattedBody: 'a nice message body!'
     }
 
     describe('conversation map', () => {
