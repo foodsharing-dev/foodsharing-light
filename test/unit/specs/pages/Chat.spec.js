@@ -49,6 +49,7 @@ describe('pages/Chat.vue', () => {
         ]
       })
       vm = new Vue({ ...Chat, router }).$mount()
+      vm.layoutViewScrollToBottom = sandbox.stub()
       return Vue.nextTick().then(() => Vue.nextTick())
     })
 
@@ -82,5 +83,22 @@ describe('pages/Chat.vue', () => {
         expect(vm.$el.textContent).to.contain('a new message')
       })
     })
+
+    it('scrolls to bottom on handleResize', () => {
+      vm.handleResize()
+      expect(vm.layoutViewScrollToBottom).to.have.been.called
+    })
+
+    it('scrolls to bottom on window resize', () => {
+      triggerWindowResizeEvent()
+      expect(vm.layoutViewScrollToBottom).to.have.been.called
+    })
   })
 })
+
+function triggerWindowResizeEvent () {
+  // https://stackoverflow.com/a/39237538
+  let event = document.createEvent('HTMLEvents')
+  event.initEvent('resize', true, false)
+  window.dispatchEvent(event)
+}
