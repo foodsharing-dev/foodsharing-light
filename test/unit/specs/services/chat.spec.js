@@ -84,7 +84,7 @@ describe('services/chat', () => {
   })
 
   describe('send', () => {
-    it('sends to foodsharing and receives resulting message', () => {
+    it('sends to foodsharing and does not receive resulting message', () => {
       sandbox
         .stub(foodsharing, 'sendMessage')
         .callsFake((conversationId, body) => {
@@ -96,9 +96,7 @@ describe('services/chat', () => {
 
       return chat.send(1, 'heya').then(() => {
         expect(foodsharing.sendMessage).to.have.been.calledWith(1, 'heya')
-        expect(chat.receiveMessage).to.have.been.calledWith({
-          conversationId: 1, body: 'heya'
-        })
+        expect(chat.receiveMessage).to.not.have.been.called
       })
     })
   })
