@@ -1,4 +1,5 @@
 var path = require('path')
+var { parse: parseCookie } = require('cookie')
 
 module.exports = {
   // Webpack aliases
@@ -57,13 +58,18 @@ module.exports = {
         changeOrigin: true
       },
 
-      // proxy to foodsharing socket.io
+      // proxy directly to the nodejs chat backend
       '/foodsharing/socket': {
-        target: require('./dev.backends').foodsharing,
+        target: require('./dev.backends').chat,
         changeOrigin: true,
         ws: true,
         pathRewrite: {
-          '^/': '/chat/socket.io/'
+          '^/': '/socket.io/'
+        },
+        onProxyReq: (proxyReq, req, res) => {
+          // the chat server will use the PHP session to identify us
+          // unless we remove the cookie, we should just care about the django cookie
+          removeCookie(proxyReq, req, 'PHPSESSID');
         }
       },
 
@@ -94,3 +100,19 @@ module.exports = {
       }
     }
  */
+
+function removeCookie(proxyReq, req, cookieName) {
+  let { cookie: cookieVal } = req.headers;
+  if (cookieVal) {
+    let cookie = parseCookie(cookieVal);
+    if (cookie[cookieName]) {
+      delete cookie[cookieName];
+      proxyReq.setHeader('cookie', serializeCookieObject(cookie));
+    }
+  }
+}
+
+// https://gist.github.com/project-pp/18c81c02b9c9a6f89a7f7bcf815bf1d6
+function serializeCookieObject(o) {
+  return Object.keys(o).reduce((a, k) => a.concat([k, o[k]].map(encodeURI).join('=')), []).join(';');
+}
