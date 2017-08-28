@@ -19,9 +19,7 @@ export default {
   state,
 
   send (conversationId, body) {
-    return foodsharing.sendMessage(conversationId, body).then(message => {
-      this.receiveMessage(message)
-    })
+    return foodsharing.sendMessage(conversationId, body)
   },
 
   getOrCreateConversationForUser (id) {
