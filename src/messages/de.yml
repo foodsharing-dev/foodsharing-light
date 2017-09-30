@@ -1,12 +1,12 @@
 ---
 Login:
-  heading: Melde Dich an
-  submit: Login
+  heading: Anmelden
+  submit: Anmelden
   form:
     email: E-Mail-Adresse
     password: Passwort
-  failed: Login fehlgeschlagen
-  cookiesDisabled: Bitte aktiviere Cookies in deinem Browser, um dich einloggen zu können!
+  failed: Anmelden fehlgeschlagen
+  cookiesDisabled: Bitte aktiviere Cookies in deinem Browser, um dich anmelden zu können!
   not_registered: |
     Noch nicht dabei?
     <a href="https://foodsharing.de/" target="_blank">Registrieren</a>
